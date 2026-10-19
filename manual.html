@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메모리온 (MemoryOn) — 공식 사용설명서 & 완벽 가이드</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root {
+      --primary: #e11d48;
+      --accent: #2563eb;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --sub: #475569;
+      --border: #e2e8f0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding-bottom: 60px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: #fff;
+      padding: 42px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+    .hero h1 {
+      font-size: 1.75rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+    .hero p {
+      color: #cbd5e1;
+      font-size: 0.96rem;
+      max-width: 640px;
+      margin: 0 auto 20px;
+    }
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4);
+      transition: transform 0.15s;
+    }
+    .hero-btn:hover { transform: translateY(-2px); }
+
+    .wrap {
+      max-width: 900px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+    .guide-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.05);
+    }
+    .guide-card h2 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .step-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .step-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .step-item strong {
+      display: block;
+      font-size: 0.96rem;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .step-item p {
+      font-size: 0.88rem;
+      color: var(--sub);
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      margin-right: 4px;
+    }
+    .b-red { background: #ffe4e6; color: #e11d48; border: 1px solid #fda4af; }
+    .b-blue { background: #dbeafe; color: #1d4ed8; border: 1px solid #93c5fd; }
+    .b-green { background: #d1fae5; color: #047857; border: 1px solid #6ee7b7; }
+    .b-amber { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
+
+    .kbd-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.88rem;
+    }
+    .kbd-table th, .kbd-table td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+    }
+    .kbd-table th {
+      background: #f1f5f9;
+      font-weight: 800;
+      width: 35%;
+    }
+    kbd {
+      background: #fff;
+      border: 1px solid #94a3b8;
+      border-bottom-width: 2px;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+    .tip-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      color: #1e3a8a;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+    @media (max-width: 640px) {
+      .hero { padding: 30px 16px; }
+      .hero h1 { font-size: 1.4rem; }
+      .guide-card { padding: 18px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1>🧠 메모리온 (MemoryOn) 사용설명서</h1>
+    <p>가림막 백지복습 · AI 아나운서 음성 회독 · 간격 반복(Anki)을 하나로 결합한 스마트 암기 스튜디오 공식 매뉴얼입니다.</p>
+    <a href="./index.html" class="hero-btn">🚀 메모리온 암기장 바로 실행하기</a>
+  </div>
+
+  <div class="wrap">
+
+    <!-- 1. 설치 및 시작하기 -->
+    <div class="guide-card">
+      <h2>📱 1. 휴대폰 & PC에 전용 앱으로 설치하기</h2>
+      <div class="step-list">
+        <div class="step-item">
+          <strong>🤖 갤럭시 / 안드로이드 휴대폰</strong>
+          <p>크롬(Chrome), 삼성 인터넷, 또는 모바일 Edge 앱으로 접속한 뒤 메뉴(<b>⋮</b>) → <b>[앱 설치]</b> 또는 <b>[홈 화면에 추가]</b>를 누르면 바탕화면에 정식 앱 아이콘이 생성됩니다.</p>
+        </div>
+        <div class="step-item">
+          <strong>🍎 아이폰 / 아이패드 (iOS)</strong>
+          <p>사파리(Safari) 브라우저로 접속한 뒤 하단 중앙의 <b>[공유하기(네모 위 화살표)]</b> 버튼 → <b>[홈 화면에 추가]</b>를 누르면 바탕화면에 앱으로 설치됩니다.</p>
+        </div>
+        <div class="step-item">
+          <strong>💻 PC에서 최고 음질(MS 선희·인준 아나운서)로 사용하기</strong>
+          <p>윈도우 PC에서는 <b>마이크로소프트 엣지(Edge)</b> 브라우저로 열면 최고급 신경망 성우인 <b>선희(여성 아나운서)</b>와 <b>인준(남성 강사)</b> 목소리가 무료로 자동 연결됩니다.</p>
+        </div>
+      </div>
+      <div class="tip-box">
+        🔒 <b>개인정보 및 데이터 독립성 안내:</b> 메모리온의 모든 암기 카드와 메모는 서버가 아닌 <b>사용자 본인의 스마트폰/PC 내부 저장소(IndexedDB)</b>에만 저장됩니다. 같은 주소를 여러 사람이 써도 내 공부 내용은 오직 내 기기에만 보입니다.
+      </div>
+    </div>
+
+    <!-- 2. 가림막 학습법 -->
+    <div class="guide-card">
+      <h2>🎯 2. 4단계 가림막(빈칸) 학습 & 순차 열기</h2>
+      <div class="step-list">
+        <div class="step-item">
+          <strong>4가지 가림막 모드 전환</strong>
+          <p>
+            • <span class="badge b-red">🔴 그림+빨간글씨+암기표</span> 가장 추천하는 기본 모드입니다. 핵심 키워드와 하단 요약표만 가려줍니다.<br>
+            • <span class="badge b-blue">🔒 백지복습(전체)</span> 소제목만 남기고 본문 문장 전체를 가려 백지 인출 훈련을 돕습니다.<br>
+            • <span class="badge b-amber">🎯 하단 암기표만</span> 본문은 보면서 맨 아래 두문자·핵심 요약표만 빠르게 점검합니다.<br>
+            • <span class="badge b-green">👀 모두 펼치기</span> 가림막을 모두 벗기고 일반 서브노트처럼 통독합니다.
+          </p>
+        </div>
+        <div class="step-item">
+          <strong>🔓 다음 빈칸 순차 열기 & ✂️ 내 맘대로 빈칸 추가하기</strong>
+          <p>
+            • 하단 리모컨의 <b>[🔓 다음빈칸]</b> 버튼(PC는 <kbd>Enter</kbd>)을 누르면 위에서부터 순서대로 빈칸이 하나씩 열리며 화면이 자동 스크롤됩니다.<br>
+            • 공부 도중 새로 빈칸을 뚫고 싶은 단어가 있다면, 글자를 마우스로 드래그(또는 우클릭)하거나 <b>[✂️ 가림막 편집]</b>을 눌러 즉시 빨간 빈칸/파란 빈칸으로 만들 수 있습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 스마트 TTS 오디오 회독 -->
+    <div class="guide-card">
+      <h2>🎧 3. AI 아나운서 음성 회독 (귀로 듣는 서브노트)</h2>
+      <div class="step-list">
+        <div class="step-item">
+          <strong>4가지 재생 모드 지원 (단축키 <kbd>R</kbd> 또는 하단 리모컨으로 전환)</strong>
+          <p>
+            1. <b>🔊 현재 문제 1회 듣기:</b> 지금 보고 있는 카드만 끝까지 읽고 멈춥니다.<br>
+            2. <b>🔂 현재 문제 무한 반복:</b> 안 외워지는 문제를 계속 반복 낭독합니다. (1회독이 끝날 때마다 열렸던 빈칸을 다시 자동으로 덮고 반복합니다)<br>
+            3. <b>▶️ 연속 듣기 (현재 ~ 끝):</b> 현재 문제부터 마지막 문제까지 자동으로 페이지를 넘기며 연속 낭독합니다.<br>
+            4. <b>🔁 전 구간 무한 순환:</b> 1번 문제부터 끝 문제까지 무한 회전하며 읽어줍니다 (이동 중 귀로 회독할 때 최적).
+          </p>
+        </div>
+        <div class="step-item">
+          <strong>🎙️ 아나운서 목소리 및 배속 변경</strong>
+          <p>상단 <b>[⚙️ 음성/배율]</b> 버튼을 누르면 4가지 아나운서 프리셋(표준 브리핑 / 중저음 강사 / 또렷한 딕션 / 속독 브리핑)과 배속(0.9배속 ~ 1.5배속)을 자유롭게 조절할 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 카드 추가 방법 3가지 -->
+    <div class="guide-card">
+      <h2>➕ 4. 암기 카드 추가 & 제작하는 3가지 방법</h2>
+      <div class="step-list">
+        <div class="step-item">
+          <strong>방법 ①: [➕ 카드 직접 추가] 탭 (가장 간편한 자체 에디터)</strong>
+          <p>
+            • <b>🅰️ 문답형(Basic):</b> 앞면에는 질문/기출문제를, 뒷면에는 정답과 해설을 입력합니다.<br>
+            • <b>🅱️ 서브노트·빈칸형(Cloze):</b> 개조식 요약 노트를 적고 원하는 단어를 <code>{{빨간빈칸}}</code> 또는 <code>[[파란빈칸]]</code>으로 감싸기만 하면 자동으로 가림막이 생성됩니다. (클립보드 캡처 이미지를 <kbd>Ctrl</kbd>+<kbd>V</kbd>로 바로 붙여넣을 수도 있습니다)<br>
+            • <b>⚡ 대량 일괄 등록:</b> <code>문제 :: 정답 || 메모</code> 형식으로 여러 줄을 한 번에 붙여넣어 수십 개의 카드를 1초 만에 생성합니다.
+          </p>
+        </div>
+        <div class="step-item">
+          <strong>방법 ②: [📂 HWPX 업로드] 탭 (한글 서브노트 자동 변환)</strong>
+          <p>한글(HWPX)로 작성된 서브노트 파일을 업로드하면 <code>■</code> 기호를 기준으로 단원을 쪼개고, 빨간색 글씨·파란색 암기표·도면 이미지·우측 하단 과목명을 자동 인식하여 암기 카드로 변환합니다.</p>
+        </div>
+        <div class="step-item">
+          <strong>방법 ③: [📸 손글씨→노트 스튜디오] 탭</strong>
+          <p>손글씨 서브노트 사진을 올리고 개념도를 드래그하면 줄노트 가로줄을 깨끗하게 지워주며, 한글(HWP) 문서에 바로 붙여넣을 수 있는 표 서식과 암기 카드를 동시에 만들어 줍니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 플래그 & 간격 반복 & 백업 -->
+    <div class="guide-card">
+      <h2>🚩 5. 6색 컬러 플래그 & 간격 반복(Anki) & 백업</h2>
+      <div class="step-list">
+        <div class="step-item">
+          <strong>🎨 6색 컬러 플래그 & 🩸 취약(Leech) 문제 자동 분류</strong>
+          <p>
+            • 카드 우측 상단의 6가지 색깔 점을 눌러 <i>'시험직전 최우선(빨강)', '자주 틀리는 함정(주황)', '수식·계산(노랑)'</i> 등 나만의 기준대로 분류하세요.<br>
+            • 하단 평가 버튼에서 <b>[1. 다시(Again)]</b>을 누적 4회 이상 누른 카드는 자동으로 <b>🩸 취약(Leech) 배지</b>가 붙어 특별 관리됩니다.<br>
+            • <b>[🚩 플래그/카드 관리]</b> 탭에서 특정 색깔 플래그나 취약 카드만 골라 <b>[🎯 집중 학습하기]</b> 또는 <b>[🎧 연속 TTS 듣기]</b>를 실행할 수 있습니다.
+          </p>
+        </div>
+        <div class="step-item">
+          <strong>💾 JSON 파일 백업 & 기기 간 1초 연동 (PC ↔ 스마트폰)</strong>
+          <p><b>[💾 백업/복원]</b> 탭에서 <b>[JSON 파일로 내보내기]</b>를 누르면 내가 만든 모든 카드·이미지·메모·암기 이력이 파일 하나로 저장됩니다. 이 파일을 카톡으로 보내 휴대폰이나 다른 PC에서 불러오면 100% 똑같이 복원됩니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. PC 키보드 단축키 표 -->
+    <div class="guide-card">
+      <h2>⌨️ 6. PC 키보드 단축키 모음</h2>
+      <table class="kbd-table">
+        <tbody>
+          <tr><th><kbd>Enter</kbd> 또는 <kbd>E</kbd></th><td>다음 빈칸(가림막) 하나씩 순서대로 열기</td></tr>
+          <tr><th><kbd>Space</kbd> (스페이스바)</th><td>현재 카드의 모든 가림막 한 번에 펼치기 / 다시 덮기</td></tr>
+          <tr><th><kbd>←</kbd> / <kbd>→</kbd> 방향키</th><td>이전 문제 / 다음 문제로 이동</td></tr>
+          <tr><th><kbd>T</kbd></th><td>AI 아나운서 음성 듣기 시작 / 일시정지</td></tr>
+          <tr><th><kbd>R</kbd></th><td>음성 재생 모드 순환 (1회 → 1문제반복 → 연속듣기 → 전구간순환)</td></tr>
+          <tr><th><kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd> / <kbd>4</kbd></th><td>난이도 평가 (1: 다시 / 2: 어려움 / 3: 알맞음 / 4: 쉬움)</td></tr>
+          <tr><th><kbd>Z</kbd></th><td>방금 누른 난이도 평가 실행 취소 (Undo)</td></tr>
+          <tr><th><kbd>S</kbd></th><td>현재 카드 중요 별표(⭐) 켜기 / 끄기</td></tr>
+          <tr><th><kbd>Alt</kbd> + <kbd>1</kbd> ~ <kbd>6</kbd></th><td>현재 카드에 1~6번 컬러 플래그 지정 (<kbd>Alt</kbd>+<kbd>0</kbd>은 해제)</td></tr>
+          <tr><th><kbd>Ctrl</kbd> + <kbd>Enter</kbd></th><td>(카드 직접 추가 창에서) 카드 즉시 저장 후 다음 카드 입력</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</body>
+</html>
