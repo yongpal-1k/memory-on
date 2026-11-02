@@ -28,7 +28,7 @@
     color: var(--text-dark);
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
     overflow-x: hidden;
-    padding-bottom: 84px; /* 하단 독 바 여백 */
+    padding-bottom: 88px;
   }
 
   /* 1. 상단 고정 모바일 헤더 */
@@ -36,7 +36,7 @@
     position: sticky;
     top: 0;
     z-index: 900;
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1.5px solid var(--gold-border);
@@ -44,7 +44,7 @@
     padding: 8px 10px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 6px;
   }
 
   .m-nav-row {
@@ -55,18 +55,18 @@
   }
 
   .m-select {
-    height: 36px;
+    height: 35px;
     border-radius: 10px;
     border: 1.5px solid #cbd5e1;
     background: #ffffff;
     color: var(--text-dark);
     font-size: 13px;
     font-weight: 800;
-    padding: 0 8px;
+    padding: 0 7px;
     outline: none;
   }
   #mCategorySelect {
-    width: 96px;
+    width: 92px;
     flex-shrink: 0;
   }
   #mTopicSelect {
@@ -76,14 +76,14 @@
   }
 
   .m-icon-btn {
-    height: 36px;
-    min-width: 36px;
-    padding: 0 10px;
+    height: 35px;
+    min-width: 35px;
+    padding: 0 9px;
     border-radius: 10px;
     border: 1.5px solid #cbd5e1;
     background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     color: #1e293b;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 900;
     display: inline-flex;
     align-items: center;
@@ -94,12 +94,51 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
   }
   .m-icon-btn:active {
-    transform: scale(0.96);
+    transform: scale(0.95);
   }
   .m-icon-btn.active {
     background: linear-gradient(135deg, #99f6e4 0%, #14b8a6 100%);
     color: #042f2e;
     border-color: #0d9488;
+  }
+
+  /* 음성 엔진 상태 & 전환 바 */
+  .m-audio-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    background: #f0fdfa;
+    border: 1px solid #5eead4;
+    border-radius: 10px;
+    padding: 4px 8px;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #0f766e;
+  }
+  .m-audio-status {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .m-mini-pill {
+    height: 25px;
+    padding: 0 8px;
+    border-radius: 999px;
+    border: 1px solid #0d9488;
+    background: #ffffff;
+    color: #0f766e;
+    font-size: 11px;
+    font-weight: 900;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .m-mini-pill.cloud-on {
+    background: #fef08a;
+    color: #854d0e;
+    border-color: #d97706;
   }
 
   /* Step 0 ~ 4 가로 스크롤 탭 */
@@ -109,12 +148,12 @@
     gap: 5px;
     overflow-x: auto;
     scrollbar-width: none;
-    padding-bottom: 2px;
+    padding-bottom: 1px;
   }
   .m-step-bar::-webkit-scrollbar { display: none; }
 
   .m-step-btn {
-    height: 32px;
+    height: 31px;
     padding: 0 11px;
     border-radius: 999px;
     border: 1.5px solid #cbd5e1;
@@ -242,7 +281,6 @@
     border-color: #34d399;
   }
 
-  /* 궁전 하단 설명 콘솔 */
   .m-palace-console {
     padding: 12px;
     background: linear-gradient(160deg, #fefce8 0%, #fef3c7 100%);
@@ -317,7 +355,6 @@
     color: #0f172a;
   }
 
-  /* 서브노트 내부 표/SVG 모바일 자동 최적화 */
   #mSubnoteBox table {
     width: 100% !important;
     max-width: 100% !important;
@@ -338,7 +375,6 @@
     margin: 6px auto;
   }
 
-  /* 가림막(Cloze) 캡슐 스타일 */
   .cloze-mask {
     display: inline-block;
     padding: 2px 10px;
@@ -366,7 +402,6 @@
     box-shadow: none !important;
   }
 
-  /* 도면 가림막 */
   .cloze-diagram-wrap {
     position: relative;
     width: 100%;
@@ -395,14 +430,12 @@
     display: none !important;
   }
 
-  /* TTS 읽는 중인 줄 하이라이트 */
   .tts-reading-row {
     background-color: #fef08a !important;
     outline: 2.5px solid #eab308 !important;
     border-radius: 6px !important;
   }
 
-  /* 안내 토스트 바 */
   .m-toast {
     position: fixed;
     bottom: 78px;
@@ -477,7 +510,7 @@
 </head>
 <body>
 
-<!-- 1. 상단 고정 네비게이션 & 학습 단계 바 -->
+<!-- 1. 상단 고정 네비게이션 & 음성 상태 바 -->
 <header class="m-header">
   <div class="m-nav-row">
     <select id="mCategorySelect" class="m-select" onchange="onCategoryChange()"></select>
@@ -485,6 +518,13 @@
     <select id="mTopicSelect" class="m-select" onchange="loadTopic(Number(this.value))"></select>
     <button type="button" class="m-icon-btn" onclick="moveTopic(1)" title="다음 토픽">▶</button>
     <button type="button" id="btnPalaceToggle" class="m-icon-btn" onclick="togglePalaceCard()">🏛️궁전</button>
+  </div>
+
+  <!-- 음성 진단 & 엔진 전환 바 -->
+  <div class="m-audio-bar">
+    <span id="mAudioStatus" class="m-audio-status">🔊 음성 준비됨 (안 들리면 우측 [방식변경] 터치)</span>
+    <button type="button" id="btnEngineSwitch" class="m-mini-pill" onclick="toggleAudioEngineMode()">⚙️ 방식: 폰기본</button>
+    <button type="button" class="m-mini-pill" onclick="runSoundDiagnosticTest()">🔔 소리테스트</button>
   </div>
 
   <div class="m-step-bar">
@@ -496,7 +536,7 @@
   </div>
 </header>
 
-<!-- 2. 기억의 궁전 뷰어 (궁전 데이터가 있는 토픽이거나 궁전 버튼 클릭 시 표시) -->
+<!-- 2. 기억의 궁전 뷰어 -->
 <section id="mPalaceCard" class="m-palace-card">
   <div class="m-palace-top">
     <span id="mPalaceTitle">🏛️ 기억의 궁전</span>
@@ -514,7 +554,7 @@
 
   <div class="m-palace-console">
     <div id="mPalaceRoom" class="m-palace-room">거점 준비 중</div>
-    <div id="mPalaceStory" class="m-palace-story">핀을 터치하거나 아래 [정답확인 / 다음거점] 버튼을 눌러 학습하세요.</div>
+    <div id="mPalaceStory" class="m-palace-story">핀을 터치하거나 아래 버튼을 눌러 학습하세요.</div>
     <div id="mPalaceAnswer" class="m-palace-answer" onclick="stepPalacePinAction()">🔒 터치하여 정답 확인 & 음성 듣기</div>
     <div class="m-palace-nav">
       <button type="button" class="m-icon-btn" onclick="movePalacePin(-1)">◀ 이전 핀</button>
@@ -567,13 +607,12 @@
   </button>
 </nav>
 
-<!-- 기존 PC용 데이터 파일 2개 그대로 연결 -->
 <script src="topics_data.js"></script>
 <script src="palaces_data.js"></script>
 
 <script>
 /* =========================================================================
-   📱 소방기술사 모바일 전용 다이어트 코어 엔진
+   📱 소방기술사 모바일 전용 코어 엔진 (듀얼 오디오 TTS 탑재본)
    ========================================================================= */
 const PRONUN_DICT = {
   "KCL": "케이씨엘", "KVL": "케이브이엘", "NTC": "엔티씨", "PTC": "피티씨",
@@ -608,7 +647,6 @@ let filteredTopicIndices = [];
 let currentTopicIdx = 0;
 let currentStep = 2;
 let clozeList = [];
-let currentClozeCursor = 0;
 
 let currentPalace = null;
 let currentPinIdx = 0;
@@ -621,6 +659,9 @@ let speechTimer = null;
 let pickFromHereMode = false;
 let subnoteFontSize = parseFloat(localStorage.getItem('m_font_size')) || 15.5;
 
+// 음성 엔진 모드: 'native' (스마트폰 내장 TTS) vs 'cloud' (클라우드 MP3 스트리밍)
+let audioEngineMode = localStorage.getItem('m_audio_engine_mode') || 'native';
+let cloudAudioPlayer = new Audio();
 window._activeUtterances = [];
 
 /* 1. 부팅 초기화 */
@@ -628,7 +669,6 @@ window.addEventListener('DOMContentLoaded', () => {
   allTopics = window.STUDY_TOPICS || [];
   window.MEMORY_PALACES = window.MEMORY_PALACES || {};
 
-  // 토픽 내부에 내장된 memoryPalace 추출
   allTopics.forEach(t => {
     if (t && t.id && t.memoryPalace && Array.isArray(t.memoryPalace.pins) && t.memoryPalace.pins.length > 0) {
       if (!window.MEMORY_PALACES[t.id]) {
@@ -637,6 +677,20 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // 카카오톡 인앱 브라우저이거나 speechSynthesis가 아예 없으면 자동으로 클라우드 MP3 모드 활성화
+  const ua = navigator.userAgent.toLowerCase();
+  if (!('speechSynthesis' in window) || ua.includes('kakaotalk')) {
+    audioEngineMode = 'cloud';
+  }
+  updateEngineSwitchButtonUI();
+
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.getVoices();
+    };
+  }
+
   document.documentElement.style.setProperty('--subnote-size', subnoteFontSize + 'px');
   updateRateButtonUI();
   initCategorySelector();
@@ -644,7 +698,6 @@ window.addEventListener('DOMContentLoaded', () => {
   const savedIdx = parseInt(localStorage.getItem('m_last_topic_idx'), 10) || 0;
   loadTopic(Math.max(0, Math.min(allTopics.length - 1, savedIdx)));
 
-  // 서브노트에서 [⏬ 여기부터] 터치 이벤트 바인딩
   const box = document.getElementById('mSubnoteBox');
   box.addEventListener('click', (e) => {
     if (!pickFromHereMode) return;
@@ -793,7 +846,6 @@ function renderPalacePins() {
 
   const pins = currentPalace.pins || [];
 
-  // 경로 점선 그리기
   if (pins.length > 1) {
     const pts = pins.map(p => `${p.x},${p.y}`).join(' ');
     const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
@@ -911,7 +963,7 @@ function speakAllPalacePins() {
   speakUnitListSequentially(units);
 }
 
-/* 4. 서브노트 렌더링 & Step 0 ~ 4 가림막 생성 */
+/* 4. 서브노트 렌더링 & Step 0 ~ 4 가림막 */
 function setStep(step) {
   stopSpeech();
   currentStep = step;
@@ -930,7 +982,6 @@ function renderSubnoteWithStep(step) {
 
   box.innerHTML = topic.summaryHtml || '<p>원문 데이터가 없습니다.</p>';
   clozeList = [];
-  currentClozeCursor = 0;
 
   if (step === 0) {
     updateBottomMaskStatus();
@@ -1113,7 +1164,6 @@ function updateBottomMaskStatus() {
 }
 
 function handleMainStepButton() {
-  // 1) 빈칸이 남아 있으면 다음 빈칸을 순서대로 열면서 읽어줌
   const nextItem = clozeList.find(item => !isClozeRevealed(item));
   if (nextItem) {
     if (nextItem.isDiagram) {
@@ -1129,13 +1179,11 @@ function handleMainStepButton() {
     return;
   }
 
-  // 2) 빈칸이 모두 열려 있고 궁전이 열려 있으면 궁전 다음 핀 실행
   if (currentPalace && document.getElementById('mPalaceCard').classList.contains('open')) {
     stepPalacePinAction();
     return;
   }
 
-  // 3) 모든 빈칸을 다 열었으면 다음 Step으로 진급 제안
   if (currentStep < 4) {
     setStep(currentStep + 1);
   } else {
@@ -1167,8 +1215,54 @@ function adjustFontSize(delta) {
 }
 
 /* =========================================================================
-   🔊 5. 스마트폰 네이티브 TTS 엔진 (딜레이 제로 동기 발화)
+   🔊 5. 스마트폰 무음 해결 듀얼 오디오 엔진 (폰 기본 TTS + 클라우드 MP3 백업)
    ========================================================================= */
+function setAudioStatusText(msg) {
+  const el = document.getElementById('mAudioStatus');
+  if (el) el.textContent = msg;
+}
+
+function updateEngineSwitchButtonUI() {
+  const btn = document.getElementById('btnEngineSwitch');
+  if (!btn) return;
+  if (audioEngineMode === 'cloud') {
+    btn.textContent = '⚙️ 방식: 클라우드음성';
+    btn.classList.add('cloud-on');
+  } else {
+    btn.textContent = '⚙️ 방식: 폰기본TTS';
+    btn.classList.remove('cloud-on');
+  }
+}
+
+function toggleAudioEngineMode() {
+  stopSpeech();
+  audioEngineMode = (audioEngineMode === 'native') ? 'cloud' : 'native';
+  localStorage.setItem('m_audio_engine_mode', audioEngineMode);
+  updateEngineSwitchButtonUI();
+  speakTextNow(audioEngineMode === 'cloud' ? '클라우드 음성 모드로 전환되었습니다.' : '휴대폰 기본 음성 모드로 전환되었습니다.');
+}
+
+function runSoundDiagnosticTest() {
+  // 1) Web Audio API로 짧은 '띵~' 차임벨을 먼저 울려 휴대폰 미디어 볼륨/무음스위치 확인
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtx) {
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(660, ctx.currentTime);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.15);
+    }
+  } catch (e) {}
+
+  speakTextNow('소방기술사 음성 테스트입니다. 소리가 잘 들리시나요?');
+}
+
 function refineSpeechText(raw) {
   if (!raw) return '';
   let text = String(raw)
@@ -1197,47 +1291,117 @@ function refineSpeechText(raw) {
   return text;
 }
 
-function getMobileKoreanVoice() {
-  if (!('speechSynthesis' in window)) return null;
-  const voices = window.speechSynthesis.getVoices() || [];
-  const koVoices = voices.filter(v => {
-    const l = (v.lang || '').toLowerCase();
-    const n = (v.name || '').toLowerCase();
-    return l.includes('ko') || n.includes('korean') || n.includes('한국어');
-  });
-  return koVoices.find(v => v.name.includes('Natural')) || koVoices[0] || null;
+// 클라우드 한국어 MP3 스트리밍 재생기 (카카오톡 인앱 브라우저 및 TTS 미설치 폰 완벽 대응)
+function speakViaCloudAudio(cleanText, onEndCallback) {
+  if (!cleanText) {
+    if (onEndCallback) onEndCallback();
+    return;
+  }
+  // 180자 단위로 안전하게 분할
+  const chunks = cleanText.match(/.{1,160}(?:\s|$|,|\.)/g) || [cleanText];
+  let cIdx = 0;
+
+  const playNextChunk = () => {
+    if (cIdx >= chunks.length) {
+      setAudioStatusText('🔊 재생 완료');
+      if (onEndCallback) onEndCallback();
+      return;
+    }
+    const q = encodeURIComponent(chunks[cIdx++].trim());
+    const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ko&q=${q}`;
+    cloudAudioPlayer.src = url;
+    cloudAudioPlayer.playbackRate = Math.min(2.0, Math.max(0.7, ttsRate));
+    cloudAudioPlayer.onended = () => playNextChunk();
+    cloudAudioPlayer.onerror = () => {
+      setAudioStatusText('⚠️ 오디오 재생 실패 (폰 볼륨을 확인하세요)');
+      if (onEndCallback) onEndCallback();
+    };
+    setAudioStatusText(`🔊 [클라우드음성] 읽는 중: ${cleanText.slice(0, 18)}...`);
+    cloudAudioPlayer.play().catch(() => {
+      setAudioStatusText('⚠️ 브라우저 소리 차단됨 — 버튼을 한 번 더 터치하세요');
+      if (onEndCallback) onEndCallback();
+    });
+  };
+
+  playNextChunk();
 }
 
-// 터치 이벤트 안에서 setTimeout 없이 즉시 호출하여 모바일 오디오 차단 100% 돌파
-function speakTextNow(rawText, onEndCallback) {
-  if (!('speechSynthesis' in window)) return;
-  stopSpeech();
-
-  const clean = refineSpeechText(rawText);
-  if (!clean) {
+// ★ 핵심 수정: 모바일에서 cancel() 직후 speak()가 씹히는 현상 방지 & 잘못된 voice 지정 제거
+function speakSingleCleanedText(cleanText, onEndCallback) {
+  if (!cleanText) {
     if (onEndCallback) onEndCallback();
     return;
   }
 
-  const u = new SpeechSynthesisUtterance(clean);
+  if (audioEngineMode === 'cloud' || !('speechSynthesis' in window)) {
+    speakViaCloudAudio(cleanText, onEndCallback);
+    return;
+  }
+
+  try {
+    // 현재 실제로 말하고 있을 때만 cancel 호출 (아무 말 안 할 때 cancel 부르면 다음 문장이 삼켜짐)
+    if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+      window.speechSynthesis.cancel();
+    }
+  } catch (e) {}
+
+  const u = new SpeechSynthesisUtterance(cleanText);
   window._activeUtterances.push(u);
+
+  // 모바일에서는 u.voice를 억지로 넣지 않고 u.lang = 'ko-KR'만 지정해야 OS 기본 한국어 엔진이 100% 작동함!
   u.lang = 'ko-KR';
   u.rate = ttsRate;
+  u.volume = 1.0;
 
-  const koVoice = getMobileKoreanVoice();
-  if (koVoice) u.voice = koVoice;
+  let started = false;
+  // 만약 1.2초 안에 모바일 내장 TTS가 시작되지 않으면(무음 먹통 시) 자동으로 클라우드 음성으로 즉시 백업 재생!
+  const fallbackWatchdog = setTimeout(() => {
+    if (!started) {
+      audioEngineMode = 'cloud';
+      updateEngineSwitchButtonUI();
+      speakViaCloudAudio(cleanText, onEndCallback);
+    }
+  }, 1200);
 
+  u.onstart = () => {
+    started = true;
+    clearTimeout(fallbackWatchdog);
+    setAudioStatusText(`🔊 읽는 중: ${cleanText.slice(0, 20)}...`);
+  };
   u.onend = () => {
+    started = true;
+    clearTimeout(fallbackWatchdog);
+    setAudioStatusText('🔊 대기 중');
     if (onEndCallback) onEndCallback();
   };
   u.onerror = () => {
-    if (onEndCallback) onEndCallback();
+    clearTimeout(fallbackWatchdog);
+    if (!started) {
+      audioEngineMode = 'cloud';
+      updateEngineSwitchButtonUI();
+      speakViaCloudAudio(cleanText, onEndCallback);
+    } else if (onEndCallback) {
+      onEndCallback();
+    }
   };
 
   try {
     window.speechSynthesis.resume();
     window.speechSynthesis.speak(u);
-  } catch (e) {}
+  } catch (e) {
+    clearTimeout(fallbackWatchdog);
+    speakViaCloudAudio(cleanText, onEndCallback);
+  }
+}
+
+function speakTextNow(rawText, onEndCallback) {
+  isSpeakingQueue = false;
+  if (speechTimer) {
+    clearTimeout(speechTimer);
+    speechTimer = null;
+  }
+  const clean = refineSpeechText(rawText);
+  speakSingleCleanedText(clean, onEndCallback);
 }
 
 function stopSpeech() {
@@ -1248,13 +1412,23 @@ function stopSpeech() {
   }
   window._activeUtterances = [];
   if ('speechSynthesis' in window) {
-    try { window.speechSynthesis.cancel(); } catch (e) {}
+    try {
+      if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+        window.speechSynthesis.cancel();
+      }
+    } catch (e) {}
   }
+  try {
+    cloudAudioPlayer.pause();
+    cloudAudioPlayer.currentTime = 0;
+  } catch (e) {}
+
   document.querySelectorAll('.tts-reading-row').forEach(el => el.classList.remove('tts-reading-row'));
   const btn = document.getElementById('btnDockSpeakAll');
   const lbl = document.getElementById('lblSpeakAllBtn');
   if (btn) btn.classList.remove('active');
   if (lbl) lbl.textContent = '🔊 전체듣기';
+  setAudioStatusText('🔊 정지됨');
 }
 
 function collectReadableRows() {
@@ -1287,7 +1461,7 @@ function collectReadableRows() {
 }
 
 function speakUnitListSequentially(units) {
-  if (!units.length || !('speechSynthesis' in window)) return;
+  if (!units.length) return;
   stopSpeech();
   isSpeakingQueue = true;
 
@@ -1317,29 +1491,12 @@ function speakUnitListSequentially(units) {
       return;
     }
 
-    const u = new SpeechSynthesisUtterance(clean);
-    window._activeUtterances.push(u);
-    u.lang = 'ko-KR';
-    u.rate = ttsRate;
-    const koVoice = getMobileKoreanVoice();
-    if (koVoice) u.voice = koVoice;
-
-    u.onend = () => {
+    speakSingleCleanedText(clean, () => {
       if (!isSpeakingQueue) return;
-      speechTimer = setTimeout(playNext, 140);
-    };
-    u.onerror = () => {
-      if (!isSpeakingQueue) return;
-      speechTimer = setTimeout(playNext, 100);
-    };
-
-    try {
-      window.speechSynthesis.resume();
-      window.speechSynthesis.speak(u);
-    } catch (e) {}
+      speechTimer = setTimeout(playNext, 150);
+    });
   };
 
-  // 첫 문장은 터치 즉시 발화!
   playNext();
 }
 
