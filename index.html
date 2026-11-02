@@ -4,8 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="referrer" content="no-referrer">
-<title>📱 소방기술사 모바일 학습 마스터</title>
+
+<!-- 📱 스마트폰 홈 화면 추가 시 진짜 앱(전체화면)처럼 실행되도록 설정 -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="소방기술사">
+<meta name="application-name" content="소방기술사">
+<meta name="theme-color" content="#0d9488">
+
+<title>소방기술사 마스터</title>
+
+<!-- 📱 samguk_library 폴더의 아이콘을 홈 화면 바로가기 아이콘으로 연결 -->
 <link rel="icon" type="image/x-icon" href="samguk_library/ui_study_icons_3x3_8.ico">
+<link rel="shortcut icon" href="samguk_library/ui_study_icons_3x3_8.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="samguk_library/ui_study_icons_3x3_8.ico">
+
 <style>
   :root {
     --teal-main: #0d9488;
@@ -103,16 +117,16 @@
     border-color: #0d9488;
   }
 
-  /* 삼성 브라우저 전용 음성 제어 바 */
+  /* 심플 음성 상태 바 */
   .m-audio-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 5px;
+    gap: 6px;
     background: #f0fdfa;
     border: 1.5px solid #5eead4;
     border-radius: 10px;
-    padding: 4px 8px;
+    padding: 4px 10px;
     font-size: 11.5px;
     font-weight: 800;
     color: #0f766e;
@@ -125,8 +139,8 @@
     text-overflow: ellipsis;
   }
   .m-mini-pill {
-    height: 26px;
-    padding: 0 9px;
+    height: 25px;
+    padding: 0 10px;
     border-radius: 999px;
     border: 1.5px solid #0d9488;
     background: #ffffff;
@@ -135,11 +149,6 @@
     font-weight: 900;
     cursor: pointer;
     flex-shrink: 0;
-  }
-  .m-mini-pill.active-mode {
-    background: #ccfbf1;
-    color: #042f2e;
-    border-color: #0d9488;
   }
 
   /* Step 0 ~ 4 가로 스크롤 탭 */
@@ -511,7 +520,7 @@
 </head>
 <body>
 
-<!-- 1. 상단 고정 네비게이션 & 음성 제어 바 -->
+<!-- 1. 상단 고정 네비게이션 -->
 <header class="m-header">
   <div class="m-nav-row">
     <select id="mCategorySelect" class="m-select" onchange="onCategoryChange()"></select>
@@ -521,10 +530,9 @@
     <button type="button" id="btnPalaceToggle" class="m-icon-btn" onclick="togglePalaceCard()">🏛️궁전</button>
   </div>
 
-  <!-- 삼성 브라우저 최적화 단일 음성 엔진 바 -->
+  <!-- 엣지TTS 완전 제거 — 단일 고음질 음성 상태창 -->
   <div class="m-audio-bar">
-    <span id="mAudioStatus" class="m-audio-status">🔊 삼성 브라우저 최적화 음성 준비됨</span>
-    <button type="button" id="btnEngineMode" class="m-mini-pill active-mode" onclick="toggleVoiceMode()">🎙️ 음성: 서연(고음질)</button>
+    <span id="mAudioStatus" class="m-audio-status">🎙️ 고음질 아나운서 음성 대기 중</span>
     <button type="button" class="m-mini-pill" onclick="stopSpeech()">⏹️ 즉시정지</button>
   </div>
 
@@ -580,7 +588,7 @@
 
 <div id="mToast" class="m-toast">⏬ 읽기 시작할 문단이나 표 칸을 터치하세요!</div>
 
-<!-- 단일 HTML5 오디오 플레이어 -->
+<!-- 단일 HTML5 오디오 플레이어 (엣지 TTS 완전 제거) -->
 <audio id="mHtmlAudioPlayer" preload="auto" playsinline webkit-playsinline style="display:none;"></audio>
 
 <!-- 4. 하단 고정 엄지손가락 컨트롤 독 바 -->
@@ -616,8 +624,9 @@
 
 <script>
 /* =========================================================================
-   📱 소방기술사 모바일 전용 코어 엔진 (삼성 인터넷 브라우저 완벽 최적화본)
-   - 세션 ID(speechSessionId) 잠금 방식으로 정지 시 화면 폭주 & 목소리 충돌 100% 차단
+   📱 소방기술사 모바일 전용 코어 엔진
+   - 엣지(Edge) TTS 및 브라우저 내장 speechSynthesis 100% 완전 제거
+   - samguk_library 아이콘 홈 화면 바로가기(PWA Manifest) 자동 연결
    ========================================================================= */
 const PRONUN_DICT = {
   "KCL": "케이씨엘", "KVL": "케이브이엘", "NTC": "엔티씨", "PTC": "피티씨",
@@ -663,18 +672,69 @@ let isSpeakingQueue = false;
 let speechTimer = null;
 let pickFromHereMode = false;
 let subnoteFontSize = parseFloat(localStorage.getItem('m_font_size')) || 15.5;
-
-// ★ 핵심: 재생 세션 고유 ID (정지나 새 문장 클릭 시 즉시 증가하여 이전 콜백을 100% 무효화)
 let speechSessionId = 0;
 
-// 음성 모드:
-// 'seoyeon' = 고음질 신경망 아나운서(서연) 단일 고정 (중간에 다른 목소리로 절대 안 바뀜!)
-// 'samsung' = 갤럭시/삼성 브라우저 내장 TTS 단일 고정
-let voiceMode = localStorage.getItem('m_samsung_voice_mode') || 'seoyeon';
-window._activeUtterances = [];
+/* 0. 삼성 인터넷 홈 화면 아이콘(samguk_library) 자동 생성기 */
+function setupHomeScreenAppIcon() {
+  try {
+    const baseUrl = window.location.href.split('?')[0].replace(/\/[^\/]*$/, '/');
+    const iconIcoUrl = baseUrl + 'samguk_library/ui_study_icons_3x3_8.ico';
+    const iconSheetUrl = baseUrl + 'samguk_library/ui_study_icons_3x3.png';
+
+    // 3x3 스프라이트 시트에서 첫 번째 아이콘만 정사각형(192x192)으로 잘라내어 선명한 홈 화면 아이콘 생성
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = 192;
+        canvas.height = 192;
+        const ctx = canvas.getContext('2d');
+        const cellW = Math.floor(img.width / 3);
+        const cellH = Math.floor(img.height / 3);
+        ctx.drawImage(img, 0, 0, cellW, cellH, 0, 0, 192, 192);
+        const croppedDataUrl = canvas.toDataURL('image/png');
+
+        document.querySelectorAll('link[rel*="icon"]').forEach(el => {
+          el.href = croppedDataUrl;
+        });
+
+        attachWebManifest(croppedDataUrl, baseUrl);
+      } catch (e) {
+        attachWebManifest(iconIcoUrl, baseUrl);
+      }
+    };
+    img.onerror = () => {
+      attachWebManifest(iconIcoUrl, baseUrl);
+    };
+    img.src = iconSheetUrl;
+  } catch (e) {}
+}
+
+function attachWebManifest(iconUrl, baseUrl) {
+  const manifestObj = {
+    name: "소방기술사 기억의 궁전 마스터",
+    short_name: "소방기술사",
+    start_url: baseUrl + "m.html",
+    display: "standalone",
+    background_color: "#f1f5f9",
+    theme_color: "#0d9488",
+    icons: [
+      { src: iconUrl, sizes: "192x192", type: "image/png" },
+      { src: iconUrl, sizes: "512x512", type: "image/png" }
+    ]
+  };
+  const blob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
+  const link = document.createElement('link');
+  link.rel = 'manifest';
+  link.href = URL.createObjectURL(blob);
+  document.head.appendChild(link);
+}
 
 /* 1. 부팅 초기화 */
 window.addEventListener('DOMContentLoaded', () => {
+  setupHomeScreenAppIcon();
+
   allTopics = window.STUDY_TOPICS || [];
   window.MEMORY_PALACES = window.MEMORY_PALACES || {};
 
@@ -686,12 +746,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.getVoices();
-    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
-  }
-
-  updateVoiceModeButtonUI();
   document.documentElement.style.setProperty('--subnote-size', subnoteFontSize + 'px');
   updateRateButtonUI();
   initCategorySelector();
@@ -1217,33 +1271,11 @@ function adjustFontSize(delta) {
 }
 
 /* =========================================================================
-   🔊 5. 삼성 인터넷 브라우저 전용 무충돌 단일 TTS 엔진
-   - 한 번에 오직 하나의 음성 엔진만 구동 (절대 도중에 목소리가 바뀌지 않음)
-   - 정지(stopSpeech) 시 speechSessionId를 즉시 변경하여 화면 폭주 원천 차단
+   🔊 5. 순수 단일 신경망 오디오 엔진 (엣지 TTS / speechSynthesis 완전 삭제)
    ========================================================================= */
 function setAudioStatus(msg) {
   const el = document.getElementById('mAudioStatus');
   if (el) el.textContent = msg;
-}
-
-function updateVoiceModeButtonUI() {
-  const btn = document.getElementById('btnEngineMode');
-  if (!btn) return;
-  if (voiceMode === 'seoyeon') {
-    btn.textContent = '🎙️ 음성: 서연(고음질)';
-    btn.classList.add('active-mode');
-  } else {
-    btn.textContent = '🎙️ 음성: 삼성기본TTS';
-    btn.classList.remove('active-mode');
-  }
-}
-
-function toggleVoiceMode() {
-  stopSpeech();
-  voiceMode = (voiceMode === 'seoyeon') ? 'samsung' : 'seoyeon';
-  localStorage.setItem('m_samsung_voice_mode', voiceMode);
-  updateVoiceModeButtonUI();
-  speakTextNow(voiceMode === 'seoyeon' ? '고음질 서연 아나운서 음성으로 고정되었습니다.' : '삼성 브라우저 기본 음성으로 고정되었습니다.');
 }
 
 function refineSpeechText(raw) {
@@ -1274,9 +1306,8 @@ function refineSpeechText(raw) {
   return text;
 }
 
-// ★ 정지 함수: 이벤트 핸들러를 먼저 모두 null로 끊은 뒤 정지시켜야 삼성 브라우저가 에러로 오작동하지 않음!
 function stopSpeech() {
-  speechSessionId++; // 이전 재생 세션 번호표 즉시 폐기 (화면 폭주 완벽 차단!)
+  speechSessionId++;
   isSpeakingQueue = false;
 
   if (speechTimer) {
@@ -1284,7 +1315,6 @@ function stopSpeech() {
     speechTimer = null;
   }
 
-  // 1) HTML5 오디오 이벤트 핸들러 먼저 분리 후 정지
   const audioEl = document.getElementById('mHtmlAudioPlayer');
   if (audioEl) {
     audioEl.onended = null;
@@ -1296,31 +1326,15 @@ function stopSpeech() {
     } catch (e) {}
   }
 
-  // 2) 삼성 내장 TTS 이벤트 핸들러 먼저 분리 후 정지
-  if (window._activeUtterances && window._activeUtterances.length) {
-    window._activeUtterances.forEach(u => {
-      u.onstart = null;
-      u.onend = null;
-      u.onerror = null;
-    });
-    window._activeUtterances = [];
-  }
-  if ('speechSynthesis' in window) {
-    try {
-      window.speechSynthesis.cancel();
-    } catch (e) {}
-  }
-
   document.querySelectorAll('.tts-reading-row').forEach(el => el.classList.remove('tts-reading-row'));
   const btn = document.getElementById('btnDockSpeakAll');
   const lbl = document.getElementById('lblSpeakAllBtn');
   if (btn) btn.classList.remove('active');
   if (lbl) lbl.textContent = '🔊 전체듣기';
-  setAudioStatus('🔊 대기 중');
+  setAudioStatus('🎙️ 음성 대기 중');
 }
 
-// 1) 서연(고음질 신경망) 단일 스트리밍 재생기 (다른 목소리로 절대 넘어가지 않음)
-function playSeoyeonVoice(cleanText, mySessionId, onEndCallback) {
+function playSingleAudioStream(cleanText, mySessionId, onEndCallback) {
   const audioEl = document.getElementById('mHtmlAudioPlayer');
   if (!cleanText || !audioEl || mySessionId !== speechSessionId) return;
 
@@ -1328,11 +1342,10 @@ function playSeoyeonVoice(cleanText, mySessionId, onEndCallback) {
   let chunkIdx = 0;
 
   const playNextChunk = () => {
-    // 정지 버튼이 눌렸거나 다른 문장이 시작되었으면 즉시 중단!
     if (mySessionId !== speechSessionId) return;
 
     if (chunkIdx >= chunks.length) {
-      setAudioStatus('🔊 재생 완료');
+      setAudioStatus('🎙️ 재생 완료');
       if (onEndCallback) onEndCallback();
       return;
     }
@@ -1357,7 +1370,7 @@ function playSeoyeonVoice(cleanText, mySessionId, onEndCallback) {
 
     audioEl.onplaying = () => {
       if (mySessionId !== speechSessionId) return;
-      setAudioStatus(`🔊 읽는 중: ${curText.slice(0, 18)}...`);
+      setAudioStatus(`🔊 읽는 중: ${curText.slice(0, 20)}...`);
     };
 
     audioEl.onended = () => {
@@ -1367,79 +1380,16 @@ function playSeoyeonVoice(cleanText, mySessionId, onEndCallback) {
 
     audioEl.onerror = () => {
       if (mySessionId !== speechSessionId) return;
-      setAudioStatus('⚠️ 네트워크 지연으로 현재 줄 건너뜀');
       if (onEndCallback) onEndCallback();
     };
 
     const p = audioEl.play();
     if (p !== undefined) {
-      p.catch(() => {
-        if (mySessionId !== speechSessionId) return;
-        setAudioStatus('⚠️ 화면의 재생 버튼을 다시 터치해 주세요');
-      });
+      p.catch(() => {});
     }
   };
 
   playNextChunk();
-}
-
-// 2) 삼성 브라우저 내장 TTS 단일 재생기 (안드로이드 ko_KR / ko-KR 완벽 대응)
-function playSamsungNativeVoice(cleanText, mySessionId, onEndCallback) {
-  if (!('speechSynthesis' in window) || mySessionId !== speechSessionId) return;
-
-  try {
-    window.speechSynthesis.cancel();
-  } catch (e) {}
-
-  // 삼성 브라우저는 cancel() 직후 60ms 숨고르기를 주어야 문장이 씹히지 않음
-  speechTimer = setTimeout(() => {
-    if (mySessionId !== speechSessionId) return;
-
-    const u = new SpeechSynthesisUtterance(cleanText);
-    window._activeUtterances.push(u);
-
-    const allVoices = window.speechSynthesis.getVoices() || [];
-    const koVoice = allVoices.find(v => {
-      const l = (v.lang || '').toLowerCase();
-      return l.includes('ko_kr') || l.includes('ko-kr') || l === 'ko';
-    });
-    if (koVoice) u.voice = koVoice;
-
-    u.lang = 'ko-KR';
-    u.rate = ttsRate;
-    u.volume = 1.0;
-
-    u.onstart = () => {
-      if (mySessionId !== speechSessionId) return;
-      setAudioStatus(`🔊 [삼성TTS] 읽는 중: ${cleanText.slice(0, 18)}...`);
-    };
-
-    u.onend = () => {
-      if (mySessionId !== speechSessionId) return;
-      setAudioStatus('🔊 재생 완료');
-      if (onEndCallback) onEndCallback();
-    };
-
-    u.onerror = () => {
-      // 정지 버튼 때문에 발생한 에러는 세션ID가 달라서 여기서 100% 차단됨
-      if (mySessionId !== speechSessionId) return;
-      setAudioStatus('⚠️ 삼성 TTS 응답 없음 — 상단 [음성: 서연] 모드를 사용해 보세요');
-    };
-
-    try {
-      window.speechSynthesis.resume();
-      window.speechSynthesis.speak(u);
-    } catch (e) {}
-  }, 65);
-}
-
-function speakSingleCleanedText(cleanText, mySessionId, onEndCallback) {
-  if (!cleanText || mySessionId !== speechSessionId) return;
-  if (voiceMode === 'samsung') {
-    playSamsungNativeVoice(cleanText, mySessionId, onEndCallback);
-  } else {
-    playSeoyeonVoice(cleanText, mySessionId, onEndCallback);
-  }
 }
 
 function speakTextNow(rawText) {
@@ -1447,7 +1397,7 @@ function speakTextNow(rawText) {
   const mySessionId = speechSessionId;
   const clean = refineSpeechText(rawText);
   if (!clean) return;
-  speakSingleCleanedText(clean, mySessionId, null);
+  playSingleAudioStream(clean, mySessionId, null);
 }
 
 function collectReadableRows() {
@@ -1494,7 +1444,6 @@ function speakUnitListSequentially(units) {
   let idx = 0;
 
   const playNext = () => {
-    // 세션 ID가 바뀌었거나 정지 상태면 즉시 종료 (화면 넘어감 원천 차단)
     if (!isSpeakingQueue || mySessionId !== speechSessionId || idx >= units.length) {
       if (mySessionId === speechSessionId) stopSpeech();
       return;
@@ -1514,9 +1463,9 @@ function speakUnitListSequentially(units) {
       return;
     }
 
-    speakSingleCleanedText(clean, mySessionId, () => {
+    playSingleAudioStream(clean, mySessionId, () => {
       if (!isSpeakingQueue || mySessionId !== speechSessionId) return;
-      speechTimer = setTimeout(playNext, 180);
+      speechTimer = setTimeout(playNext, 160);
     });
   };
 
