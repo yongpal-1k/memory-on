@@ -1196,6 +1196,33 @@
     .sg-floating-remote { display: none !important; }
     body, .subnote-paper-container { background: #fff !important; color: #000 !important; box-shadow: none !important; border: none !important; }
   }
+  /* 📱 스마트폰(모바일) 세로 화면 완벽 대응 패치 */
+  @media (max-width: 768px) {
+    .top-master-header { position: relative !important; padding: 8px 10px !important; }
+    .master-study-toolbar { position: relative !important; top: 0 !important; padding: 8px 10px !important; }
+    .palace-body-split, .stage-arena-center { flex-direction: column !important; overflow-y: auto !important; }
+    .palace-side-console { width: 100% !important; max-height: 240px !important; }
+    .anki-battle-stage, .memory-palace-stage { height: auto !important; min-height: 520px !important; }
+    .palace-viewport { min-height: 240px !important; width: 100% !important; }
+    .hero-stand-wrap { display: none !important; } /* 모바일에서는 좌우 장수 캐릭터 숨김 */
+    .anki-center-console { flex-direction: column !important; width: 100% !important; }
+    .subnote-workspace { flex-direction: column !important; padding: 0 8px !important; }
+    .outline-sidebar { width: 100% !important; position: relative !important; top: 0 !important; }
+    .subnote-paper-container { padding: 14px 12px !important; }
+    .sg-floating-remote:not(.minimized) {
+      width: calc(100vw - 16px) !important;
+      right: 8px !important;
+      left: 8px !important;
+      bottom: 8px !important;
+      border-radius: 22px !important;
+    }
+  }
+
+
+
+
+
+
 </style>
 </head>
 <body>

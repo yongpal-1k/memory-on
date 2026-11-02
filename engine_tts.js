@@ -1497,3 +1497,24 @@ if (document.readyState === 'loading') {
 } else {
   injectSpeakFromHereButtonUI();
 }
+
+// 📱 스마트폰 손가락 터치를 마우스 클릭/드래그로 자동 연결해주는 패치
+(function enableMobileTouchBridge() {
+  const mapTouchToMouse = (touchType, mouseType) => {
+    window.addEventListener(touchType, (e) => {
+      const t = e.changedTouches[0];
+      if (!t) return;
+      const target = e.target;
+      const isDraggable = target.closest && (target.closest('#remoteDragHeader') || target.closest('#remoteMiniOrb') || target.closest('.palace-pin'));
+      if (!isDraggable) return;
+      const simulated = new MouseEvent(mouseType, {
+        bubbles: true, cancelable: true, view: window,
+        clientX: t.clientX, clientY: t.clientY
+      });
+      target.dispatchEvent(simulated);
+    }, { passive: false });
+  };
+  mapTouchToMouse('touchstart', 'mousedown');
+  mapTouchToMouse('touchmove', 'mousemove');
+  mapTouchToMouse('touchend', 'mouseup');
+})();
