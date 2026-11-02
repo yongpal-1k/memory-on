@@ -42,7 +42,7 @@
     color: var(--text-dark);
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
     overflow-x: hidden;
-    padding-bottom: 92px;
+    padding-bottom: 105px; /* 플로팅 캡슐 독 여백 */
   }
 
   /* 1. 상단 고정 모바일 헤더 */
@@ -185,7 +185,7 @@
      2. 기억의 궁전 모바일 카드 & [⛶ 최대화면] 전용 뷰어 모드
      ========================================================================= */
   .m-palace-card {
-    margin: 8px 0 0 0; /* 좌우 여백 제거하여 기본 화면에서도 가로폭 100% 활용 */
+    margin: 8px 0 0 0;
     background: linear-gradient(155deg, #fdfcf6 0%, #f8f6e8 100%);
     border-top: 2px solid var(--gold-border);
     border-bottom: 2px solid var(--gold-border);
@@ -237,7 +237,7 @@
     transition: opacity 0.2s ease;
   }
 
-  /* ★ 방안 2-A: 반투명 유리 점(Glass Dot) 초소형 거점 핀 스타일 */
+  /* 반투명 유리 점(Glass Dot) 초소형 거점 핀 스타일 */
   .m-pin {
     position: absolute;
     width: 21px;
@@ -259,7 +259,6 @@
     box-shadow: 0 1px 4px rgba(0,0,0,0.45);
     transition: all 0.16s ease;
   }
-  /* 터치 영역은 넓게 유지하여 작은 점이라도 손가락으로 쉽게 눌리도록 처리 */
   .m-pin::after {
     content: '';
     position: absolute;
@@ -286,7 +285,6 @@
     50% { transform: translate(-50%, -50%) scale(1.15); }
   }
 
-  /* ★ 방안 2-C: 핀 크기 조절 (초소형 / 숨김) 상태 클래스 */
   .m-palace-viewport.pin-size-micro .m-pin {
     width: 14px;
     height: 14px;
@@ -306,7 +304,6 @@
     pointer-events: none !important;
   }
 
-  /* 일반 모드 궁전 하단 설명 콘솔 */
   .m-palace-console {
     padding: 10px 12px;
     background: linear-gradient(160deg, #fefce8 0%, #fef3c7 100%);
@@ -353,9 +350,7 @@
     gap: 6px;
   }
 
-  /* =========================================================================
-     ★ 방안 1-C: [⛶ 최대화면(가로/세로 꽉 차게)] 전용 뷰어 모드 스타일
-     ========================================================================= */
+  /* [⛶ 최대화면] 전용 뷰어 모드 스타일 */
   .m-palace-card.fullscreen-mode {
     position: fixed !important;
     inset: 0 !important;
@@ -370,7 +365,6 @@
     width: 100vw !important;
     height: 100dvh !important;
   }
-
   .m-palace-card.fullscreen-mode .m-palace-top {
     background: rgba(15, 23, 42, 0.86) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -378,8 +372,6 @@
     padding: 8px 12px !important;
     z-index: 3010;
   }
-
-  /* 전체화면 시 그림 영역이 화면 중앙에 최대 크기로 배치됨 (핀 좌표 100% 일치 유지) */
   .m-palace-card.fullscreen-mode .m-palace-viewport {
     margin: auto !important;
     width: 100vw !important;
@@ -388,8 +380,6 @@
     background: #000000 !important;
     box-shadow: 0 0 30px rgba(0,0,0,0.9);
   }
-
-  /* 휴대폰을 가로로 눕혔을 때(Landscape) 화면 높이에 꽉 차게 확장 */
   @media (orientation: landscape) {
     .m-palace-card.fullscreen-mode .m-palace-viewport {
       height: calc(100dvh - 96px) !important;
@@ -397,8 +387,6 @@
       max-width: 100vw !important;
     }
   }
-
-  /* 전체화면 하단 반투명 미니 자막 컨트롤 바 */
   .m-palace-card.fullscreen-mode .m-palace-console {
     background: rgba(15, 23, 42, 0.90) !important;
     backdrop-filter: blur(12px) !important;
@@ -409,7 +397,7 @@
     z-index: 3010;
   }
   .m-palace-card.fullscreen-mode .m-palace-room {
-    display: none !important; /* 전체화면에서는 공간 절약을 위해 방 제목 생략 */
+    display: none !important;
   }
   .m-palace-card.fullscreen-mode .m-palace-story {
     background: rgba(30, 41, 59, 0.85) !important;
@@ -537,73 +525,142 @@
 
   .m-toast {
     position: fixed;
-    bottom: 78px;
+    bottom: 88px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(15, 23, 42, 0.92);
+    background: rgba(15, 23, 42, 0.94);
     color: #fde047;
     border: 1.5px solid #f59e0b;
     border-radius: 999px;
-    padding: 7px 16px;
-    font-size: 12.5px;
-    font-weight: 800;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 900;
     z-index: 1200;
     white-space: nowrap;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
     display: none;
   }
   .m-toast.show {
     display: block;
   }
 
-  /* 4. 하단 고정 엄지손가락 컨트롤 독 바 */
+  /* =========================================================================
+     ★ 4. 시안 A: 플로팅 유리 캡슐 독(Floating Pill Dock) 디자인
+     - 지저분한 2줄 설명 제거, 큼직한 아이콘 + 선명한 4글자 제목 + 입체 보석 메인 버튼
+     ========================================================================= */
   .m-bottom-dock {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    left: 10px;
+    right: 10px;
+    max-width: 520px;
+    margin: 0 auto;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-top: 2px solid var(--gold-border);
-    box-shadow: 0 -6px 22px rgba(15, 23, 42, 0.1);
-    padding: 7px 8px calc(7px + env(safe-area-inset-bottom));
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.94) 0%, rgba(240, 253, 250, 0.90) 100%);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 2px solid rgba(255, 255, 255, 0.98);
+    border-radius: 26px;
+    box-shadow:
+      0 12px 32px rgba(15, 23, 42, 0.16),
+      0 0 0 1.5px rgba(212, 180, 106, 0.65),
+      inset 0 2px 5px rgba(255, 255, 255, 0.95);
+    padding: 6px 7px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1.45fr 1fr 0.9fr;
-    gap: 5px;
+    grid-template-columns: 1fr 1fr 1.38fr 1fr 0.88fr;
+    gap: 6px;
+    align-items: center;
   }
 
   .m-dock-btn {
-    height: 44px;
-    border-radius: 12px;
-    border: 1.5px solid #cbd5e1;
-    background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
-    color: #1e293b;
-    font-size: 12px;
-    font-weight: 900;
+    position: relative;
+    height: 50px;
+    border-radius: 18px;
+    border: 1.5px solid rgba(203, 213, 225, 0.75);
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    color: #0f172a;
+    padding: 4px 2px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1px;
+    gap: 3px;
     cursor: pointer;
-    line-height: 1.15;
+    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.05), inset 0 1px 2px #ffffff;
+    transition: all 0.15s ease;
   }
   .m-dock-btn:active {
-    transform: scale(0.95);
+    transform: scale(0.94);
   }
+
+  .dock-ico {
+    font-size: 17px;
+    line-height: 1;
+  }
+  .dock-txt {
+    font-size: 12.5px;
+    font-weight: 900;
+    letter-spacing: -0.3px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* 중앙 메인 액션 버튼 (아쿠아 에메랄드 보석 캡슐) */
   .m-dock-btn.primary {
+    height: 52px;
+    border-radius: 20px;
     background: radial-gradient(circle at 50% 25%, #99f6e4 0%, #2dd4bf 52%, #0d9488 100%);
     color: #042f2e;
-    border-color: #0f766e;
-    font-size: 13px;
-    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
+    border: 2px solid #ffffff;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    box-shadow:
+      0 6px 18px rgba(13, 148, 136, 0.42),
+      0 0 0 1px rgba(13, 148, 136, 0.35),
+      inset 0 2px 5px rgba(255, 255, 255, 0.9);
   }
+  .m-dock-btn.primary .dock-ico {
+    font-size: 18px;
+  }
+  .m-dock-btn.primary .dock-txt {
+    font-size: 13.5px;
+    font-weight: 900;
+  }
+
+  /* 활성화(ON) 상태 버튼 (골드 앰버) */
   .m-dock-btn.active {
     background: linear-gradient(135deg, #fef08a 0%, #facc15 100%);
     color: #713f12;
-    border-color: #d97706;
+    border: 1.5px solid #ffffff;
+    box-shadow: 0 4px 12px rgba(234, 179, 8, 0.38), inset 0 1px 2px #ffffff;
+  }
+
+  /* 전체듣기 재생 중일 때 (선명한 코랄 레드 정지 버튼) */
+  .m-dock-btn.speaking-stop {
+    background: linear-gradient(135deg, #fecdd3 0%, #fb7185 100%);
+    color: #881337;
+    border: 1.5px solid #ffffff;
+    box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
+  }
+
+  /* 남은 빈칸 개수 우측 상단 미니 뱃지 */
+  .m-dock-badge {
+    position: absolute;
+    top: -4px;
+    right: -3px;
+    background: #0d9488;
+    color: #ffffff;
+    border: 1.5px solid #ffffff;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 1px 5px;
+    min-width: 18px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none;
+  }
+  .m-dock-badge.show {
+    display: inline-block;
   }
 </style>
 </head>
@@ -619,22 +676,23 @@
     <button type="button" id="btnPalaceToggle" class="m-icon-btn" onclick="togglePalaceCard()">🏛️궁전</button>
   </div>
 
-  <!-- 삼성 브라우저 내장 TTS 단독 고정 상태창 (서연/클라우드 완전 제거) -->
+  <!-- 삼성 브라우저 내장 TTS 단독 고정 상태창 -->
   <div class="m-audio-bar">
-    <span id="mAudioStatus" class="m-audio-status">🔊 삼성 브라우저 TTS 단독 고정됨</span>
+    <span id="mAudioStatus" class="m-audio-status">🔊 삼성 브라우저 TTS 대기 중</span>
     <button type="button" class="m-mini-pill" onclick="stopSpeech()">⏹️ 즉시정지</button>
   </div>
 
+  <!-- ★ 초기 시작 탭: Step 0. 원문 active -->
   <div class="m-step-bar">
-    <button type="button" id="mStep0" class="m-step-btn" onclick="setStep(0)">Step 0. 원문</button>
+    <button type="button" id="mStep0" class="m-step-btn active" onclick="setStep(0)">Step 0. 원문</button>
     <button type="button" id="mStep1" class="m-step-btn" onclick="setStep(1)">Step 1. 목차</button>
-    <button type="button" id="mStep2" class="m-step-btn active" onclick="setStep(2)">Step 2. 요약표</button>
+    <button type="button" id="mStep2" class="m-step-btn" onclick="setStep(2)">Step 2. 요약표</button>
     <button type="button" id="mStep3" class="m-step-btn" onclick="setStep(3)">Step 3. 키워드·도면</button>
     <button type="button" id="mStep4" class="m-step-btn" onclick="setStep(4)">Step 4. 100%백지</button>
   </div>
 </header>
 
-<!-- 2. 기억의 궁전 뷰어 (최대화면 모드 & 반투명 초소형 유리 핀 탑재) -->
+<!-- 2. 기억의 궁전 뷰어 -->
 <section id="mPalaceCard" class="m-palace-card">
   <div class="m-palace-top">
     <span id="mPalaceTitle">🏛️ 기억의 궁전</span>
@@ -679,31 +737,32 @@
 
 <div id="mToast" class="m-toast">⏬ 읽기 시작할 문단이나 표 칸을 터치하세요!</div>
 
-<!-- 4. 하단 고정 엄지손가락 컨트롤 독 바 -->
+<!-- ★ 4. 시안 A: 플로팅 유리 캡슐 독(Floating Pill Dock) -->
 <nav class="m-bottom-dock">
   <button type="button" id="btnDockPeek" class="m-dock-btn" onclick="togglePeekAll()">
-    <span>🔓 전체열기</span>
-    <small id="lblMaskCount" style="font-size:10px; color:#64748b;">0개 빈칸</small>
+    <span id="badgeMaskRemain" class="m-dock-badge">0</span>
+    <span id="icoDockPeek" class="dock-ico">🔓</span>
+    <span id="lblDockPeek" class="dock-txt">전체열기</span>
   </button>
 
   <button type="button" id="btnDockFromHere" class="m-dock-btn" onclick="togglePickStartLineMode()">
-    <span>⏬ 여기부터</span>
-    <small style="font-size:10px; color:#64748b;">터치한줄~끝</small>
+    <span class="dock-ico">⏬</span>
+    <span class="dock-txt">여기부터</span>
   </button>
 
   <button type="button" id="btnDockMainStep" class="m-dock-btn primary" onclick="handleMainStepButton()">
-    <span id="lblMainStepBtn">🎯 다음 빈칸 열기</span>
-    <small id="lblMainStepSub" style="font-size:10px; opacity:0.85;">순차 인출 + 음성</small>
+    <span id="icoMainStepBtn" class="dock-ico">🏛️</span>
+    <span id="lblMainStepBtn" class="dock-txt">다음거점</span>
   </button>
 
   <button type="button" id="btnDockSpeakAll" class="m-dock-btn" onclick="toggleFullSubnoteSpeech()">
-    <span id="lblSpeakAllBtn">🔊 전체듣기</span>
-    <small style="font-size:10px; color:#64748b;">처음~끝 낭독</small>
+    <span id="icoSpeakAllBtn" class="dock-ico">🔊</span>
+    <span id="lblSpeakAllBtn" class="dock-txt">전체듣기</span>
   </button>
 
   <button type="button" id="btnDockRate" class="m-dock-btn" onclick="cycleTtsRate()">
-    <span id="lblTtsRate">🏃 1.1x</span>
-    <small style="font-size:10px; color:#64748b;">읽기배속</small>
+    <span class="dock-ico">⚡</span>
+    <span id="lblTtsRate" class="dock-txt">1.1x</span>
   </button>
 </nav>
 
@@ -712,10 +771,9 @@
 
 <script>
 /* =========================================================================
-   📱 소방기술사 모바일 전용 코어 엔진 (v7)
-   - 서연(StreamElements) 등 외부 클라우드 TTS 100% 영구 삭제
-   - 오직 삼성 인터넷 브라우저 내장 TTS(speechSynthesis)만 단독 구동
-   - 기억의 궁전 [⛶ 최대화면] 뷰어 + 반투명 유리 점(Glass Dot) 핀 + 크기/숨김 조절
+   📱 소방기술사 모바일 전용 코어 엔진 (v8)
+   - 초기 부팅 시 무조건 Step 0(원문 전체보기)으로 시작
+   - 하단 플로팅 유리 캡슐 독 바 & 직관적 1줄 라벨 UI
    ========================================================================= */
 const PRONUN_DICT = {
   "KCL": "케이씨엘", "KVL": "케이브이엘", "NTC": "엔티씨", "PTC": "피티씨",
@@ -748,7 +806,9 @@ const PRONUN_DICT = {
 let allTopics = [];
 let filteredTopicIndices = [];
 let currentTopicIdx = 0;
-let currentStep = 2;
+
+// ★ 처음 시작할 때 무조건 Step 0 (원문 전체보기)으로 시작!
+let currentStep = 0;
 let clozeList = [];
 
 let currentPalace = null;
@@ -756,7 +816,6 @@ let currentPinIdx = 0;
 let currentPinRevealed = false;
 let clearedPinSet = new Set();
 
-// 거점 핀 표시 모드: 'small' (작게 21px) -> 'micro' (초소형 14px) -> 'hidden' (숨김)
 let palacePinSizeMode = localStorage.getItem('m_palace_pin_size') || 'small';
 let isPalaceFullscreen = false;
 
@@ -823,7 +882,6 @@ function attachWebManifest(iconUrl, baseUrl) {
 
 /* 1. 부팅 초기화 */
 window.addEventListener('DOMContentLoaded', () => {
-  // ★ 과거 서연/클라우드 음성 캐시 설정 영구 삭제
   localStorage.removeItem('m_samsung_voice_mode');
   localStorage.removeItem('m_tts_engine_v4');
   localStorage.removeItem('m_audio_engine_mode');
@@ -850,6 +908,12 @@ window.addEventListener('DOMContentLoaded', () => {
   document.documentElement.style.setProperty('--subnote-size', subnoteFontSize + 'px');
   updateRateButtonUI();
   initCategorySelector();
+
+  // 시작 시 무조건 Step 0으로 고정
+  currentStep = 0;
+  for (let i = 0; i <= 4; i++) {
+    document.getElementById('mStep' + i)?.classList.toggle('active', i === 0);
+  }
 
   const savedIdx = parseInt(localStorage.getItem('m_last_topic_idx'), 10) || 0;
   loadTopic(Math.max(0, Math.min(allTopics.length - 1, savedIdx)));
@@ -931,7 +995,7 @@ function loadTopic(idx) {
 }
 
 /* =========================================================================
-   3. 기억의 궁전 모바일 뷰어 (최대화면 모드 + 반투명 유리 점 핀 + 크기/숨김 조절)
+   3. 기억의 궁전 모바일 뷰어
    ========================================================================= */
 function initPalaceForTopic(topic) {
   const pData = window.MEMORY_PALACES[topic.id];
@@ -974,9 +1038,9 @@ function togglePalaceCard() {
   }
   const isOpen = card.classList.toggle('open');
   btn.classList.toggle('active', isOpen);
+  updateBottomMaskStatus();
 }
 
-/* ★ 방안 1-C: [⛶ 최대화면] 전용 뷰어 토글 */
 function togglePalaceFullscreen() {
   if (!currentPalace) return;
   const card = document.getElementById('mPalaceCard');
@@ -989,7 +1053,6 @@ function togglePalaceFullscreen() {
   }
 }
 
-/* ★ 방안 2-C: 핀 크기 조절 (작게 -> 초소형 -> 숨김) */
 function cyclePalacePinSize() {
   const order = ['small', 'micro', 'hidden'];
   const nextIdx = (order.indexOf(palacePinSizeMode) + 1) % order.length;
@@ -1050,7 +1113,6 @@ function renderPalacePins() {
 
   const pins = currentPalace.pins || [];
 
-  // 경로 점선도 그림을 가리지 않도록 아주 얇고 은은한 반투명 선으로 표시
   if (pins.length > 1) {
     const pts = pins.map(p => `${p.x},${p.y}`).join(' ');
     const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
@@ -1062,7 +1124,6 @@ function renderPalacePins() {
     svg.appendChild(poly);
   }
 
-  // 그림을 가리던 한글 정답 꼬리표(.m-pin-tag)는 완전히 제거하고 반투명 유리 점 숫자만 깔끔하게 표시
   pins.forEach((pin, idx) => {
     const isCur = (idx === currentPinIdx);
     const isClr = clearedPinSet.has(idx);
@@ -1357,10 +1418,42 @@ function highlightCurrentClozeTarget() {
   }
 }
 
+/* ★ 하단 플로팅 캡슐 독 버튼 상태 스마트 동기화 */
 function updateBottomMaskStatus() {
   const remain = clozeList.filter(item => !isClozeRevealed(item)).length;
-  const lbl = document.getElementById('lblMaskCount');
-  if (lbl) lbl.textContent = `남은빈칸 ${remain}/${clozeList.length}`;
+  const badge = document.getElementById('badgeMaskRemain');
+  const icoPeek = document.getElementById('icoDockPeek');
+  const lblPeek = document.getElementById('lblDockPeek');
+  const icoMain = document.getElementById('icoMainStepBtn');
+  const lblMain = document.getElementById('lblMainStepBtn');
+
+  if (badge) {
+    badge.textContent = remain;
+    badge.classList.toggle('show', remain > 0);
+  }
+
+  // Step 0(원문)일 때는 첫 번째 버튼이 [🔒 가림ON] 역할을 하고, Step 1~4에서는 [🔓 전체열기] 역할을 함
+  if (currentStep === 0) {
+    if (icoPeek) icoPeek.textContent = '🔒';
+    if (lblPeek) lblPeek.textContent = '가림ON';
+  } else {
+    const isPeek = document.getElementById('mSubnoteBox')?.classList.contains('peek-all-mode');
+    if (icoPeek) icoPeek.textContent = isPeek ? '🔒' : '🔓';
+    if (lblPeek) lblPeek.textContent = isPeek ? '다시잠금' : '전체열기';
+  }
+
+  // 중앙 메인 버튼: 남은 빈칸이 있으면 [🎯 다음열기], Step 0이고 궁전이 있으면 [🏛️ 다음거점], 아니면 [🚀 다음단계]
+  if (remain > 0) {
+    if (icoMain) icoMain.textContent = '🎯';
+    if (lblMain) lblMain.textContent = '다음열기';
+  } else if (currentPalace && document.getElementById('mPalaceCard')?.classList.contains('open')) {
+    if (icoMain) icoMain.textContent = '🏛️';
+    if (lblMain) lblMain.textContent = '다음거점';
+  } else {
+    if (icoMain) icoMain.textContent = '🚀';
+    if (lblMain) lblMain.textContent = currentStep < 4 ? `Step ${currentStep + 1}` : '처음단계';
+  }
+
   highlightCurrentClozeTarget();
 }
 
@@ -1388,11 +1481,17 @@ function handleMainStepButton() {
   if (currentStep < 4) {
     setStep(currentStep + 1);
   } else {
-    setStep(2);
+    setStep(0);
   }
 }
 
 function togglePeekAll() {
+  // Step 0(원문)에서 누르면 즉시 Step 2(요약표 가림)로 진입
+  if (currentStep === 0) {
+    setStep(2);
+    return;
+  }
+
   const box = document.getElementById('mSubnoteBox');
   const btn = document.getElementById('btnDockPeek');
   const isPeek = box.classList.toggle('peek-all-mode');
@@ -1407,6 +1506,7 @@ function togglePeekAll() {
       }
     }
   });
+  updateBottomMaskStatus();
 }
 
 function adjustFontSize(delta) {
@@ -1417,7 +1517,6 @@ function adjustFontSize(delta) {
 
 /* =========================================================================
    🔊 5. 삼성 인터넷 브라우저 내장 TTS 100% 단독 고정 엔진
-   - 서연(StreamElements) 등 외부 오디오 스트리밍 완전 삭제
    ========================================================================= */
 function setAudioStatus(msg) {
   const el = document.getElementById('mAudioStatus');
@@ -1478,9 +1577,11 @@ function stopSpeech() {
 
   document.querySelectorAll('.tts-reading-row').forEach(el => el.classList.remove('tts-reading-row'));
   const btn = document.getElementById('btnDockSpeakAll');
+  const ico = document.getElementById('icoSpeakAllBtn');
   const lbl = document.getElementById('lblSpeakAllBtn');
-  if (btn) btn.classList.remove('active');
-  if (lbl) lbl.textContent = '🔊 전체듣기';
+  if (btn) btn.classList.remove('speaking-stop');
+  if (ico) ico.textContent = '🔊';
+  if (lbl) lbl.textContent = '전체듣기';
   setAudioStatus('🔊 삼성 브라우저 TTS 대기 중');
 }
 
@@ -1496,7 +1597,6 @@ function playSamsungBrowserTts(cleanText, mySessionId, onEndCallback) {
     }
   } catch (e) {}
 
-  // 삼성 브라우저에서 cancel() 직후 문장이 씹히지 않도록 55ms 호흡 확보
   speechTimer = setTimeout(() => {
     if (mySessionId !== speechSessionId) return;
 
@@ -1582,9 +1682,11 @@ function speakUnitListSequentially(units) {
   isSpeakingQueue = true;
 
   const btn = document.getElementById('btnDockSpeakAll');
+  const ico = document.getElementById('icoSpeakAllBtn');
   const lbl = document.getElementById('lblSpeakAllBtn');
-  if (btn) btn.classList.add('active');
-  if (lbl) lbl.textContent = '⏹️ 정지';
+  if (btn) btn.classList.add('speaking-stop');
+  if (ico) ico.textContent = '⏹️';
+  if (lbl) lbl.textContent = '낭독정지';
 
   let idx = 0;
 
@@ -1661,7 +1763,7 @@ function cycleTtsRate() {
 
 function updateRateButtonUI() {
   const lbl = document.getElementById('lblTtsRate');
-  if (lbl) lbl.textContent = `🏃 ${ttsRate.toFixed(2).replace(/\.00$/, '.0').replace(/0$/, '')}x`;
+  if (lbl) lbl.textContent = `${ttsRate.toFixed(2).replace(/\.00$/, '.0').replace(/0$/, '')}x`;
 }
 </script>
 </body>
