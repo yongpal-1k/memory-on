@@ -2,1841 +2,1393 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🏛️ 소방기술사 — 기억의 궁전 & 서브노트 마스터</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>📱 소방기술사 모바일 학습 마스터</title>
 <link rel="icon" type="image/x-icon" href="samguk_library/ui_study_icons_3x3_8.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Hahmlet:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@400;600;700;900&family=Song+Myung&display=swap" rel="stylesheet">
-
 <style>
-  @font-face {
-    font-family: 'HCR Dotum';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/HCRDotum.woff') format('woff');
-    font-weight: normal; font-style: normal;
-  }
-  @font-face {
-    font-family: 'CookieRun-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
-    font-weight: normal; font-style: normal;
-  }
-  @font-face {
-    font-family: 'RIDIBatang';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
-    font-weight: normal; font-style: normal;
-  }
-  @font-face {
-    font-family: 'MaruBuri';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
-    font-weight: normal; font-style: normal;
-  }
-  @font-face {
-    font-family: 'NanumSquareNeo';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
-    font-weight: normal; font-style: normal;
-  }
-  @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal; font-style: normal;
-  }
-  @font-face {
-    font-family: 'SUITE-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
-    font-weight: normal; font-style: normal;
-  }
-
   :root {
-    /* ★ 크리스탈 아쿠아 & 샴페인 골드 (Crystal Aqua & Champagne Gold) 마스터 팔레트 ★ */
-    --bg-main: #f4f6f1;
-    --bg-header: rgba(255, 255, 255, 0.88);
-    --bg-toolbar: rgba(252, 253, 250, 0.90);
-    --border-gold: #dfca96;
-    --border-gold-strong: #d4b46a;
-    --border-soft: #e2e8f0;
-    --text-primary: #1e293b;
-    --text-muted: #64748b;
-    --teal-main: #14b8a6;
-    --teal-dark: #0f766e;
-    --aqua-glow: rgba(45, 212, 191, 0.42);
-    --amber-main: #d97706;
-    --lemon-panel: linear-gradient(145deg, #fefce8 0%, #fef4c0 100%);
-
-    --subnote-font: 'HCR Dotum', 'Pretendard', 'Malgun Gothic', sans-serif;
-    --subnote-size: 16px;
-    --global-zoom: 1;
-    --stage-height: 500px;
-
-    /* ★ 콘솔 ERR_FILE_NOT_FOUND 완전 제거: 실제 samguk_library 폴더에 존재하는 파일명만 정확히 참조 ★ */
-    --sheet-study: url('samguk_library/ui_study_icons_3x3.png');
-    --sheet-fire:  url('samguk_library/fire_subject_icons_3x3.png');
-    --sheet-pins:  url('samguk_library/palace_pins_3x3.png');
-    --sheet-relic: url('samguk_library/icons_3x3_01.png');
+    --teal-main: #0d9488;
+    --teal-light: #ccfbf1;
+    --teal-border: #2dd4bf;
+    --gold-border: #dfca96;
+    --bg-page: #f1f5f9;
+    --text-dark: #0f172a;
+    --subnote-size: 15.5px;
   }
 
-  * { box-sizing: border-box; }
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   html, body {
-    margin: 0; padding: 0;
-    background: linear-gradient(180deg, #f7f9f5 0%, #eef2ec 100%);
-    color: var(--text-primary);
-    font-family: var(--subnote-font);
+    margin: 0;
+    padding: 0;
+    background: var(--bg-page);
+    color: var(--text-dark);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
     overflow-x: hidden;
+    padding-bottom: 84px; /* 하단 독 바 여백 */
   }
 
-  .sg-ico {
-    display: inline-block;
-    width: 22px; height: 22px;
-    background-size: 300% 300%;
-    background-repeat: no-repeat;
-    vertical-align: middle;
-    flex-shrink: 0;
-    filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.18));
-    transition: transform 0.15s ease;
-  }
-  .sg-ico.sm { width: 18px; height: 18px; }
-  .sg-ico.md { width: 24px; height: 24px; }
-  .sg-ico.lg { width: 30px; height: 30px; }
-  .sg-ico.xl { width: 38px; height: 38px; }
-  button:hover .sg-ico, .step-tab:hover .sg-ico { transform: scale(1.12); }
-
-  .s-study { background-image: var(--sheet-study); }
-  .s-fire  { background-image: var(--sheet-fire); }
-  .s-pins  { background-image: var(--sheet-pins); }
-  .s-relic { background-image: var(--sheet-relic); }
-
-  .c-00 { background-position: 0% 0%; }
-  .c-01 { background-position: 50% 0%; }
-  .c-02 { background-position: 100% 0%; }
-  .c-10 { background-position: 0% 50%; }
-  .c-11 { background-position: 50% 50%; }
-  .c-12 { background-position: 100% 50%; }
-  .c-20 { background-position: 0% 100%; }
-  .c-21 { background-position: 50% 100%; }
-  .c-22 { background-position: 100% 100%; }
-
-  /* =========================================================================
-     1. 상단 마스터 헤더 (크리스탈 화이트 & 샴페인 골드 독 바)
-     ========================================================================= */
-  .top-master-header {
-    position: sticky; top: 0; z-index: 900;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(250, 252, 249, 0.88) 100%);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-    border-bottom: 1.5px solid var(--border-gold);
-    box-shadow:
-      0 6px 24px rgba(15, 23, 42, 0.06),
-      0 1px 0 rgba(255, 255, 255, 0.95) inset;
-    padding: 10px 18px;
-  }
-  .header-row-1 {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 10px; flex-wrap: nowrap;
-  }
-  @media (max-width: 1360px) {
-    .header-row-1 { flex-wrap: wrap; }
-  }
-  .header-left-cluster {
-    display: flex; align-items: center; gap: 8px; flex-shrink: 0;
-  }
-  .brand-badge {
-    display: flex; align-items: center; gap: 7px;
-    font-weight: 900; font-size: 13.5px;
-    color: #0f766e;
-    background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
-    padding: 5px 13px 5px 9px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border-gold);
-    box-shadow:
-      0 3px 10px rgba(212, 180, 106, 0.2),
-      inset 0 1px 2px #ffffff;
-    white-space: nowrap;
-  }
-
-  .topic-nav-group {
-    display: flex; align-items: center; gap: 6px;
-    flex: 1 1 auto;
-    min-width: 0;
-    max-width: 720px;
-    background: rgba(248, 250, 247, 0.92);
-    border: 1.5px solid var(--border-gold);
-    border-radius: 999px;
-    padding: 4px 12px;
-    overflow: hidden;
-    box-shadow: inset 0 1px 4px rgba(15, 23, 42, 0.04), 0 2px 8px rgba(212, 180, 106, 0.12);
-  }
-
-  .stage-ctrl-group {
-    display: flex; align-items: center; gap: 6px;
-    flex-shrink: 0;
-    padding-left: 12px;
-    border-left: 2px solid var(--border-gold);
-  }
-
-  .ctrl-select, .ctrl-input {
-    background: #ffffff; color: #1e293b;
-    border: 1.5px solid #dbe4e2; border-radius: 999px;
-    padding: 4px 11px; font-size: 12.5px; font-weight: 700;
-    outline: none;
-    height: 32px;
-    font-family: var(--subnote-font);
-    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.03), inset 0 1px 2px #ffffff;
-    transition: all 0.15s ease;
-  }
-  .ctrl-select:focus, .ctrl-input:focus {
-    border-color: #2dd4bf;
-    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.22);
-  }
-  #categorySelect { flex-shrink: 0; max-width: 118px; }
-  #topicSearchInput { width: 115px; flex-shrink: 0; }
-  #topicSelect {
-    flex: 1 1 160px;
-    min-width: 120px;
-    max-width: 280px;
-    color: #0f172a; font-weight: 800;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  /* ★ 크리스탈 캡슐 버튼 & 아쿠아 에메랄드 보석 액티브 ★ */
-  .btn-gold {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: linear-gradient(180deg, #ffffff 0%, #f4f7f6 100%);
-    color: #334155;
-    border: 1.5px solid #dce5e3;
-    border-radius: 999px;
-    padding: 5px 12px;
-    height: 32px;
-    font-size: 12.5px; font-weight: 800;
-    font-family: var(--subnote-font);
-    cursor: pointer;
-    box-shadow:
-      0 3px 8px rgba(15, 23, 42, 0.05),
-      inset 0 1px 2px #ffffff;
-    transition: all 0.16s ease;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .btn-gold:hover {
-    border-color: #5eead4; color: #0f766e;
-    background: #ffffff;
-    box-shadow: 0 5px 12px rgba(20, 184, 166, 0.18), inset 0 1px 2px #ffffff;
-    transform: translateY(-1px);
-  }
-  .btn-gold.active,
-  .btn-gold.teal-active {
-    background: radial-gradient(circle at 50% 25%, #99f6e4 0%, #2dd4bf 55%, #0d9488 100%);
-    border: 1.5px solid #ffffff;
-    color: #042f2e;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.65);
-    box-shadow:
-      0 5px 14px rgba(20, 184, 166, 0.38),
-      0 0 0 1px rgba(45, 212, 191, 0.45),
-      inset 0 2px 4px rgba(255, 255, 255, 0.9);
-  }
-  .btn-gold.crimson-active {
-    background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
-    border-color: #ffffff; color: #ffffff;
-    box-shadow: 0 4px 12px rgba(225, 29, 72, 0.32);
-  }
-
-  .mode-switch-pill {
-    display: inline-flex;
-    background: rgba(241, 245, 243, 0.95);
-    padding: 3px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border-gold);
-    gap: 4px;
-    flex-shrink: 0;
-    box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.06);
-  }
-  .mode-btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 5px 14px; border-radius: 999px; border: 1.5px solid transparent;
-    font-size: 12.5px; font-weight: 800; cursor: pointer;
-    font-family: var(--subnote-font);
-    background: transparent; color: #475569;
-    transition: all 0.18s;
-    white-space: nowrap;
-  }
-  .mode-btn.active-samguk,
-  .mode-btn.active-palace {
-    background: radial-gradient(circle at 50% 25%, #99f6e4 0%, #2dd4bf 52%, #0d9488 100%);
-    color: #042f2e;
-    border-color: #ffffff;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
-    box-shadow:
-      0 4px 12px rgba(20, 184, 166, 0.38),
-      inset 0 2px 4px rgba(255, 255, 255, 0.9);
-  }
-
-  .header-row-2 {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 10px; margin-top: 9px; padding-top: 8px;
-    border-top: 1px solid rgba(223, 202, 150, 0.55); flex-wrap: wrap;
-  }
-  .step-tabs { display: flex; gap: 7px; flex-wrap: wrap; }
-  .step-tab {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 14px; border-radius: 999px;
-    background: linear-gradient(180deg, #ffffff 0%, #f4f7f6 100%);
-    color: #334155;
-    border: 1.5px solid #dce5e3;
-    font-size: 12.5px; font-weight: 800; cursor: pointer;
-    font-family: var(--subnote-font);
-    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.05), inset 0 1px 2px #ffffff;
-    transition: all 0.16s ease;
-  }
-  .step-tab:hover {
-    border-color: #5eead4; color: #0f766e; background: #ffffff;
-    transform: translateY(-1px);
-  }
-  .step-tab.active {
-    background: radial-gradient(circle at 50% 25%, #a7f3d0 0%, #2dd4bf 48%, #0d9488 100%);
-    color: #042f2e;
-    border: 1.5px solid #ffffff;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    box-shadow:
-      0 6px 16px rgba(20, 184, 166, 0.42),
-      0 0 12px rgba(94, 234, 212, 0.55),
-      inset 0 2px 5px rgba(255, 255, 255, 0.95);
-  }
-
-  #masterZoomWorkspace { zoom: var(--global-zoom); width: 100%; }
-
-  /* =========================================================================
-     2. 삼국지 Anki 결투 스테이지 (크리스탈 프레임 + 레몬 크림 인포메이션 콘솔)
-     ========================================================================= */
-  .anki-battle-stage {
-    position: relative;
-    width: calc(100% - 28px);
-    max-width: 1540px;
-    margin: 12px auto 0;
-    height: var(--stage-height);
-    min-height: 220px; max-height: 860px;
-    background-color: #1e293b;
-    background-image: url('samguk_library/bg_redcliff.png');
-    background-size: cover; background-position: center;
-    border: 2px solid var(--border-gold);
-    border-radius: 24px;
-    box-shadow:
-      0 12px 32px rgba(15, 23, 42, 0.10),
-      0 0 0 4px rgba(255, 255, 255, 0.85);
-    overflow: hidden;
-    display: flex; flex-direction: column; justify-content: space-between;
-    user-select: none;
-  }
-  .anki-battle-stage::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(15,23,42,0.18) 0%, rgba(15,23,42,0.45) 100%);
-    pointer-events: none; z-index: 1;
-  }
-
-  .stage-hud-top {
-    position: relative; z-index: 10;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 18px; gap: 12px; flex-wrap: wrap;
-  }
-  .rival-tag {
-    display: flex; align-items: center; gap: 8px;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(10px);
-    border: 1.5px solid var(--border-gold); border-radius: 999px;
-    padding: 4px 12px; font-size: 13px; font-weight: 900; color: #0f766e;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
-  }
-  #battleThemeSelect {
-    background: #f0fdfa;
-    border: 1.5px solid #5eead4;
-    color: #0f766e;
-    font-weight: 900;
-    font-size: 12.5px;
-    border-radius: 999px;
-    padding: 3px 10px;
-    cursor: pointer;
-    outline: none;
-    font-family: var(--subnote-font);
-  }
-  .boss-hp-wrap {
-    flex: 1; max-width: 540px;
-    background: rgba(255, 255, 255, 0.90);
+  /* 1. 상단 고정 모바일 헤더 */
+  .m-header {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(12px);
-    border: 1.5px solid var(--border-gold); border-radius: 16px;
-    padding: 7px 16px;
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22), inset 0 1px 2px #ffffff;
-    position: relative;
-  }
-  .boss-hp-title {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 12.5px; font-weight: 900; color: #0f766e; margin-bottom: 5px;
-  }
-  .boss-hp-bar-bg {
-    width: 100%; height: 11px; background: #e2e8f0;
-    border-radius: 99px; overflow: hidden; border: 1px solid #cbd5e1;
-  }
-  .boss-hp-bar-fill {
-    height: 100%; width: 100%;
-    background: linear-gradient(90deg, #2dd4bf, #10b981, #f59e0b);
-    transition: width 0.35s cubic-bezier(0.22,1,0.36,1);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1.5px solid var(--gold-border);
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
   }
 
-  .speed-timer-bar-wrap {
-    width: 100%; height: 5px; background: rgba(226,232,240,0.5);
-    border-radius: 99px; overflow: hidden; margin-top: 4px; display: none;
-  }
-  .speed-timer-bar-wrap.active { display: block; }
-  .speed-timer-bar-fill {
-    height: 100%; width: 100%;
-    background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981);
-    transition: width 0.1s linear;
+  .m-nav-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
   }
 
-  .stage-arena-center {
-    position: relative; z-index: 10;
-    flex: 1; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 24px; gap: 18px; min-height: 0;
+  .m-select {
+    height: 36px;
+    border-radius: 10px;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    color: var(--text-dark);
+    font-size: 13px;
+    font-weight: 800;
+    padding: 0 8px;
+    outline: none;
   }
-  .hero-stand-wrap {
-    position: relative; width: 185px; height: 245px; flex-shrink: 0;
+  #mCategorySelect {
+    width: 96px;
+    flex-shrink: 0;
   }
-  .hero-stand {
-    width: 100%; height: 100%;
-    background-image: url('samguk_library/heroes_2x4_01.png');
-    background-size: 400% 200%;
-    background-repeat: no-repeat;
-    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.65));
-    transition: transform 0.25s ease;
-  }
-  .hero-stand.ally-attack { transform: translateX(36px) scale(1.08); }
-  .hero-stand.enemy-hit { animation: enemyShake 0.4s ease; }
-  @keyframes enemyShake {
-    0%,100% { transform: translateX(0); filter: brightness(1); }
-    25% { transform: translateX(12px); filter: brightness(1.8); }
-    50% { transform: translateX(-10px); }
-    75% { transform: translateX(8px); }
+  #mTopicSelect {
+    flex: 1;
+    min-width: 0;
+    text-overflow: ellipsis;
   }
 
-  .vfx-slash-overlay {
-    position: absolute; inset: -25px;
-    background-image: url('samguk_library/effects_3x3_01.png');
-    background-size: 300% 300%;
-    background-repeat: no-repeat;
-    pointer-events: none; z-index: 35;
-    opacity: 0; transform: scale(0.5);
-  }
-  .vfx-slash-overlay.boom {
-    animation: vfxSlashBoom 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-  @keyframes vfxSlashBoom {
-    0%   { opacity: 0; transform: scale(0.45) rotate(-12deg); }
-    35%  { opacity: 1; transform: scale(1.18) rotate(4deg); filter: drop-shadow(0 0 18px #fde047); }
-    100% { opacity: 0; transform: scale(1.35) rotate(8deg); }
-  }
-
-  .stamp-seal-overlay {
-    position: absolute; top: 50%; left: 50%;
-    width: 120px; height: 120px;
-    transform: translate(-50%, -50%) scale(2.2);
-    background-image: url('samguk_library/san2.png');
-    background-size: 200% 200%;
-    background-repeat: no-repeat;
-    pointer-events: none; z-index: 45;
-    opacity: 0;
-  }
-  .stamp-seal-overlay.stamp-slam {
-    animation: stampSlamAnim 0.78s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-  @keyframes stampSlamAnim {
-    0%   { opacity: 0; transform: translate(-50%, -50%) scale(2.4) rotate(-15deg); }
-    28%  { opacity: 1; transform: translate(-50%, -50%) scale(0.95) rotate(-4deg); filter: drop-shadow(0 6px 16px rgba(0,0,0,0.75)); }
-    72%  { opacity: 1; transform: translate(-50%, -50%) scale(1.02) rotate(-4deg); }
-    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.15) rotate(-4deg); }
-  }
-
-  .anki-center-console {
-    flex: 1; max-width: 880px; height: 100%;
-    display: flex; align-items: center; justify-content: center; gap: 18px;
-    position: relative;
-  }
-  .anki-card-3d-scene {
-    width: 205px; height: 290px; perspective: 1100px; flex-shrink: 0; cursor: pointer;
-    position: relative;
-  }
-  .anki-card-3d-inner {
-    width: 100%; height: 100%; position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.52s cubic-bezier(0.22,1,0.36,1);
-  }
-  .anki-card-3d-inner.is-flipped { transform: rotateY(180deg); }
-  .anki-card-face {
-    position: absolute; inset: 0;
-    border-radius: 18px;
-    backface-visibility: hidden; -webkit-backface-visibility: hidden;
-    display: flex; flex-direction: column; justify-content: space-between;
-    padding: 12px;
-    box-shadow: 0 12px 28px rgba(0,0,0,0.55);
-  }
-  .anki-card-back {
-    background-image: url('samguk_library/san1.png');
-    background-size: 300% 100%; background-position: 0% 0%;
-    border: 2px solid #dfca96;
-    transform: rotateY(0deg) translateZ(2px);
-  }
-  .anki-card-front {
-    background-image: url('samguk_library/cards_4x4_01.png');
-    background-size: 400% 400%; background-position: 0% 0%;
-    border: 2.5px solid #99f6e4;
-    box-shadow: 0 0 24px rgba(45, 212, 191, 0.65);
-    transform: rotateY(180deg) translateZ(2px);
-  }
-  .card-top-pill {
-    background: rgba(15,23,42,0.88); color: #99f6e4;
-    border: 1px solid #2dd4bf; border-radius: 99px;
-    padding: 3px 9px; font-size: 11px; font-weight: 800;
-    text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .card-bottom-plate {
-    background: rgba(15,23,42,0.92); color: #ffffff;
-    border: 1.5px solid #dfca96; border-radius: 11px;
-    padding: 8px 6px; font-size: 13.5px; font-weight: 900;
-    text-align: center; line-height: 1.3;
-  }
-
-  /* 시안 우측의 파스텔 레몬 크림 인포메이션 콘솔 */
-  .anki-context-monitor {
-    flex: 1; height: 92%; max-height: 340px;
-    background: linear-gradient(155deg, rgba(254, 252, 232, 0.96) 0%, rgba(254, 245, 185, 0.94) 100%);
-    backdrop-filter: blur(14px);
-    border: 2px solid #ffffff;
-    border-radius: 20px;
-    padding: 14px 18px;
-    display: flex; flex-direction: column; justify-content: space-between;
-    box-shadow:
-      0 12px 30px rgba(15, 23, 42, 0.25),
-      0 0 0 1.5px var(--border-gold),
-      inset 0 2px 6px rgba(255, 255, 255, 0.9);
+  .m-icon-btn {
+    height: 36px;
+    min-width: 36px;
+    padding: 0 10px;
+    border-radius: 10px;
+    border: 1.5px solid #cbd5e1;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     color: #1e293b;
-    overflow-y: auto;
-  }
-  .monitor-header {
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1.5px dashed rgba(202, 138, 4, 0.35);
-    padding-bottom: 6px; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;
-  }
-  .monitor-sec-title { font-size: 13px; font-weight: 900; color: #854d0e; display:flex; align-items:center; gap:6px; }
-  .monitor-body {
-    flex: 1; font-size: 15px; line-height: 1.62; color: #1e293b;
-    overflow-y: auto; padding-right: 4px;
-  }
-  .monitor-target-chip {
-    display: inline-block; padding: 2px 11px; border-radius: 999px;
-    background: linear-gradient(135deg, #ccfbf1, #99f6e4);
-    color: #042f2e; border: 1.5px solid #14b8a6;
-    font-weight: 900; margin: 0 3px;
-    box-shadow: 0 2px 6px rgba(20, 184, 166, 0.2);
-  }
-
-  .monitor-actions {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 7px; margin-top: 8px; padding-top: 8px;
-    border-top: 1.5px dashed rgba(202, 138, 4, 0.35);
-  }
-  .grade-btn {
-    padding: 7px 6px; border-radius: 999px;
-    font-size: 12px; font-weight: 900; cursor: pointer; color: #fff;
-    font-family: var(--subnote-font);
-    border: 1.5px solid rgba(255,255,255,0.85);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.14), inset 0 1px 2px rgba(255,255,255,0.55);
-    transition: transform 0.14s ease, box-shadow 0.14s ease;
-  }
-  .grade-btn small { font-size: 10px; opacity: 0.92; font-weight: 700; }
-  .grade-btn:hover { transform: translateY(-2px); }
-  .grade-again { background: linear-gradient(135deg, #fb7185, #e11d48); }
-  .grade-hard  { background: linear-gradient(135deg, #fbbf24, #d97706); }
-  .grade-good  {
-    background: radial-gradient(circle at 50% 25%, #99f6e4 0%, #2dd4bf 50%, #0d9488 100%);
-    color: #042f2e;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.7);
-  }
-  .grade-easy  { background: linear-gradient(135deg, #60a5fa, #2563eb); }
-
-  /* =========================================================================
-     3. 기억의 궁전 스테이지 (시안의 Memory Palace + Lemon Information 패널 1:1 구현)
-     ========================================================================= */
-  .memory-palace-stage {
-    position: relative;
-    width: calc(100% - 28px);
-    max-width: 1540px;
-    margin: 12px auto 0;
-    height: var(--stage-height);
-    min-height: 300px; max-height: 860px;
-    background: linear-gradient(155deg, #fdfcf6 0%, #f8f6e8 100%);
-    border: 2px solid var(--border-gold);
-    border-radius: 24px;
-    box-shadow:
-      0 12px 32px rgba(15, 23, 42, 0.08),
-      0 0 0 4px rgba(255, 255, 255, 0.9),
-      inset 0 2px 8px rgba(255, 255, 255, 0.95);
-    display: none; overflow: hidden; user-select: none;
-  }
-  .memory-palace-stage.active { display: flex; flex-direction: column; }
-
-  .palace-top-bar {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.86);
-    border-bottom: 1.5px solid rgba(223, 202, 150, 0.65);
-    gap: 8px; flex-wrap: wrap; z-index: 20;
-  }
-  .palace-file-badge {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
-    border: 1.5px solid #5eead4; border-radius: 999px;
-    padding: 4px 13px; font-size: 12.5px; color: #0f766e; font-weight: 800;
-    box-shadow: inset 0 1px 2px #ffffff;
-  }
-  .palace-body-split {
-    flex: 1; display: flex; min-height: 0; position: relative;
-    padding: 10px 12px; gap: 12px;
-  }
-  .palace-viewport {
-    flex: 1; position: relative; overflow: hidden;
-    background: radial-gradient(circle at center, #fdfcf5 0%, #f3efe0 100%);
-    border: 1.5px solid rgba(223, 202, 150, 0.7);
-    border-radius: 18px;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: inset 0 2px 10px rgba(212, 180, 106, 0.12);
-  }
-  .palace-canvas-mover {
-    position: relative; width: 100%; height: 100%;
-    max-width: calc((var(--stage-height) - 66px) * 1.7778);
-    aspect-ratio: 16 / 9;
-    transition: transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
-    transform-origin: center center;
-  }
-  .palace-bg-img {
-    width: 100%; height: 100%; object-fit: fill;
-    border-radius: 14px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.16);
-    pointer-events: none;
-  }
-  .palace-route-svg {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 4;
-  }
-
-  .palace-pin {
-    position: absolute; width: 44px; height: 44px;
-    transform: translate(-50%, -50%);
-    cursor: pointer; z-index: 10;
-    background-image: var(--sheet-pins);
-    background-size: 300% 300%; background-repeat: no-repeat;
-    display: flex; align-items: center; justify-content: center;
-    transition: transform 0.22s ease, filter 0.22s ease;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.75));
-  }
-  .palace-pin.state-locked  { background-position: 0% 0%; }
-  .palace-pin.state-current {
-    width: 54px; height: 54px; background-position: 50% 0%;
-    z-index: 15; animation: pinCompassPulse 1.6s infinite ease-in-out;
-  }
-  .palace-pin.state-cleared {
-    background-position: 100% 0%;
-    filter: drop-shadow(0 0 10px rgba(16,185,129,0.85));
-  }
-  @keyframes pinCompassPulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 12px rgba(251,191,36,0.95)); }
-    50% { transform: translate(-50%, -50%) scale(1.16); filter: drop-shadow(0 0 22px rgba(253,224,71,1)); }
-  }
-  .palace-pin-num {
-    font-size: 13px; font-weight: 900; color: #ffffff;
-    background: rgba(15, 23, 42, 0.85); border: 1.5px solid #fde047;
-    border-radius: 99px; min-width: 22px; height: 22px; padding: 0 5px;
-    display: flex; align-items: center; justify-content: center; pointer-events: none;
-  }
-  .palace-pin.state-cleared .palace-pin-num {
-    background: rgba(6, 78, 59, 0.92); border-color: #6ee7b7; color: #ecfdf5;
-  }
-  .palace-pin-tag {
-    position: absolute; top: 92%; left: 50%; transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.95); color: #0f172a;
-    border: 1.5px solid #d97706; border-radius: 6px; padding: 2px 7px;
-    font-size: 11px; font-weight: 900; white-space: nowrap; pointer-events: none;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.35);
-  }
-  .palace-pin.state-cleared .palace-pin-tag {
-    background: #ecfdf5; color: #065f46; border-color: #10b981;
-  }
-
-  /* 시안 우측의 파스텔 레몬 Information 카드 */
-  .palace-side-console {
-    width: 395px; flex-shrink: 0;
-    background: linear-gradient(160deg, #fefce8 0%, #fef3c7 100%);
-    border: 2px solid #ffffff;
-    border-radius: 18px;
-    padding: 14px 16px;
-    display: flex; flex-direction: column; justify-content: space-between;
-    overflow-y: auto; z-index: 20; color: #1e293b;
-    box-shadow:
-      0 8px 22px rgba(217, 119, 6, 0.10),
-      0 0 0 1.5px rgba(223, 202, 150, 0.8),
-      inset 0 2px 6px rgba(255, 255, 255, 0.9);
-  }
-  .palace-room-pill {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: rgba(255, 255, 255, 0.9); color: #0f766e;
-    border: 1.5px solid #5eead4;
-    border-radius: 999px; padding: 5px 13px; font-size: 12.5px; font-weight: 900; margin-bottom: 8px;
-    box-shadow: 0 2px 6px rgba(20, 184, 166, 0.12);
-  }
-  .palace-story-box {
-    background: rgba(255, 255, 255, 0.88);
-    border: 1.5px solid rgba(223, 202, 150, 0.75);
-    border-radius: 14px;
-    padding: 12px; font-size: 14px; line-height: 1.6; color: #1e293b; margin-bottom: 10px;
-    box-shadow: inset 0 1px 3px #ffffff;
-  }
-  .palace-answer-box {
-    background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
-    border: 2px solid #ffffff;
-    border-radius: 16px;
-    padding: 14px 12px; text-align: center; margin-bottom: 10px;
-    box-shadow:
-      0 4px 14px rgba(20, 184, 166, 0.16),
-      0 0 0 1.5px #5eead4,
-      inset 0 2px 4px #ffffff;
-  }
-
-  .stage-resize-bar {
-    width: calc(100% - 28px);
-    max-width: 1540px;
-    margin: 6px auto 0;
-    height: 10px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, transparent, #e5d09b, #5eead4, #e5d09b, transparent);
-    cursor: ns-resize; display: flex; align-items: center; justify-content: center;
-    font-size: 10px; color: #0f766e; font-weight: 900; user-select: none;
-  }
-
-  /* =========================================================================
-     4. 중단 마스터 툴바 (크리스탈 플로팅 바)
-     ========================================================================= */
-  .master-study-toolbar {
-    position: sticky; top: 92px; z-index: 850;
-    width: calc(100% - 28px);
-    max-width: 1540px;
-    margin: 8px auto 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 251, 249, 0.90) 100%);
-    backdrop-filter: blur(14px);
-    border: 1.5px solid var(--border-gold);
-    border-radius: 20px;
-    padding: 8px 16px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 8px; flex-wrap: wrap;
-    box-shadow:
-      0 8px 24px rgba(15, 23, 42, 0.06),
-      inset 0 1px 2px #ffffff;
-  }
-  .toolbar-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-
-  .font-picker-wrap { position: relative; }
-  .font-picker-dropdown {
-    position: absolute; top: 112%; left: 0; z-index: 1200;
-    width: 340px; max-height: 390px; overflow-y: auto;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(16px);
-    border: 2px solid var(--border-gold-strong); border-radius: 16px;
-    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.18); padding: 6px; display: none;
-  }
-  .font-picker-dropdown.open { display: block; }
-  .font-option-item {
-    padding: 8px 12px; border-radius: 10px; cursor: pointer;
-    color: #1e293b; font-size: 15px; border-bottom: 1px solid #f1f5f9;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .font-option-item:hover { background: #f0fdfa; color: #0f766e; }
-
-  /* =========================================================================
-     5. 하단 서브노트 뷰어 (시안의 Study note + Directory 카드 & 아쿠아 유리 가림막 캡슐)
-     ========================================================================= */
-  .subnote-workspace {
-    display: flex; align-items: flex-start;
-    max-width: 1540px; margin: 14px auto 60px; padding: 0 14px; gap: 16px;
-  }
-  .outline-sidebar {
-    width: 260px; flex-shrink: 0;
-    background: linear-gradient(180deg, #ffffff 0%, #fafbf9 100%);
-    border: 2px solid var(--border-gold);
-    border-radius: 22px;
-    padding: 16px; position: sticky; top: 150px;
-    max-height: calc(100vh - 170px); overflow-y: auto; display: none;
-    box-shadow:
-      0 10px 28px rgba(15, 23, 42, 0.06),
-      0 0 0 3px rgba(255, 255, 255, 0.85),
-      inset 0 1px 3px #ffffff;
-  }
-  .outline-sidebar.open { display: block; }
-
-  .subnote-paper-container {
-    flex: 1; min-width: 0;
-    border-radius: 24px;
-    padding: 28px 32px;
-    font-family: var(--subnote-font) !important;
-    font-size: var(--subnote-size) !important;
-    line-height: 1.75;
-    box-shadow:
-      0 12px 34px rgba(15, 23, 42, 0.07),
-      0 0 0 4px rgba(255, 255, 255, 0.9),
-      inset 0 2px 6px rgba(255, 255, 255, 0.95);
-    position: relative;
-  }
-  #subnoteBox, #subnoteBox * { font-family: var(--subnote-font) !important; }
-
-  /* 서브노트 내부 표 상하좌우 외곽 테두리 및 내부 구분선 선명화 */
-  #subnoteBox table {
-    border-collapse: collapse !important;
-    border: 2px solid #64748b !important;
-  }
-  #subnoteBox th {
-    background: linear-gradient(180deg, #eef4f3 0%, #e2eceb 100%) !important;
-    color: #0f172a !important;
-    border: 1.5px solid #64748b !important;
-  }
-  #subnoteBox td {
-    border: 1px solid #94a3b8 !important;
-  }
-
-  .skin-hanji {
-    background: linear-gradient(180deg, #ffffff 0%, #fcfbf7 100%) !important;
-    color: #1e293b !important;
-    border: 2px solid var(--border-gold) !important;
-  }
-  .skin-hanji #subnoteBox div:not(.cloze-mask):not(.cloze-diagram-mask):not(.cloze-diagram-toolbar):not(.sg-area-picked):not(.sg-area-hover):not(.tts-reading-row),
-  .skin-hanji #subnoteBox td:not(.sg-area-picked):not(.sg-area-hover):not(.tts-reading-row),
-  .skin-hanji #subnoteBox table { background-color: rgba(255, 255, 255, 0.92) !important; }
-
-  .skin-white {
-    background-color: #ffffff !important; color: #0f172a !important;
-    border: 2px solid var(--border-gold) !important;
-  }
-  .skin-green {
-    background-color: #ebf5ee !important; color: #0f291e !important;
-    border: 2px solid #86efac !important;
-  }
-  .skin-green #subnoteBox div:not(.cloze-mask):not(.cloze-diagram-mask):not(.cloze-diagram-toolbar):not(.sg-area-picked):not(.sg-area-hover):not(.tts-reading-row),
-  .skin-green #subnoteBox td:not(.sg-area-picked):not(.sg-area-hover):not(.tts-reading-row) { background-color: rgba(235, 245, 238, 0.85) !important; }
-
-  .skin-dark {
-    background-color: #111827 !important; color: #e2e8f0 !important;
-    border: 2px solid #374151 !important;
-  }
-  .skin-dark #subnoteBox div:not(.cloze-mask):not(.cloze-diagram-mask):not(.cloze-diagram-toolbar):not(.sg-area-picked):not(.sg-area-hover):not(.tts-reading-row),
-  .skin-dark #subnoteBox td:not(.sg-area-picked):not(.sg-area-hover):not(.tts-reading-row),
-  .skin-dark #subnoteBox th:not(.sg-area-picked):not(.sg-area-hover):not(.tts-reading-row) { background-color: #1f2937 !important; color: #f1f5f9 !important; border-color: #374151 !important; }
-
-  .lined-exam-paper {
-    background-image:
-      linear-gradient(90deg, transparent 42px, rgba(20, 184, 166, 0.22) 42px, rgba(20, 184, 166, 0.22) 44px, transparent 44px),
-      repeating-linear-gradient(180deg, transparent 0px, transparent 31px, rgba(148, 163, 184, 0.2) 31px, rgba(148, 163, 184, 0.2) 32px) !important;
-    padding-left: 56px !important;
-  }
-
-  /* ★ 시안 하단 Study note의 반투명 아쿠아 유리 캡슐 가림막 (cloze) ★ */
-  .cloze-mask {
-    display: inline-block;
-    padding: 2px 12px;
-    margin: 2px 3px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, rgba(224, 249, 244, 0.92) 0%, rgba(167, 243, 208, 0.72) 100%) !important;
-    color: #065f46 !important;
-    border: 1.5px solid #5eead4 !important;
-    font-weight: 800 !important;
+    font-size: 13px;
+    font-weight: 900;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
     cursor: pointer;
-    user-select: none;
-    box-shadow:
-      0 2px 6px rgba(20, 184, 166, 0.14),
-      inset 0 1px 3px rgba(255, 255, 255, 0.95);
-    transition: all 0.15s ease;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
   }
-  .cloze-mask:hover {
-    background: linear-gradient(180deg, #ccfbf1 0%, #99f6e4 100%) !important;
-    border-color: #14b8a6 !important;
-    transform: translateY(-1px);
+  .m-icon-btn:active {
+    transform: scale(0.96);
   }
-  .cloze-mask.current-anki-target {
-    background: radial-gradient(circle at 50% 25%, #99f6e4 0%, #2dd4bf 55%, #0d9488 100%) !important;
-    border: 2px solid #ffffff !important;
-    color: #042f2e !important;
-    box-shadow:
-      0 0 14px rgba(20, 184, 166, 0.75),
-      0 0 0 1.5px #0d9488,
-      inset 0 1px 3px #ffffff;
-    transform: scale(1.04);
-  }
-  .cloze-mask.leech-card {
-    border: 2px solid #fb7185 !important;
-    background: linear-gradient(135deg, #ffe4e6, #fecdd3) !important;
-    color: #9f1239 !important;
-    box-shadow: 0 0 10px rgba(225, 29, 72, 0.35) !important;
-  }
-  .cloze-mask.graduated-card {
-    background: rgba(204, 251, 241, 0.28) !important;
-    color: inherit !important;
-    border: 1px dotted #14b8a6 !important;
-    box-shadow: none !important;
-  }
-  .cloze-mask.revealed, .peek-all-mode .cloze-mask {
-    background: rgba(240, 253, 250, 0.65) !important;
-    color: inherit !important;
-    border: 1px dashed #2dd4bf !important;
-    box-shadow: none;
+  .m-icon-btn.active {
+    background: linear-gradient(135deg, #99f6e4 0%, #14b8a6 100%);
+    color: #042f2e;
+    border-color: #0d9488;
   }
 
-  /* 영역선택 모드 & 전체낭독/한줄낭독(F7/F8) 실시간 하이라이트 */
-  body.sg-area-select-active #subnoteBox .cloze-mask,
-  body.sg-area-select-active #subnoteBox .cloze-diagram-mask {
-    pointer-events: none !important;
+  /* Step 0 ~ 4 가로 스크롤 탭 */
+  .m-step-bar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
   }
-  .sg-area-hover {
-    background-color: #ccfbf1 !important;
-    outline: 3px dashed #0d9488 !important;
-    box-shadow: inset 0 0 0 9999px rgba(45, 212, 191, 0.25) !important;
-    cursor: pointer !important;
+  .m-step-bar::-webkit-scrollbar { display: none; }
+
+  .m-step-btn {
+    height: 32px;
+    padding: 0 11px;
+    border-radius: 999px;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
   }
-  .sg-area-picked {
-    position: relative !important;
-    background-color: #99f6e4 !important;
-    outline: 3px solid #0f766e !important;
-    box-shadow: inset 0 0 0 9999px rgba(45, 212, 191, 0.36), 0 4px 12px rgba(13, 148, 136, 0.35) !important;
-    border-radius: 8px !important;
-  }
-  .sg-area-reading,
-  .tts-reading-row {
-    background-color: #fef08a !important;
-    outline: 3px solid #eab308 !important;
-    box-shadow: inset 0 0 0 9999px rgba(254, 240, 138, 0.45), 0 0 16px rgba(234, 179, 8, 0.45) !important;
-    border-radius: 8px !important;
-    transition: background-color 0.15s ease;
-  }
-  .sg-area-order-badge {
-    position: absolute; top: 3px; right: 6px; z-index: 60;
-    background: linear-gradient(135deg, #14b8a6, #0f766e) !important;
-    color: #ffffff !important;
-    border: 1.5px solid #ffffff !important;
-    border-radius: 99px; padding: 2px 9px;
-    font-size: 11.5px; font-weight: 900;
-    pointer-events: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.22);
+  .m-step-btn.active {
+    background: radial-gradient(circle at 50% 25%, #99f6e4 0%, #2dd4bf 55%, #0d9488 100%);
+    color: #042f2e;
+    border-color: #0f766e;
+    box-shadow: 0 3px 8px rgba(13, 148, 136, 0.28);
   }
 
-  /* =========================================================================
-     6. 크리스탈 아쿠아 & 샴페인 골드 플로팅 리모컨 (405px, 원본 글꼴 100% 연동)
-     ========================================================================= */
-  .sg-floating-remote, .sg-floating-remote * {
-    font-family: var(--subnote-font) !important;
+  /* 2. 기억의 궁전 모바일 카드 */
+  .m-palace-card {
+    margin: 10px 10px 0;
+    background: linear-gradient(155deg, #fdfcf6 0%, #f8f6e8 100%);
+    border: 2px solid var(--gold-border);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+    display: none;
   }
-  .sg-floating-remote {
-    position: fixed;
-    right: 24px;
-    bottom: 24px;
-    width: 438px;
-    z-index: 1650;
-    background: linear-gradient(155deg,
-      rgba(255, 255, 255, 0.68) 0%,
-      rgba(240, 253, 250, 0.52) 48%,
-      rgba(254, 249, 195, 0.42) 100%);
-    backdrop-filter: blur(16px) saturate(145%);
-    -webkit-backdrop-filter: blur(16px) saturate(145%);
-    border: 2.5px solid rgba(255, 251, 235, 0.95);
-    border-radius: 30px;
-    padding: 10px 10px 12px 10px;
-    box-shadow:
-      0 0 0 2px rgba(223, 202, 150, 0.8),
-      0 0 22px rgba(253, 224, 71, 0.35),
-      0 20px 45px rgba(15, 23, 42, 0.18),
-      inset 0 2px 6px rgba(255, 255, 255, 0.95),
-      inset 0 -2px 10px rgba(45, 212, 191, 0.22);
-    color: #0f172a;
-    user-select: none;
-    transition: background 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+  .m-palace-card.open {
+    display: block;
+  }
+
+  .m-palace-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid var(--gold-border);
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--teal-main);
+  }
+
+  .m-palace-viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #1e293b;
     overflow: hidden;
   }
-  .sg-floating-remote.trans-mid {
-    background: linear-gradient(155deg, rgba(255,255,255,0.34), rgba(240,253,250,0.25)) !important;
-    backdrop-filter: blur(6px) !important;
-    opacity: 0.72;
-  }
-  .sg-floating-remote.trans-high {
-    background: rgba(255, 255, 255, 0.12) !important;
-    backdrop-filter: blur(2px) !important;
-    opacity: 0.34;
-  }
-  .sg-floating-remote.trans-mid:hover,
-  .sg-floating-remote.trans-high:hover {
-    opacity: 0.99;
-    background: linear-gradient(155deg, rgba(255,255,255,0.78), rgba(240,253,250,0.62)) !important;
-    backdrop-filter: blur(16px) !important;
+
+  .m-palace-img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
   }
 
-  .sg-floating-remote.minimized {
-    width: 66px !important;
-    height: 66px !important;
-    border-radius: 20px !important;
-    padding: 0 !important;
-    background: radial-gradient(circle at 50% 35%,
-      rgba(153, 246, 228, 0.96) 0%,
-      rgba(45, 212, 191, 0.92) 50%,
-      rgba(13, 148, 136, 0.96) 100%) !important;
-    border: 2.5px solid #ffffff !important;
-    box-shadow:
-      0 0 0 2px rgba(223, 202, 150, 0.85),
-      0 10px 28px rgba(13, 148, 136, 0.5),
-      0 0 20px rgba(94, 234, 212, 0.8),
-      inset 0 2px 6px #ffffff !important;
-    display: flex; align-items: center; justify-content: center;
-    cursor: grab;
-    opacity: 0.96 !important;
+  .m-palace-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
   }
-  .sg-floating-remote.minimized .remote-full-panel {
-    display: none !important;
-  }
-  .remote-mini-orb {
-    display: none;
-    width: 34px; height: 34px;
+
+  .m-pin {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    transform: translate(-50%, -50%);
     border-radius: 999px;
-    border: 4px solid #ffffff;
-    box-shadow: 0 0 14px #ffffff, inset 0 0 8px #ffffff;
-    position: relative;
-  }
-  .sg-floating-remote.minimized .remote-mini-orb {
-    display: flex; align-items: center; justify-content: center;
-  }
-  .remote-mini-orb-label {
-    position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.96); color: #0f766e;
-    border: 1.5px solid #2dd4bf; border-radius: 99px;
-    font-size: 10px; font-weight: 900; padding: 1px 6px; white-space: nowrap;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
-  }
-
-  .remote-drag-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 8px 12px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.88) 100%);
-    border: 1.5px solid rgba(255, 255, 255, 0.98);
-    border-radius: 18px;
-    margin-bottom: 4px;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.07), inset 0 1px 2px #ffffff;
-    cursor: grab;
-    gap: 6px;
-  }
-  .remote-drag-header:active { cursor: grabbing; }
-  .remote-drag-title {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 13px; font-weight: 900; color: #0f766e;
-    white-space: nowrap;
-  }
-  .remote-header-ctrls {
-    display: flex; align-items: center; gap: 4px; flex-shrink: 0;
-  }
-  .remote-ico-btn {
-    background: rgba(240, 253, 250, 0.95);
-    color: #0f766e;
-    border: 1px solid rgba(45, 212, 191, 0.55);
-    border-radius: 99px;
-    padding: 3px 9px;
-    font-size: 11px; font-weight: 800;
-    cursor: pointer;
-    white-space: nowrap;
-    box-shadow: 0 2px 5px rgba(13, 148, 136, 0.08);
-    transition: all 0.15s ease;
-  }
-  .remote-ico-btn:hover {
-    background: linear-gradient(135deg, #2dd4bf, #0d9488);
+    background: rgba(15, 23, 42, 0.88);
+    border: 2px solid #fde047;
     color: #ffffff;
-    border-color: #99f6e4;
+    font-size: 13px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.65);
+    transition: transform 0.18s ease;
+  }
+  .m-pin.current {
+    width: 42px;
+    height: 42px;
+    background: #f59e0b;
+    border: 2.5px solid #ffffff;
+    color: #0f172a;
+    z-index: 15;
+    animation: mPinPulse 1.4s infinite ease-in-out;
+  }
+  .m-pin.cleared {
+    background: #059669;
+    border-color: #a7f3d0;
+    color: #ecfdf5;
+  }
+  @keyframes mPinPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #fde047; }
+    50% { transform: translate(-50%, -50%) scale(1.16); box-shadow: 0 0 20px #fde047; }
   }
 
-  .remote-body {
-    padding: 6px 4px 2px 4px;
-    display: flex; flex-direction: column; gap: 7px;
+  .m-pin-tag {
+    position: absolute;
+    top: 102%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.92);
+    color: #fde047;
+    border: 1px solid #f59e0b;
+    border-radius: 5px;
+    padding: 1px 6px;
+    font-size: 10.5px;
+    font-weight: 800;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .m-pin.cleared .m-pin-tag {
+    background: rgba(6, 78, 59, 0.94);
+    color: #a7f3d0;
+    border-color: #34d399;
   }
 
-  .remote-scroll-display {
-    background: linear-gradient(145deg, rgba(254, 252, 232, 0.96) 0%, rgba(254, 240, 138, 0.88) 100%);
-    border: 2px solid rgba(255, 255, 255, 0.95);
-    border-radius: 18px;
-    padding: 10px 14px;
-    color: #1e293b;
-    box-shadow:
-      0 6px 16px rgba(234, 179, 8, 0.2),
-      0 0 0 1px rgba(250, 204, 21, 0.45),
-      inset 0 2px 6px rgba(255, 255, 255, 0.9);
-  }
-  .remote-scroll-top {
-    display: flex; align-items: center; justify-content: space-between;
-    font-size: 11.5px; font-weight: 900; color: #854d0e;
-    border-bottom: 1px dashed rgba(202, 138, 4, 0.35);
-    padding-bottom: 4px;
-    margin-bottom: 5px;
+  /* 궁전 하단 설명 콘솔 */
+  .m-palace-console {
+    padding: 12px;
+    background: linear-gradient(160deg, #fefce8 0%, #fef3c7 100%);
+    border-top: 1.5px solid var(--gold-border);
+    display: flex;
+    flex-direction: column;
     gap: 8px;
   }
-  .remote-scroll-target {
-    font-size: 15px; font-weight: 900; color: #1e293b;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-
-  .remote-mode-row {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
-  }
-  .remote-btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.78) 100%);
-    color: #1e293b;
-    border: 1.5px solid rgba(255, 255, 255, 0.96);
-    border-radius: 999px;
-    padding: 6px 6px; font-size: 11.8px; font-weight: 800;
-    cursor: pointer; transition: all 0.15s ease;
-    white-space: nowrap !important;
-    box-shadow:
-      0 4px 10px rgba(15, 23, 42, 0.07),
-      0 0 8px rgba(255, 255, 255, 0.6),
-      inset 0 1px 2px #ffffff;
-  }
-  .remote-btn:hover {
-    background: #ffffff;
+  .m-palace-room {
+    font-size: 12px;
+    font-weight: 900;
     color: #0f766e;
-    border-color: #5eead4;
-    transform: translateY(-1px);
+    background: rgba(255,255,255,0.9);
+    border: 1px solid #5eead4;
+    padding: 4px 10px;
+    border-radius: 999px;
+    align-self: flex-start;
   }
-  .remote-btn.active {
-    background: linear-gradient(135deg, #fef08a 0%, #facc15 100%);
-    color: #713f12; border-color: #ffffff;
-    box-shadow: 0 4px 14px rgba(234, 179, 8, 0.38), inset 0 1px 3px #ffffff;
-  }
-  .remote-btn.teal-on {
-    background: linear-gradient(135deg, #99f6e4 0%, #2dd4bf 100%);
-    color: #042f2e; border-color: #ffffff;
-    box-shadow: 0 4px 14px rgba(20, 184, 166, 0.42), inset 0 1px 3px #ffffff;
-  }
-
-  .remote-space-btn {
-    width: 100%; padding: 11px 14px;
-    border-radius: 18px;
-    background: radial-gradient(circle at 50% 35%,
-      rgba(153, 246, 228, 0.96) 0%,
-      rgba(45, 212, 191, 0.92) 45%,
-      rgba(13, 148, 136, 0.95) 100%);
-    border: 2px solid rgba(255, 255, 255, 0.95);
-    color: #042f2e; font-size: 14px; font-weight: 900;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 7px;
-    box-shadow:
-      0 8px 22px rgba(20, 184, 166, 0.42),
-      0 0 18px rgba(94, 234, 212, 0.65),
-      inset 0 2px 6px rgba(255, 255, 255, 0.95),
-      inset 0 -3px 8px rgba(15, 118, 110, 0.4);
-    white-space: nowrap;
-    transition: all 0.18s ease;
-  }
-  .remote-space-btn:hover { transform: translateY(-2px) scale(1.01); }
-
-  .remote-grade-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;
-  }
-  .remote-g-btn {
-    padding: 6px 4px; border-radius: 999px; font-size: 11.5px; font-weight: 900;
-    color: #fff; border: 1.5px solid rgba(255,255,255,0.9); cursor: pointer;
-    text-align: center; white-space: nowrap;
-    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12), inset 0 1px 2px rgba(255,255,255,0.6);
-  }
-  .remote-g-btn:hover { filter: brightness(1.08); }
-
-  .remote-step-grid {
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px;
-  }
-  .remote-tts-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;
-  }
-
-  /* =========================================================================
-     7. 모달 팝업창 (크리스탈 화이트 & 샴페인 골드 카드)
-     ========================================================================= */
-  .modal-backdrop {
-    position: fixed; inset: 0; z-index: 2000;
-    background: rgba(15, 23, 42, 0.42); backdrop-filter: blur(6px);
-    display: none; align-items: center; justify-content: center; padding: 20px;
-  }
-  .modal-backdrop.open { display: flex; }
-  .modal-card {
-    background: linear-gradient(180deg, #ffffff 0%, #fafbf9 100%);
+  .m-palace-story {
+    background: rgba(255,255,255,0.92);
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.45;
     color: #1e293b;
-    border: 2px solid var(--border-gold);
-    border-radius: 24px;
-    width: 100%; max-width: 820px; max-height: 88vh;
-    display: flex; flex-direction: column;
-    box-shadow:
-      0 24px 55px rgba(15, 23, 42, 0.25),
-      0 0 0 4px rgba(255, 255, 255, 0.9);
-    overflow: hidden;
   }
-  .modal-header {
-    padding: 14px 20px;
-    background: linear-gradient(90deg, #f0fdfa 0%, #fefce8 100%);
-    border-bottom: 1.5px solid var(--border-gold);
-    display: flex; align-items: center; justify-content: space-between;
-    font-size: 16px; font-weight: 900; color: #0f766e;
+  .m-palace-answer {
+    background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+    border: 2px solid #2dd4bf;
+    border-radius: 12px;
+    padding: 11px 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 900;
+    color: #042f2e;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(20, 184, 166, 0.15);
   }
-  .modal-body { padding: 18px; overflow-y: auto; flex: 1; }
-
-  @media print {
-    .top-master-header, .anki-battle-stage, .memory-palace-stage,
-    .stage-resize-bar, .master-study-toolbar, .outline-sidebar,
-    .sg-floating-remote { display: none !important; }
-    body, .subnote-paper-container { background: #fff !important; color: #000 !important; box-shadow: none !important; border: none !important; }
-  }
-  /* 📱 스마트폰(모바일) 세로 화면 완벽 대응 패치 */
-  @media (max-width: 768px) {
-    .top-master-header { position: relative !important; padding: 8px 10px !important; }
-    .master-study-toolbar { position: relative !important; top: 0 !important; padding: 8px 10px !important; }
-    .palace-body-split, .stage-arena-center { flex-direction: column !important; overflow-y: auto !important; }
-    .palace-side-console { width: 100% !important; max-height: 240px !important; }
-    .anki-battle-stage, .memory-palace-stage { height: auto !important; min-height: 520px !important; }
-    .palace-viewport { min-height: 240px !important; width: 100% !important; }
-    .hero-stand-wrap { display: none !important; } /* 모바일에서는 좌우 장수 캐릭터 숨김 */
-    .anki-center-console { flex-direction: column !important; width: 100% !important; }
-    .subnote-workspace { flex-direction: column !important; padding: 0 8px !important; }
-    .outline-sidebar { width: 100% !important; position: relative !important; top: 0 !important; }
-    .subnote-paper-container { padding: 14px 12px !important; }
-    .sg-floating-remote:not(.minimized) {
-      width: calc(100vw - 16px) !important;
-      right: 8px !important;
-      left: 8px !important;
-      bottom: 8px !important;
-      border-radius: 22px !important;
-    }
+  .m-palace-nav {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 6px;
   }
 
+  /* 3. 서브노트 본문 영역 */
+  .m-subnote-card {
+    margin: 10px;
+    background: #ffffff;
+    border: 2px solid var(--gold-border);
+    border-radius: 18px;
+    padding: 16px 14px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+    font-size: var(--subnote-size);
+    line-height: 1.72;
+    overflow-x: auto;
+  }
 
+  .m-subnote-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1.5px dashed #cbd5e1;
+  }
+  .m-topic-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: #0f172a;
+  }
 
+  /* 서브노트 내부 표/SVG 모바일 자동 최적화 */
+  #mSubnoteBox table {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-collapse: collapse !important;
+    border: 1.5px solid #475569 !important;
+    font-size: 0.92em !important;
+    margin: 8px 0 !important;
+  }
+  #mSubnoteBox th, #mSubnoteBox td {
+    border: 1px solid #94a3b8 !important;
+    padding: 6px 6px !important;
+    word-break: keep-all;
+  }
+  #mSubnoteBox svg {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 6px auto;
+  }
 
+  /* 가림막(Cloze) 캡슐 스타일 */
+  .cloze-mask {
+    display: inline-block;
+    padding: 2px 10px;
+    margin: 2px 2px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #e0f9f4 0%, #a7f3d0 100%) !important;
+    color: #065f46 !important;
+    border: 1.5px solid #2dd4bf !important;
+    font-weight: 800 !important;
+    font-size: 0.92em;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 2px 5px rgba(20, 184, 166, 0.15);
+  }
+  .cloze-mask.current-target {
+    background: radial-gradient(circle at 50% 25%, #fde047 0%, #f59e0b 100%) !important;
+    color: #451a03 !important;
+    border: 2px solid #92400e !important;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+  }
+  .cloze-mask.revealed, .peek-all-mode .cloze-mask {
+    background: rgba(240, 253, 250, 0.75) !important;
+    color: inherit !important;
+    border: 1px dashed #14b8a6 !important;
+    box-shadow: none !important;
+  }
 
+  /* 도면 가림막 */
+  .cloze-diagram-wrap {
+    position: relative;
+    width: 100%;
+    margin: 8px 0;
+  }
+  .cloze-diagram-mask {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    background: linear-gradient(135deg, rgba(254, 243, 199, 0.97), rgba(253, 230, 138, 0.97));
+    border: 2px dashed #d97706;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #78350f;
+    font-weight: 900;
+    font-size: 14px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .cloze-diagram-wrap.revealed .cloze-diagram-mask,
+  .peek-all-mode .cloze-diagram-mask {
+    display: none !important;
+  }
 
+  /* TTS 읽는 중인 줄 하이라이트 */
+  .tts-reading-row {
+    background-color: #fef08a !important;
+    outline: 2.5px solid #eab308 !important;
+    border-radius: 6px !important;
+  }
+
+  /* 안내 토스트 바 */
+  .m-toast {
+    position: fixed;
+    bottom: 78px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.92);
+    color: #fde047;
+    border: 1.5px solid #f59e0b;
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 12.5px;
+    font-weight: 800;
+    z-index: 1200;
+    white-space: nowrap;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    display: none;
+  }
+  .m-toast.show {
+    display: block;
+  }
+
+  /* 4. 하단 고정 엄지손가락 컨트롤 독 바 */
+  .m-bottom-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 2px solid var(--gold-border);
+    box-shadow: 0 -6px 22px rgba(15, 23, 42, 0.1);
+    padding: 7px 8px calc(7px + env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.45fr 1fr 0.9fr;
+    gap: 5px;
+  }
+
+  .m-dock-btn {
+    height: 44px;
+    border-radius: 12px;
+    border: 1.5px solid #cbd5e1;
+    background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+    color: #1e293b;
+    font-size: 12px;
+    font-weight: 900;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    cursor: pointer;
+    line-height: 1.15;
+  }
+  .m-dock-btn:active {
+    transform: scale(0.95);
+  }
+  .m-dock-btn.primary {
+    background: radial-gradient(circle at 50% 25%, #99f6e4 0%, #2dd4bf 52%, #0d9488 100%);
+    color: #042f2e;
+    border-color: #0f766e;
+    font-size: 13px;
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
+  }
+  .m-dock-btn.active {
+    background: linear-gradient(135deg, #fef08a 0%, #facc15 100%);
+    color: #713f12;
+    border-color: #d97706;
+  }
 </style>
 </head>
 <body>
 
-<header class="top-master-header">
-  <div class="header-row-1">
-    <div class="header-left-cluster">
-      <div class="brand-badge">
-        <span id="subjectEmblemIcon" class="sg-ico lg s-fire c-22"></span>
-        <span>🏛️ 소방기술사 기억의 궁전 마스터</span>
-      </div>
-
-      <div class="mode-switch-pill" style="display:none !important;">
-        <button id="btnModeSamguk" class="mode-btn active-samguk" onclick="switchMainStageMode('samguk')">
-          <span class="sg-ico md s-study c-00"></span><span>삼국지 카드결투</span>
-        </button>
-        <button id="btnModePalace" class="mode-btn" onclick="switchMainStageMode('palace')">
-          <span class="sg-ico md s-study c-01"></span><span>기억의 궁전</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="topic-nav-group">
-      <select id="categorySelect" class="ctrl-select" onchange="filterTopicsList()">
-        <option value="ALL">전체 과목</option>
-      </select>
-      <label style="display:none !important;">
-        <input type="checkbox" id="onlyPalaceFilter" onchange="filterTopicsList()">🏛️궁전만
-      </label>
-      <input type="text" id="topicSearchInput" class="ctrl-input" placeholder="토픽·두문자 검색..." oninput="filterTopicsList()">
-      <button class="btn-gold" onclick="moveTopic(-1)" title="이전 토픽">◀</button>
-      <select id="topicSelect" class="ctrl-select" onchange="loadTopic(Number(this.value))"></select>
-      <button class="btn-gold" onclick="moveTopic(1)" title="다음 토픽">▶</button>
-    </div>
-
-    <div class="stage-ctrl-group">
-      <select id="stageSizeSelect" class="ctrl-select" onchange="setStageHeightPreset(this.value)">
-        <option value="650">화면: 특대(650px)</option>
-        <option value="500" selected>화면: 대형(500px)</option>
-        <option value="370">화면: 중형(370px)</option>
-        <option value="250">화면: 소형(250px)</option>
-        <option value="0">화면 접기(원문집중)</option>
-      </select>
-
-      <button class="btn-gold" onclick="openMnemonicBookModal()">
-        <span class="sg-ico sm s-study c-22"></span><span>두문자족보</span>
-      </button>
-      <button class="btn-gold" onclick="openHistoryModal()">
-        <span class="sg-ico sm s-study c-21"></span><span>복습·잔디</span>
-      </button>
-      <button class="btn-gold active" onclick="openTopicManagerModal()" title="단축키 Ctrl+S 지원">
-        <span class="sg-ico sm s-pins c-22"></span><span>데이터투입·저장(Ctrl+S)</span>
-      </button>
-      <button class="btn-gold" onclick="openPronunModal()">
-        <span class="sg-ico sm s-study c-10"></span><span>발음사전</span>
-      </button>
-    </div>
+<!-- 1. 상단 고정 네비게이션 & 학습 단계 바 -->
+<header class="m-header">
+  <div class="m-nav-row">
+    <select id="mCategorySelect" class="m-select" onchange="onCategoryChange()"></select>
+    <button type="button" class="m-icon-btn" onclick="moveTopic(-1)" title="이전 토픽">◀</button>
+    <select id="mTopicSelect" class="m-select" onchange="loadTopic(Number(this.value))"></select>
+    <button type="button" class="m-icon-btn" onclick="moveTopic(1)" title="다음 토픽">▶</button>
+    <button type="button" id="btnPalaceToggle" class="m-icon-btn" onclick="togglePalaceCard()">🏛️궁전</button>
   </div>
 
-  <!-- 정통 4단계 서브노트 가림막 탭 -->
-  <div class="header-row-2">
-    <div class="step-tabs">
-      <button id="stepTab0" class="step-tab" onclick="setProgressiveStep(0)">
-        <span class="sg-ico sm s-pins c-21"></span><span>Step 0. 원문통독</span>
-      </button>
-      <button id="stepTab1" class="step-tab" onclick="setProgressiveStep(1)">
-        <span class="sg-ico sm s-pins c-10"></span><span>Step 1. 대제목·목차 (1. 2. 3.)</span>
-      </button>
-      <button id="stepTab2" class="step-tab active" onclick="setProgressiveStep(2)">
-        <span class="sg-ico sm s-pins c-11"></span><span>Step 2. 핵심단어 (파란 요약표)</span>
-      </button>
-      <button id="stepTab3" class="step-tab" onclick="setProgressiveStep(3)">
-        <span class="sg-ico sm s-pins c-12"></span><span>Step 3. 본문 빨간글씨·도면</span>
-      </button>
-      <button id="stepTab4" class="step-tab" onclick="setProgressiveStep(4)">
-        <span class="sg-ico sm s-study c-02"></span><span>Step 4. 100% 모두 가리기</span>
-      </button>
-    </div>
-
-    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-      <button id="btnOutlineTree" class="btn-gold" onclick="toggleOutlineSidebar()">
-        <span class="sg-ico sm s-pins c-21"></span><span>목차트리</span>
-      </button>
-      <button id="btnHintMode" class="btn-gold active" onclick="toggleClozeHintMode()" title="단축키 H">
-        <span class="sg-ico sm s-pins c-10"></span><span id="hintModeText">초성힌트 ON</span>
-      </button>
-      <button id="btnDiagramEditMode" class="btn-gold" onclick="toggleDiagramMaskEditMode()" title="클릭한 구역(도면·표·그림)을 도면 가림막으로 지정/편집">
-        <span class="sg-ico sm s-fire c-10"></span><span id="diagramEditModeText">📐 도면가림 편집 OFF</span>
-      </button>
-      <button id="btnSpeedTimer" class="btn-gold" style="display:none !important;" onclick="toggleSpeedFocusTimer()" title="6초 안에 인출 못하면 자동 정답 공개">
-        <span class="sg-ico sm s-study c-12"></span><span id="speedTimerBtnText">⏱️ 6초 순발력 OFF</span>
-      </button>
-      <button id="btnWrongPool" class="btn-gold" style="display:none !important;" onclick="startWrongPoolReview()">
-        <span class="sg-ico sm s-study c-20"></span><span>오답집중 (<b id="wrongCountBadge">0</b>)</span>
-      </button>
-      <button id="btnLeechPool" class="btn-gold" style="display:none !important;" onclick="startLeechPoolReview()" title="3회 이상 틀린 상습 약점 거머리 빈칸만 집중 격파">
-        <span>🩸 거머리(<b id="leechCountBadge">0</b>)</span>
-      </button>
-      <button class="btn-gold" style="display:none !important;" onclick="resetGraduatedCardsForTopic()" title="영구 졸업 처리한 빈칸을 다시 문제에 포함">
-        <span>🎓 졸업초기화(<b id="gradCountBadge">0</b>)</span>
-      </button>
-      <button id="btnWhiteboardToggle" class="btn-gold" onclick="toggleWhiteboardPanel()">
-        <span class="sg-ico sm s-study c-02"></span><span>백지채점판</span>
-      </button>
-      <button class="btn-gold" onclick="markCurrentTopicCompleted()">
-        <span class="sg-ico sm s-pins c-02"></span><span>1회독 완료</span>
-      </button>
-      <button id="btnRemoteToggleHeader" class="btn-gold teal-active" onclick="toggleFloatingRemoteMinimize()" title="서브노트 플로팅 리모컨 펼치기/접기">
-        <span class="sg-ico sm s-study c-00"></span><span>리모컨</span>
-      </button>
-    </div>
+  <div class="m-step-bar">
+    <button type="button" id="mStep0" class="m-step-btn" onclick="setStep(0)">Step 0. 원문</button>
+    <button type="button" id="mStep1" class="m-step-btn" onclick="setStep(1)">Step 1. 목차</button>
+    <button type="button" id="mStep2" class="m-step-btn active" onclick="setStep(2)">Step 2. 요약표</button>
+    <button type="button" id="mStep3" class="m-step-btn" onclick="setStep(3)">Step 3. 키워드·도면</button>
+    <button type="button" id="mStep4" class="m-step-btn" onclick="setStep(4)">Step 4. 100%백지</button>
   </div>
 </header>
 
-<div id="masterZoomWorkspace">
-
-  <!-- 1️⃣ 삼국지 Anki 카드 결투 스테이지 -->
-  <section id="samgukBattleStage" class="anki-battle-stage" style="display:none !important;">
-    <div class="stage-hud-top">
-      <div class="rival-tag">
-        <span class="sg-ico md s-study c-00"></span>
-        <select id="battleThemeSelect" onchange="changeBattleTheme(this.value)" title="삼국지 전장 배경 및 장수 매칭 선택">
-          <option value="redcliff">⚔️ 적벽대전 (주유 vs 조조)</option>
-          <option value="hulao">⚔️ 호로관 (관우 vs 여포)</option>
-          <option value="paljindo">⚔️ 오장원 (제갈량 vs 사마의)</option>
-          <option value="worldmap">⚔️ 천하통일 13주 (유비 vs 장료)</option>
-        </select>
-        <span id="rivalMatchText" style="display:none;">주유 vs 조조 (적벽대전)</span>
-      </div>
-
-      <div class="boss-hp-wrap">
-        <div class="boss-hp-title">
-          <span id="bossTitleText">적장 조조 — 서브노트 방어선</span>
-          <span id="ankiProgressText">남은 빈칸: 0 / 0 (100%)</span>
-        </div>
-        <div class="boss-hp-bar-bg">
-          <div id="bossHpFill" class="boss-hp-bar-fill"></div>
-        </div>
-        <div id="speedTimerWrap" class="speed-timer-bar-wrap">
-          <div id="speedTimerFill" class="speed-timer-bar-fill"></div>
-        </div>
-      </div>
-
-      <div style="display:flex; gap:5px; align-items:center;">
-        <button class="btn-gold" onclick="undoLastAnkiAction()" title="방금 판정 되돌리기 (단축키 Ctrl+Z)">
-          ↩️ 취소(Ctrl+Z)
-        </button>
-        <button id="btnOrderSeq" class="btn-gold active" onclick="setAnkiOrderMode('seq')">순서</button>
-        <button id="btnOrderRand" class="btn-gold" onclick="setAnkiOrderMode('rand')">랜덤</button>
-        <button id="btnCardTtsScope" class="btn-gold" onclick="toggleCardTtsScope()">
-          <span class="sg-ico sm s-study c-10"></span><span id="cardTtsScopeText">문장전체</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="stage-arena-center">
-      <div class="hero-stand-wrap">
-        <div id="allyHeroStand" class="hero-stand" style="background-position: 100% 0%;"></div>
-      </div>
-
-      <div class="anki-center-console">
-        <div id="stageStampOverlay" class="stamp-seal-overlay"></div>
-
-        <div class="anki-card-3d-scene" onclick="handleAnkiCardClick()" title="클릭 또는 Space바를 눌러 카드 뒤집기">
-          <div id="ankiCardInner" class="anki-card-3d-inner">
-            <div id="ankiCardBack" class="anki-card-face anki-card-back">
-              <div id="cardBackSecPill" class="card-top-pill">[1. 개요]</div>
-              <div style="text-align:center; padding:8px;">
-                <span class="sg-ico xl s-pins c-01"></span>
-                <div style="font-size:12px; color:#fde68a; font-weight:800; margin-top:4px;">클릭 / Space 정답확인</div>
-              </div>
-              <div id="cardBackHintPlate" class="card-bottom-plate">초성 힌트 대기 중</div>
-            </div>
-            <div id="ankiCardFront" class="anki-card-face anki-card-front">
-              <div id="cardFrontSecPill" class="card-top-pill">[★CRITICAL 해금!]</div>
-              <div style="text-align:right;">
-                <span class="sg-ico md s-relic c-00"></span>
-              </div>
-              <div id="cardFrontAnswerPlate" class="card-bottom-plate">정답 키워드</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="anki-context-monitor">
-          <div class="monitor-header">
-            <div class="monitor-sec-title">
-              <span class="sg-ico sm s-pins c-11"></span>
-              <span id="monitorBreadcrumb">[소속 대목차] 문맥 전광판</span>
-            </div>
-            <div style="display:flex; gap:5px;">
-              <button class="btn-gold" onclick="replayCurrentAnkiTts()" title="단축키 R">
-                <span class="sg-ico sm s-study c-10"></span><span>다시듣기(R)</span>
-              </button>
-              <button class="btn-gold" onclick="scrollToCurrentClozeInSubnote()">
-                <span class="sg-ico sm s-pins c-20"></span><span>원문위치</span>
-              </button>
-            </div>
-          </div>
-
-          <div id="monitorContextBody" class="monitor-body">
-            빈칸 학습을 시작하면 이곳에 원문 문맥과 도면(SVG Image Occlusion)이 표시됩니다.
-          </div>
-
-          <div class="monitor-actions">
-            <button class="grade-btn grade-again" onclick="gradeAnkiTarget('again')">
-              <span>1. 다시 (Again)</span>
-              <small>🔄 3칸 뒤 재출제</small>
-            </button>
-            <button class="grade-btn grade-hard" onclick="gradeAnkiTarget('hard')">
-              <span>2. 어려움 (Hard)</span>
-              <small>⏳ 턴 끝에 복습</small>
-            </button>
-            <button class="grade-btn grade-good" onclick="gradeAnkiTarget('good')">
-              <span>3 / Space. 알맞음</span>
-              <small>⚔️ 격파 후 전진</small>
-            </button>
-            <button class="grade-btn grade-easy" onclick="gradeAnkiTarget('easy')" title="단축키 4 또는 @">
-              <span>4 / @. 쉬움 (졸업)</span>
-              <small>🎓 영구 해금(보류)</small>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-stand-wrap">
-        <div id="enemyHeroStand" class="hero-stand" style="background-position: 33.33% 100%;"></div>
-        <div id="enemyVfxOverlay" class="vfx-slash-overlay"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2️⃣ 🏛️ 기억의 궁전 스테이지 -->
-  <section id="memoryPalaceStage" class="memory-palace-stage active">
-    <div class="palace-top-bar">
-      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-        <div class="palace-file-badge">
-          <span class="sg-ico sm s-study c-01"></span>
-          <span>토픽 ID: <b id="palaceTopicIdLabel">alarm_40</b> | 이미지: <b id="palaceFileNameLabel" style="color:#0f766e;">pl1.jpg</b></span>
-        </div>
-        <button class="btn-gold" onclick="promptChangePalaceImageFile()">
-          <span class="sg-ico sm s-pins c-22"></span><span>파일명 변경</span>
-        </button>
-        <button id="btnPalaceZoomToggle" class="btn-gold teal-active" onclick="togglePalaceCameraZoom()">
-          <span id="palaceZoomIcon" class="sg-ico sm s-pins c-20"></span>
-          <span id="palaceZoomBtnText">현재 거점 클로즈업 ON</span>
-        </button>
-        <button class="btn-gold" onclick="resetPalaceAllPins()">
-          <span class="sg-ico sm s-study c-12"></span><span>처음부터 순회</span>
-        </button>
-      </div>
-
-      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-        <button id="btnPalaceEditMode" class="btn-gold" onclick="togglePalaceEditMode()">
-          <span class="sg-ico sm s-pins c-22"></span><span id="palaceEditModeText">거점편집 OFF</span>
-        </button>
-        <button class="btn-gold" onclick="addNewPalacePin()">
-          <span class="sg-ico sm s-pins c-01"></span><span>거점 추가</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="palace-body-split">
-      <div id="palaceViewport" class="palace-viewport">
-        <div id="palaceCanvasMover" class="palace-canvas-mover">
-          <img id="palaceBgImg" class="palace-bg-img" src="" alt="Memory Palace">
-          <svg id="palaceRouteSvg" class="palace-route-svg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
-          <div id="palacePinsLayer"></div>
-        </div>
-      </div>
-
-      <div class="palace-side-console">
-        <div>
-          <div class="palace-room-pill">
-            <span class="sg-ico md s-pins c-01"></span>
-            <span id="palaceRoomLabel">제1방 — 거점 ①</span>
-          </div>
-
-          <div class="palace-story-box">
-            <div style="font-size:12px; color:#0f766e; font-weight:900; margin-bottom:4px; display:flex; align-items:center; gap:5px;">
-              <span class="sg-ico sm s-pins c-10"></span><span>공간 연상 스토리 힌트</span>
-            </div>
-            <div id="palaceStoryText">연상 스토리 힌트가 표시됩니다.</div>
-          </div>
-
-          <div class="palace-answer-box" onclick="revealOrNextPalacePin()" style="cursor:pointer;">
-            <div style="font-size:11.5px; color:#0f766e; font-weight:700; margin-bottom:5px;">암기 타겟 키워드 (클릭 또는 Space)</div>
-            <div id="palaceAnswerText" style="font-size:19px; font-weight:900; color:#042f2e;">초성 대기</div>
-          </div>
-
-          <div style="display:flex; gap:6px; margin-bottom:10px;">
-            <button class="btn-gold" style="flex:1; justify-content:center;" onclick="editCurrentPalacePinDialog()">
-              <span class="sg-ico sm s-pins c-22"></span><span>현재 거점 문구 수정</span>
-            </button>
-            <button class="btn-gold" onclick="deleteCurrentPalacePin()" title="현재 거점 삭제">🗑️</button>
-          </div>
-        </div>
-
-        <div style="display:flex; flex-direction:column; gap:7px;">
-          <div style="display:flex; gap:6px;">
-            <button class="btn-gold" style="flex:1; justify-content:center;" onclick="movePalacePinStep(-1)">◀ 이전 거점</button>
-            <button class="btn-gold" style="flex:1; justify-content:center;" onclick="movePalacePinStep(1)">다음 거점 ▶</button>
-          </div>
-          <button id="btnPalaceMainAction" class="grade-btn grade-good" style="width:100%; padding:11px;" onclick="revealOrNextPalacePin()">
-            <span id="palaceActionBtnText">Space — 정답 해금 & Edge TTS 낭독</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div id="stageResizeBar" class="stage-resize-bar" title="위아래로 드래그하여 기억의 궁전 화면 크기를 조절하세요">
-    ▲ ▼ 드래그하여 기억의 궁전 화면 크기 조절
-  </div>
-
-  <!-- 중단 마스터 툴바 -->
-  <nav class="master-study-toolbar">
-    <div class="toolbar-group">
-      <span class="sg-ico md s-study c-10"></span>
-      <select id="ttsVoiceSelect" class="ctrl-select" onchange="if(window.onTtsVoiceChange) onTtsVoiceChange(this.value)" style="max-width:195px;"></select>
-      <select id="ttsRateSelect" class="ctrl-select" onchange="changeTtsRate(this.value)">
-        <option value="0.9">0.9x</option>
-        <option value="1.0">1.0x</option>
-        <option value="1.05" selected>1.05x</option>
-        <option value="1.15">1.15x</option>
-        <option value="1.25">1.25x</option>
-        <option value="1.4">1.4x</option>
-        <option value="1.6">1.6x</option>
-      </select>
-
-      <button class="btn-gold" onclick="if(window.speakFullSubnote) speakFullSubnote()">
-        <span class="sg-ico sm s-study c-10"></span><span>전체낭독</span>
-      </button>
-      <button class="btn-gold" onclick="if(window.speakPrevStepLine) speakPrevStepLine()" title="F7">◀ 이전줄(F7)</button>
-      <button class="btn-gold" onclick="if(window.speakNextStepLine) speakNextStepLine()" title="F8">다음줄(F8) ▶</button>
-      <button class="btn-gold" onclick="stopAllTtsSpeech()" title="Esc">⏹ 정지</button>
-
-      <button id="btnSelectAreaMode" class="btn-gold" onclick="toggleSgAreaSelectMode()">
-        <span class="sg-ico sm s-study c-11"></span><span>영역선택</span>
-      </button>
-      <button id="btnSpeakSelected" class="btn-gold" onclick="speakSgSelectedAreas()" title="F9">
-        ▶️ 선택읽기(<b id="sgAreaCount">0</b>)
-      </button>
-      <button id="btnLoopSelected" class="btn-gold" onclick="toggleSgAreaLoop()">🔁 반복</button>
-      <button class="btn-gold" onclick="clearSgSelectedAreas()">✖ 해제</button>
-
-      <button id="btnActiveRecallTts" class="btn-gold" onclick="toggleActiveRecallTtsMode()">
-        <span class="sg-ico sm s-study c-12"></span><span>2.5초 인출낭독</span>
-      </button>
-    </div>
-
-    <div class="toolbar-group">
-      <div class="font-picker-wrap">
-        <button id="fontPickerBtn" class="btn-gold" onclick="toggleFontDropdown(event)">
-          🔤 글꼴: <span id="currentFontLabel">함초롬돋움</span> ▼
-        </button>
-        <div id="fontPickerDropdown" class="font-picker-dropdown"></div>
-      </div>
-
-      <div style="display:inline-flex; align-items:center; gap:3px; background:#ffffff; padding:2px 6px; border-radius:999px; border:1.5px solid #dbe4e2;">
-        <button class="btn-gold" style="padding:3px 7px;" onclick="stepGlobalZoom(-1)">🔍-</button>
-        <select id="globalZoomSelect" class="ctrl-select" style="border:none; padding:3px 4px; box-shadow:none;" onchange="applyGlobalZoom(Number(this.value))">
-          <option value="1">1.0x (기본)</option>
-          <option value="1.15">1.15x</option>
-          <option value="1.3">1.3x</option>
-          <option value="1.5">1.5x</option>
-          <option value="1.75">1.75x</option>
-          <option value="2">2.0x (최대)</option>
-        </select>
-        <button class="btn-gold" style="padding:3px 7px;" onclick="stepGlobalZoom(1)">🔍+</button>
-      </div>
-
-      <select id="paperSkinSelect" class="ctrl-select" onchange="applyPaperSkin(this.value)">
-        <option value="skin-hanji">📜 크리스탈 크림(기본)</option>
-        <option value="skin-white">📄 순백지</option>
-        <option value="skin-green">🌿 눈보호 칠판</option>
-        <option value="skin-dark">🌙 다크모드</option>
-      </select>
-
-      <button id="btnExamLines" class="btn-gold" onclick="toggleExamLines()">📏 답안지줄</button>
-      <button id="btnToolbarPeekAll" class="btn-gold" onclick="togglePeekAllCloze()">👁️ 전체열기</button>
-      <button id="btnInlineSubnoteEdit" class="btn-gold" onclick="toggleInlineSubnoteEdit()"><span id="inlineSubnoteEditText">✏️ 노트수정 OFF</span></button>
-      <button class="btn-gold teal-active" onclick="exportCurrentSubnoteToHwpFile()" title="도면(SVG->고화질PNG)과 표 서식을 아래아한글(HWP) 전용 문서 파일로 저장합니다">📄 한글(HWP) 저장</button>
-      <button class="btn-gold" onclick="copyCurrentSubnoteForHwp()" title="누른 뒤 아래아한글(HWP)에서 Ctrl+V를 누르면 표+도면+색상이 깨지지 않고 그대로 붙여넣어집니다">📋 한글용 복사</button>
-      <button class="btn-gold" onclick="window.print()">🖨️ 인쇄</button>
-    </div>
-  </nav>
-
-  <!-- 하단 서브노트 뷰어 -->
-  <main class="subnote-workspace">
-    <aside id="outlineSidebar" class="outline-sidebar">
-      <div style="font-weight:900; color:#0f766e; margin-bottom:10px; display:flex; align-items:center; justify-content:space-between;">
-        <span>🧭 대목차 네비게이터</span>
-        <button class="btn-gold" style="padding:2px 8px; font-size:11px;" onclick="toggleOutlineSidebar()">닫기</button>
-      </div>
-      <div id="outlineTreeList" style="display:flex; flex-direction:column; gap:6px;"></div>
-    </aside>
-
-    <div id="subnotePaperContainer" class="subnote-paper-container skin-hanji">
-      <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:2px solid var(--border-gold); padding-bottom:12px; margin-bottom:16px; flex-wrap:wrap; gap:8px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <span id="subnoteHeaderIcon" class="sg-ico xl s-fire c-00"></span>
-          <div>
-            <div id="subnoteCategoryBadge" style="font-size:12px; font-weight:800; color:#0f766e;">경보설비</div>
-            <h2 id="subnoteTitleHeading" style="margin:0; font-size:21px; font-weight:900;">토픽 제목</h2>
-          </div>
-        </div>
-        <div style="display:flex; gap:6px; align-items:center;">
-          <span id="ttsStatusText" style="font-size:12px; color:#0f766e; font-weight:800;">🔊 Edge 자연음성 준비</span>
-          <button class="btn-gold" onclick="resetCustomSubnoteHtmlForCurrentTopic()" title="이 토픽에 잘못 저장된 노트수정 캐시를 원본으로 초기화">🔄 원문복구</button>
-          <button class="btn-gold" onclick="togglePostitBox()">📌 암기포스트잇</button>
-        </div>
-      </div>
-
-      <div id="postitContainer" style="display:none; margin-bottom:16px; background:#fefce8; border:2px solid var(--border-gold-strong); border-radius:16px; padding:12px; color:#1e293b;">
-        <div style="font-weight:800; font-size:13px; margin-bottom:6px; color:#854d0e;">📌 내 전용 암기 포스트잇 (토픽별 자동 저장)</div>
-        <textarea id="postitTextarea" rows="3" style="width:100%; border:1px solid #dfca96; border-radius:10px; padding:8px; background:#ffffff; color:#1e293b;" placeholder="이 토픽만의 암기 팁이나 두문자를 적어두세요..." oninput="saveCurrentPostit()"></textarea>
-      </div>
-
-      <div id="whiteboardPanel" style="display:none; margin-bottom:20px; background:#f0fdfa; color:#1e293b; border:2px solid #5eead4; border-radius:18px; padding:16px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <div style="font-weight:900; color:#0f766e; display:flex; align-items:center; gap:6px;">
-            <span class="sg-ico md s-study c-02"></span>
-            <span>Step 4 실전 백지 인출 타이핑 & 키워드 자동 채점판</span>
-          </div>
-          <button class="btn-gold active" onclick="gradeWhiteboardTyping()">🎯 원문 1:1 대조 채점하기</button>
-        </div>
-        <textarea id="wbUserTextarea" rows="5" style="width:100%; background:#ffffff; color:#0f172a; border:1.5px solid #99f6e4; border-radius:12px; padding:10px; font-size:14px;" placeholder="기억나는 대목차, 두문자, 핵심 키워드를 백지 상태에서 자유롭게 타이핑해 보세요..."></textarea>
-        <div id="wbGradeResultBox" style="margin-top:10px; font-size:13.5px;"></div>
-      </div>
-
-      <div id="subnoteBox"></div>
-    </div>
-  </main>
-</div>
-
-<!-- =========================================================================
-     🎮 크리스탈 아쿠아 & 샴페인 골드 플로팅 리모컨 (405px, 원본 글꼴 100% 연동)
-     ========================================================================= -->
-<aside id="sgFloatingRemote" class="sg-floating-remote">
-  <div id="remoteMiniOrb" class="remote-mini-orb" title="드래그하여 이동 / 클릭하여 리모컨 펼치기">
-    <span class="remote-mini-orb-label">🎮 리모컨</span>
-  </div>
-
-  <div class="remote-full-panel">
-    <div id="remoteDragHeader" class="remote-drag-header" title="마우스로 잡고 원하는 위치로 자유롭게 이동하세요">
-      <div class="remote-drag-title">
-        <span class="sg-ico sm s-study c-01"></span>
-        <span>🏛️ 기억의 궁전 리모컨</span>
-      </div>
-      <div class="remote-header-ctrls">
-        <button id="remBtnOpacity" class="remote-ico-btn" onclick="cycleFloatingRemoteOpacity()" title="투명도 3단계 전환 (100% 선명 -> 50% 반투명 -> 20% 초투명)">투명: 100%</button>
-        <button class="remote-ico-btn" onclick="resetFloatingRemotePosition()" title="우측 하단 기본 위치로 초기화">원위치</button>
-        <button class="remote-ico-btn" onclick="toggleFloatingRemoteMinimize()" title="리모컨 보석함으로 작게 접기">접기 —</button>
-      </div>
-    </div>
-
-    <div class="remote-body">
-      <div class="remote-mode-row" style="display:none !important;">
-        <button id="remBtnModeSamguk" class="remote-btn active" onclick="switchMainStageMode('samguk')">
-          <span class="sg-ico sm s-study c-00"></span><span>삼국지 카드결투</span>
-        </button>
-        <button id="remBtnModePalace" class="remote-btn" onclick="switchMainStageMode('palace')">
-          <span class="sg-ico sm s-study c-01"></span><span>기억의 궁전</span>
-        </button>
-      </div>
-
-      <div class="remote-scroll-display" onclick="remoteTriggerMainSpaceAction()" style="cursor:pointer;" title="클릭하면 Space바(정답확인/다음)와 동일하게 작동합니다">
-        <div class="remote-scroll-top">
-          <span id="remProgressLabel">⚔️ 빈칸 #1 / 1</span>
-          <span id="remSecLabel">[소속 목차]</span>
-        </div>
-        <div id="remTargetText" class="remote-scroll-target">초성/정답 표시</div>
-      </div>
-
-      <button id="remSpaceMainBtn" class="remote-space-btn" onclick="remoteTriggerMainSpaceAction()">
-        <span class="sg-ico sm s-pins c-02"></span>
-        <span id="remSpaceBtnText">Space — 정답 확인 / 해금</span>
-      </button>
-
-      <div id="remSamgukGradeRow" class="remote-grade-grid">
-        <button class="remote-g-btn grade-again" onclick="gradeAnkiTarget('again')">1. 다시</button>
-        <button class="remote-g-btn grade-hard" onclick="gradeAnkiTarget('hard')">2. 어려움</button>
-        <button class="remote-g-btn grade-good" onclick="gradeAnkiTarget('good')">3. 알맞음</button>
-        <button class="remote-g-btn grade-easy" onclick="gradeAnkiTarget('easy')">4. 졸업</button>
-      </div>
-
-      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:5px;">
-        <button class="remote-btn" onclick="remoteMovePrevTarget()" title="이전 빈칸/거점 (◀)">◀ 이전</button>
-        <button class="remote-btn" onclick="remoteMoveNextTarget()" title="다음 빈칸/거점 (▶)">다음 ▶</button>
-        <button class="remote-btn" onclick="undoLastAnkiAction()" title="직전 판정 취소 (Ctrl+Z)">↩️ 취소</button>
-        <button class="remote-btn" onclick="scrollToCurrentClozeInSubnote()" title="현재 빈칸 원문 위치로 스크롤">🎯 원문위치</button>
-      </div>
-
-      <div class="remote-step-grid">
-        <button id="remStep0" class="remote-btn active" onclick="setProgressiveStep(0)" title="Step 0: 원문통독">Step 0</button>
-        <button id="remStep1" class="remote-btn" onclick="setProgressiveStep(1)" title="Step 1: 대제목·목차 가리기">1.목차</button>
-        <button id="remStep2" class="remote-btn" onclick="setProgressiveStep(2)" title="Step 2: 파란 핵심단어 요약표 가리기">2.파란</button>
-        <button id="remStep3" class="remote-btn" onclick="setProgressiveStep(3)" title="Step 3: 본문 빨간글씨·도면 가리기">3.빨간</button>
-        <button id="remStep4" class="remote-btn" onclick="setProgressiveStep(4)" title="Step 4: 100% 모두 가리기">4.100%</button>
-      </div>
-
-      <div id="remToolRow5" class="remote-step-grid">
-        <button id="remBtnPeekAll" class="remote-btn" style="padding:5px 3px; font-size:11.5px; white-space:nowrap;" onclick="togglePeekAllCloze()">
-          <span>👁️ 전체열기</span>
-        </button>
-        <button id="remBtnHintToggle" class="remote-btn active" style="padding:5px 3px; font-size:11.5px; white-space:nowrap;" onclick="toggleClozeHintMode()">
-          <span id="remHintBtnText">🔓 가림OFF</span>
-        </button>
-        <button id="remBtnSubnoteEdit" class="remote-btn" style="padding:5px 3px; font-size:11.5px; white-space:nowrap;" onclick="toggleInlineSubnoteEdit()" title="서브노트 원문 직접 수정 ON/OFF">
-          <span id="remSubnoteEditText">✏️ 노트수정</span>
-        </button>
-        <button id="remBtnDiagEdit" class="remote-btn" style="padding:5px 3px; font-size:11.5px; white-space:nowrap;" onclick="toggleDiagramMaskEditMode()" title="노트수정 ON 상태에서 도면 가림막을 편집합니다">
-          <span id="remDiagEditText">📐 도면편집</span>
-        </button>
-      </div>
-
-      <div class="remote-tts-grid">
-        <button class="remote-btn" onclick="if(window.speakFullSubnote) speakFullSubnote()">🔊 전체낭독</button>
-        <button class="remote-btn" onclick="if(window.speakPrevStepLine) speakPrevStepLine()">◀ 이전(F7)</button>
-        <button class="remote-btn" onclick="if(window.speakNextStepLine) speakNextStepLine()">다음(F8) ▶</button>
-        <button class="remote-btn" onclick="stopAllTtsSpeech()">⏹ 정지</button>
-      </div>
-
-      <div class="remote-tts-grid">
-        <button id="remBtnAreaMode" class="remote-btn" onclick="toggleSgAreaSelectMode()">🎯 영역선택</button>
-        <button class="remote-btn" onclick="speakSgSelectedAreas()">▶️ 읽기(<b id="remAreaCount">0</b>)</button>
-        <button id="remBtnAreaLoop" class="remote-btn" onclick="toggleSgAreaLoop()">🔁 반복</button>
-        <button class="remote-btn" onclick="clearSgSelectedAreas()">✖ 선택해제</button>
-      </div>
-
-      <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:5px;">
-        <button class="remote-btn" onclick="moveTopic(-1)">◀ 이전토픽</button>
-        <button class="remote-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆️ 맨위로</button>
-        <button class="remote-btn" onclick="moveTopic(1)">다음토픽 ▶</button>
-      </div>
+<!-- 2. 기억의 궁전 뷰어 (궁전 데이터가 있는 토픽이거나 궁전 버튼 클릭 시 표시) -->
+<section id="mPalaceCard" class="m-palace-card">
+  <div class="m-palace-top">
+    <span id="mPalaceTitle">🏛️ 기억의 궁전</span>
+    <div style="display:flex; gap:5px;">
+      <button type="button" class="m-icon-btn" style="height:26px; font-size:11px;" onclick="resetPalaceTour()">🔄 처음부터</button>
+      <button type="button" class="m-icon-btn" style="height:26px; font-size:11px;" onclick="speakAllPalacePins()">🔊 궁전전체듣기</button>
     </div>
   </div>
-</aside>
 
-<!-- 모달 4종 -->
-<div id="topicManagerModal" class="modal-backdrop">
-  <div class="modal-card">
-    <div class="modal-header">
-      <span>➕ 1,000개 확장형 데이터 투입 · 토픽 편집/삭제 & 파일 저장소</span>
-      <button class="btn-gold" onclick="closeModal('topicManagerModal')">✖ 닫기</button>
-    </div>
-    <div class="modal-body">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; background:#f0fdfa; border:1.5px solid #5eead4; border-radius:14px; padding:10px 14px; margin-bottom:10px;">
-        <div style="font-size:13px; font-weight:900; color:#0f766e;">
-          📌 현재 선택 토픽: <span id="lblCurrentManageTopic" style="color:#0f172a;">-</span>
-        </div>
-        <div style="display:flex; gap:6px; flex-wrap:wrap;">
-          <button type="button" class="btn-gold" onclick="loadCurrentTopicJsonIntoEditor()" title="현재 화면의 토픽 JSON을 아래 창에 불러와 수정합니다">📋 현재 토픽 JSON 불러오기</button>
-          <button type="button" class="btn-gold" onclick="revertUnsavedInjectedTopics()" title="파일로 저장하기 전에 임시로 투입했던 토픽들을 모두 취소합니다">🧹 임시 투입분 취소</button>
-          <button type="button" class="btn-gold crimson-active" onclick="deleteCurrentSelectedTopic()" title="현재 보고 있는 토픽을 목록에서 삭제합니다">🗑️ 현재 토픽 삭제</button>
-        </div>
-      </div>
+  <div class="m-palace-viewport">
+    <img id="mPalaceImg" class="m-palace-img" alt="기억의 궁전 배경">
+    <svg id="mPalaceSvg" class="m-palace-svg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+    <div id="mPalacePins"></div>
+  </div>
 
-      <p style="font-size:12.5px; color:#475569; margin:0 0 8px 0; line-height:1.5;">
-        최초 1회만 <b>[sameng 폴더 연결]</b>을 해두면, 이후부터는 아래 <b>[🚀 데이터 투입 및 자동 영구저장]</b> 버튼 하나로 화면 반영과 <b>topics_data.js + palaces_data.js</b> 두 파일 분리·병합 저장이 동시에 완료됩니다.
-      </p>
-      <textarea id="injectJsonTextarea" rows="10" style="width:100%; background:#f8fafc; color:#0f172a; border:1.5px solid #cbd5e1; border-radius:12px; padding:10px; font-family:monospace; font-size:12.5px;" placeholder='{"id":"alarm_41","category":"경보설비","title":"■ 열전대식 차동식 분포형 감지기","summaryHtml":"..."}'></textarea>
-      <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
-        <button class="btn-gold teal-active" style="flex:1; justify-content:center; height:40px; font-size:14px;" onclick="injectTopicJsonNow()">
-          🚀 데이터 투입 및 자동 영구저장 (topics_data.js + palaces_data.js 동시 저장)
-        </button>
-      </div>
+  <div class="m-palace-console">
+    <div id="mPalaceRoom" class="m-palace-room">거점 준비 중</div>
+    <div id="mPalaceStory" class="m-palace-story">핀을 터치하거나 아래 [정답확인 / 다음거점] 버튼을 눌러 학습하세요.</div>
+    <div id="mPalaceAnswer" class="m-palace-answer" onclick="stepPalacePinAction()">🔒 터치하여 정답 확인 & 음성 듣기</div>
+    <div class="m-palace-nav">
+      <button type="button" class="m-icon-btn" onclick="movePalacePin(-1)">◀ 이전 핀</button>
+      <button type="button" class="m-icon-btn active" onclick="stepPalacePinAction()">🎯 정답확인 / 다음 핀 ▶</button>
+      <button type="button" class="m-icon-btn" onclick="movePalacePin(1)">다음 핀 ▶</button>
     </div>
   </div>
-</div>
+</section>
 
-<div id="historyModal" class="modal-backdrop">
-  <div class="modal-card">
-    <div class="modal-header">
-      <span>📅 에빙하우스 복습 주기 (1·3·7·14·30일) & 내 학습기록 백업/복원</span>
-      <div style="display:flex; gap:6px; align-items:center;">
-        <button class="btn-gold teal-active" onclick="exportUserStudyProgressJson()" title="거머리, 졸업카드, 포스트잇, 회독기록, 발음사전을 파일로 백업">📤 내 학습기록 백업(.json)</button>
-        <button class="btn-gold" onclick="document.getElementById('importProgressFileInput').click()" title="백업해둔 학습기록 JSON 파일 불러오기">📥 복원</button>
-        <input type="file" id="importProgressFileInput" accept=".json" style="display:none;" onchange="importUserStudyProgressJson(event)">
-        <button class="btn-gold" onclick="closeModal('historyModal')">✖ 닫기</button>
-      </div>
-    </div>
-    <div class="modal-body" id="historyModalBody"></div>
-  </div>
-</div>
-
-<div id="mnemonicModal" class="modal-backdrop">
-  <div class="modal-card">
-    <div class="modal-header">
-      <span>🧠 전 과목 주황색/파란색 암기 두문자 총정리 족보</span>
-      <button class="btn-gold" onclick="closeModal('mnemonicModal')">✖ 닫기</button>
-    </div>
-    <div class="modal-body" id="mnemonicModalBody"></div>
-  </div>
-</div>
-
-<div id="pronunModal" class="modal-backdrop">
-  <div class="modal-card">
-    <div class="modal-header">
-      <span>🗣️ Edge TTS 발음 교정 사전 (원래단어 = 읽을발음)</span>
-      <button class="btn-gold" onclick="closeModal('pronunModal')">✖ 닫기</button>
-    </div>
-    <div class="modal-body">
-      <textarea id="pronunDictTextarea" rows="12" style="width:100%; background:#f8fafc; color:#0f172a; border:1.5px solid #cbd5e1; border-radius:12px; padding:10px; font-family:monospace; font-size:13px;"></textarea>
-      <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
-        <button class="btn-gold active" onclick="if(window.savePronunDictFromModal) savePronunDictFromModal()">💾 사전 저장 적용</button>
-      </div>
+<!-- 3. 서브노트 본문 카드 -->
+<main class="m-subnote-card">
+  <div class="m-subnote-header">
+    <div id="mTopicTitle" class="m-topic-title">토픽 로딩 중...</div>
+    <div style="display:flex; gap:4px; flex-shrink:0;">
+      <button type="button" class="m-icon-btn" style="height:28px; font-size:11.5px; padding:0 8px;" onclick="adjustFontSize(-1)">가-</button>
+      <button type="button" class="m-icon-btn" style="height:28px; font-size:11.5px; padding:0 8px;" onclick="adjustFontSize(1)">가+</button>
     </div>
   </div>
-</div>
 
+  <div id="mSubnoteBox"></div>
+</main>
+
+<div id="mToast" class="m-toast">⏬ 읽기 시작할 문단이나 표 칸을 터치하세요!</div>
+
+<!-- 4. 하단 엄지손가락 컨트롤 독 바 -->
+<nav class="m-bottom-dock">
+  <button type="button" id="btnDockPeek" class="m-dock-btn" onclick="togglePeekAll()">
+    <span>🔓 전체열기</span>
+    <small id="lblMaskCount" style="font-size:10px; color:#64748b;">0개 빈칸</small>
+  </button>
+
+  <button type="button" id="btnDockFromHere" class="m-dock-btn" onclick="togglePickStartLineMode()">
+    <span>⏬ 여기부터</span>
+    <small style="font-size:10px; color:#64748b;">터치한줄~끝</small>
+  </button>
+
+  <button type="button" id="btnDockMainStep" class="m-dock-btn primary" onclick="handleMainStepButton()">
+    <span id="lblMainStepBtn">🎯 다음 빈칸 열기</span>
+    <small id="lblMainStepSub" style="font-size:10px; opacity:0.85;">순차 인출 + 음성</small>
+  </button>
+
+  <button type="button" id="btnDockSpeakAll" class="m-dock-btn" onclick="toggleFullSubnoteSpeech()">
+    <span id="lblSpeakAllBtn">🔊 전체듣기</span>
+    <small style="font-size:10px; color:#64748b;">처음~끝 낭독</small>
+  </button>
+
+  <button type="button" id="btnDockRate" class="m-dock-btn" onclick="cycleTtsRate()">
+    <span id="lblTtsRate">🏃 1.1x</span>
+    <small style="font-size:10px; color:#64748b;">읽기배속</small>
+  </button>
+</nav>
+
+<!-- 기존 PC용 데이터 파일 2개 그대로 연결 -->
 <script src="topics_data.js"></script>
 <script src="palaces_data.js"></script>
-<script src="engine_tts.js"></script>
-<script src="samguk_anki_engine.js"></script>
+
+<script>
+/* =========================================================================
+   📱 소방기술사 모바일 전용 다이어트 코어 엔진
+   ========================================================================= */
+const PRONUN_DICT = {
+  "KCL": "케이씨엘", "KVL": "케이브이엘", "NTC": "엔티씨", "PTC": "피티씨",
+  "CTR": "씨티알", "SCR": "에스씨알", "LED": "엘이디", "NFPC": "엔에프피씨",
+  "NFTC": "엔에프티씨", "NFPA": "엔에프피에이", "ASET": "에이셋", "RSET": "알셋",
+  "FEC": "에프이씨", "CO₂": "씨오투", "CO2": "씨오투", "CO": "씨오",
+  "O₂": "오투", "O2": "오투", "N₂": "엔투", "N2": "엔투",
+  "H₂O": "에이치투오", "H2O": "에이치투오", "SO₂": "에스오투", "NO₂": "엔오투",
+  "HCl": "에이치씨엘", "HCN": "에이치씨엔", "NH₃": "엔에이치쓰리", "CF₃Br": "씨에프쓰리비알",
+  "Td": "티디", "Ta": "티에이", "To": "티오", "Ti": "티아이", "Te": "티이",
+  "P형": "피형", "R형": "알형", "Al판": "알루미늄판", "Al": "알루미늄",
+  "Leak홀": "리크홀", "Leak": "리크", "dT/dt": "디티 오버 디티",
+  "10℃/min": "10도 퍼 민", "15℃/min": "15도 퍼 민", "20℃/min": "20도 퍼 민",
+  "℃/min": "섭씨 도 퍼 민", "kW/m²": "킬로와트 퍼 제곱미터", "kW/m2": "킬로와트 퍼 제곱미터",
+  "Wb/m²": "웨버 퍼 제곱미터", "Wb/m2": "웨버 퍼 제곱미터",
+  "kg/cm²": "킬로그램 퍼 제곱센티미터", "N/m²": "뉴턴 퍼 제곱미터",
+  "m³/min": "세제곱미터 퍼 민", "L/min": "리터 퍼 민", "m/s": "미터 퍼 세크",
+  "m²": "제곱미터", "m³": "세제곱미터", "cm²": "제곱센티미터",
+  "sinθ": "사인 세타", "cosθ": "코사인 세타", "tanθ": "탄젠트 세타",
+  "R1": "알 원", "R2": "알 투", "R3": "알 쓰리", "R4": "알 포",
+  "I1": "아이 원", "I2": "아이 투", "I3": "아이 쓰리", "I4": "아이 포",
+  "V_T": "브이 티", "VT": "브이 티", "V1": "브이 원", "V2": "브이 투", "V3": "브이 쓰리",
+  "MPa": "메가파스칼", "kPa": "킬로파스칼", "kW": "킬로와트", "kVA": "킬로볼트암페어",
+  "mA": "밀리암페어", "ppm": "피피엠", "㏀": "킬로옴", "Ω": "옴",
+  "㎡": "제곱미터", "㎥": "세제곱미터", "㎠": "제곱센티미터", "℃": "도",
+  "≠": " 같지 않다, ", "≈": " 거의 같다, ", "≒": " 거의 같다, ",
+  "≤": " 이하, ", "≥": " 이상, ", "∑": "시그마 ", "Σ": "시그마 "
+};
+
+let allTopics = [];
+let filteredTopicIndices = [];
+let currentTopicIdx = 0;
+let currentStep = 2;
+let clozeList = [];
+let currentClozeCursor = 0;
+
+let currentPalace = null;
+let currentPinIdx = 0;
+let currentPinRevealed = false;
+let clearedPinSet = new Set();
+
+let ttsRate = parseFloat(localStorage.getItem('m_tts_rate')) || 1.1;
+let isSpeakingQueue = false;
+let speechTimer = null;
+let pickFromHereMode = false;
+let subnoteFontSize = parseFloat(localStorage.getItem('m_font_size')) || 15.5;
+
+window._activeUtterances = [];
+
+/* 1. 부팅 초기화 */
+window.addEventListener('DOMContentLoaded', () => {
+  allTopics = window.STUDY_TOPICS || [];
+  window.MEMORY_PALACES = window.MEMORY_PALACES || {};
+
+  // 토픽 내부에 내장된 memoryPalace 추출
+  allTopics.forEach(t => {
+    if (t && t.id && t.memoryPalace && Array.isArray(t.memoryPalace.pins) && t.memoryPalace.pins.length > 0) {
+      if (!window.MEMORY_PALACES[t.id]) {
+        window.MEMORY_PALACES[t.id] = t.memoryPalace;
+      }
+    }
+  });
+
+  document.documentElement.style.setProperty('--subnote-size', subnoteFontSize + 'px');
+  updateRateButtonUI();
+  initCategorySelector();
+
+  const savedIdx = parseInt(localStorage.getItem('m_last_topic_idx'), 10) || 0;
+  loadTopic(Math.max(0, Math.min(allTopics.length - 1, savedIdx)));
+
+  // 서브노트에서 [⏬ 여기부터] 터치 이벤트 바인딩
+  const box = document.getElementById('mSubnoteBox');
+  box.addEventListener('click', (e) => {
+    if (!pickFromHereMode) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setPickStartLineMode(false);
+    startReadingFromClickedElement(e.target);
+  }, true);
+});
+
+/* 2. 과목 & 토픽 네비게이션 */
+function initCategorySelector() {
+  const catSel = document.getElementById('mCategorySelect');
+  const cats = Array.from(new Set(allTopics.map(t => t.category || '기타')));
+  catSel.innerHTML = `<option value="ALL">전체(${allTopics.length})</option>`;
+  cats.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c;
+    opt.textContent = c;
+    catSel.appendChild(opt);
+  });
+  populateTopicSelector('ALL');
+}
+
+function onCategoryChange() {
+  const cat = document.getElementById('mCategorySelect').value;
+  populateTopicSelector(cat);
+  if (filteredTopicIndices.length > 0) {
+    loadTopic(filteredTopicIndices[0]);
+  }
+}
+
+function populateTopicSelector(cat) {
+  const sel = document.getElementById('mTopicSelect');
+  sel.innerHTML = '';
+  filteredTopicIndices = [];
+
+  allTopics.forEach((t, idx) => {
+    if (cat !== 'ALL' && (t.category || '기타') !== cat) return;
+    filteredTopicIndices.push(idx);
+    const hasP = Boolean(window.MEMORY_PALACES[t.id]?.pins?.length);
+    const opt = document.createElement('option');
+    opt.value = idx;
+    opt.textContent = `${idx + 1}. ${hasP ? '🏛️ ' : ''}${(t.title || '').replace(/^■\s*/, '')}`;
+    sel.appendChild(opt);
+  });
+}
+
+function moveTopic(delta) {
+  if (!filteredTopicIndices.length) return;
+  const pos = filteredTopicIndices.indexOf(currentTopicIdx);
+  const nextPos = pos >= 0
+    ? (pos + delta + filteredTopicIndices.length) % filteredTopicIndices.length
+    : 0;
+  loadTopic(filteredTopicIndices[nextPos]);
+}
+
+function loadTopic(idx) {
+  if (!allTopics.length) return;
+  stopSpeech();
+  currentTopicIdx = Math.max(0, Math.min(allTopics.length - 1, idx));
+  localStorage.setItem('m_last_topic_idx', String(currentTopicIdx));
+
+  const sel = document.getElementById('mTopicSelect');
+  if (sel) sel.value = String(currentTopicIdx);
+
+  const topic = allTopics[currentTopicIdx];
+  document.getElementById('mTopicTitle').textContent = topic.title || '';
+
+  initPalaceForTopic(topic);
+  renderSubnoteWithStep(currentStep);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* 3. 기억의 궁전 모바일 뷰어 */
+function initPalaceForTopic(topic) {
+  const pData = window.MEMORY_PALACES[topic.id];
+  const card = document.getElementById('mPalaceCard');
+  const btnToggle = document.getElementById('btnPalaceToggle');
+
+  if (pData && Array.isArray(pData.pins) && pData.pins.length > 0) {
+    currentPalace = pData;
+    currentPinIdx = 0;
+    currentPinRevealed = false;
+    clearedPinSet.clear();
+
+    card.classList.add('open');
+    btnToggle.classList.add('active');
+    btnToggle.textContent = `🏛️궁전(${pData.pins.length})`;
+    document.getElementById('mPalaceTitle').textContent = `🏛️ 기억의 궁전 (${pData.pins.length}거점)`;
+
+    loadPalaceImageWithFallback(pData, topic);
+    renderPalacePins();
+    updatePalaceConsoleUI();
+  } else {
+    currentPalace = null;
+    card.classList.remove('open');
+    btnToggle.classList.remove('active');
+    btnToggle.textContent = '🏛️궁전없음';
+  }
+}
+
+function togglePalaceCard() {
+  if (!currentPalace) {
+    alert('이 토픽에는 등록된 기억의 궁전 데이터가 없습니다.');
+    return;
+  }
+  const card = document.getElementById('mPalaceCard');
+  const btn = document.getElementById('btnPalaceToggle');
+  const isOpen = card.classList.toggle('open');
+  btn.classList.toggle('active', isOpen);
+}
+
+function loadPalaceImageWithFallback(pData, topic) {
+  const img = document.getElementById('mPalaceImg');
+  const rawFile = (pData.imageFile || topic.imageFile || 'pl1.jpg').trim();
+  const baseName = rawFile.replace(/\.(png|jpg|jpeg|webp)$/i, '');
+
+  const candidates = [
+    `samguk_library/${rawFile}`,
+    `samguk_library/${baseName}.jpg`,
+    `samguk_library/${baseName}.png`,
+    rawFile,
+    `${baseName}.jpg`,
+    `${baseName}.png`
+  ];
+  if (pData.fallbackUrl) candidates.push(pData.fallbackUrl);
+  if (topic.fallbackUrl) candidates.push(topic.fallbackUrl);
+
+  let tryIdx = 0;
+  img.onerror = () => {
+    tryIdx++;
+    if (tryIdx < candidates.length) {
+      img.src = candidates[tryIdx];
+    }
+  };
+  img.src = candidates[0];
+}
+
+function renderPalacePins() {
+  if (!currentPalace) return;
+  const pinsWrap = document.getElementById('mPalacePins');
+  const svg = document.getElementById('mPalaceSvg');
+  pinsWrap.innerHTML = '';
+  svg.innerHTML = '';
+
+  const pins = currentPalace.pins || [];
+
+  // 경로 점선 그리기
+  if (pins.length > 1) {
+    const pts = pins.map(p => `${p.x},${p.y}`).join(' ');
+    const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+    poly.setAttribute('points', pts);
+    poly.setAttribute('fill', 'none');
+    poly.setAttribute('stroke', 'rgba(253, 224, 71, 0.85)');
+    poly.setAttribute('stroke-width', '0.7');
+    poly.setAttribute('stroke-dasharray', '1.8, 1.2');
+    svg.appendChild(poly);
+  }
+
+  pins.forEach((pin, idx) => {
+    const isCur = (idx === currentPinIdx);
+    const isClr = clearedPinSet.has(idx);
+    const el = document.createElement('div');
+    el.className = 'm-pin' + (isCur ? ' current' : '') + (isClr ? ' cleared' : '');
+    el.style.left = `${pin.x}%`;
+    el.style.top = `${pin.y}%`;
+    el.textContent = pin.num || (idx + 1);
+
+    if (isClr || (isCur && currentPinRevealed)) {
+      const tag = document.createElement('div');
+      tag.className = 'm-pin-tag';
+      tag.textContent = (pin.answer || '').slice(0, 14);
+      el.appendChild(tag);
+    }
+
+    el.onclick = (e) => {
+      e.stopPropagation();
+      currentPinIdx = idx;
+      currentPinRevealed = true;
+      clearedPinSet.add(idx);
+      renderPalacePins();
+      updatePalaceConsoleUI();
+      speakTextNow(`${pin.answer || ''}. ${pin.storyHint || ''}`);
+    };
+
+    pinsWrap.appendChild(el);
+  });
+}
+
+function updatePalaceConsoleUI() {
+  if (!currentPalace || !currentPalace.pins.length) return;
+  const pins = currentPalace.pins;
+  const pin = pins[currentPinIdx] || pins[0];
+
+  document.getElementById('mPalaceRoom').textContent =
+    `📍 거점 #${pin.num || (currentPinIdx + 1)} / ${pins.length} — ${pin.room || ''}`;
+  document.getElementById('mPalaceStory').textContent =
+    pin.storyHint || '등록된 스토리 힌트가 없습니다.';
+
+  const ansBox = document.getElementById('mPalaceAnswer');
+  if (currentPinRevealed || clearedPinSet.has(currentPinIdx)) {
+    ansBox.textContent = `🎯 ${pin.answer || ''}`;
+    ansBox.style.background = 'linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%)';
+  } else {
+    ansBox.textContent = `🔒 터치하여 거점 #${pin.num || (currentPinIdx + 1)} 정답 확인 & 듣기`;
+    ansBox.style.background = 'linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%)';
+  }
+}
+
+function stepPalacePinAction() {
+  if (!currentPalace || !currentPalace.pins.length) return;
+  const pins = currentPalace.pins;
+  const pin = pins[currentPinIdx];
+
+  if (!currentPinRevealed) {
+    currentPinRevealed = true;
+    clearedPinSet.add(currentPinIdx);
+    renderPalacePins();
+    updatePalaceConsoleUI();
+    speakTextNow(`${pin.answer || ''}. ${pin.storyHint || ''}`);
+  } else {
+    currentPinIdx = (currentPinIdx + 1) % pins.length;
+    currentPinRevealed = true;
+    clearedPinSet.add(currentPinIdx);
+    const nextPin = pins[currentPinIdx];
+    renderPalacePins();
+    updatePalaceConsoleUI();
+    speakTextNow(`${nextPin.answer || ''}. ${nextPin.storyHint || ''}`);
+  }
+}
+
+function movePalacePin(delta) {
+  if (!currentPalace || !currentPalace.pins.length) return;
+  const len = currentPalace.pins.length;
+  currentPinIdx = (currentPinIdx + delta + len) % len;
+  currentPinRevealed = false;
+  renderPalacePins();
+  updatePalaceConsoleUI();
+}
+
+function resetPalaceTour() {
+  if (!currentPalace) return;
+  stopSpeech();
+  currentPinIdx = 0;
+  currentPinRevealed = false;
+  clearedPinSet.clear();
+  renderPalacePins();
+  updatePalaceConsoleUI();
+}
+
+function speakAllPalacePins() {
+  if (!currentPalace || !currentPalace.pins.length) return;
+  const units = currentPalace.pins.map((p, idx) => ({
+    text: `${idx + 1}번 거점. ${p.answer || ''}. ${p.storyHint || ''}`,
+    onStart: () => {
+      currentPinIdx = idx;
+      currentPinRevealed = true;
+      clearedPinSet.add(idx);
+      renderPalacePins();
+      updatePalaceConsoleUI();
+    }
+  }));
+  speakUnitListSequentially(units);
+}
+
+/* 4. 서브노트 렌더링 & Step 0 ~ 4 가림막 생성 */
+function setStep(step) {
+  stopSpeech();
+  currentStep = step;
+  for (let i = 0; i <= 4; i++) {
+    document.getElementById('mStep' + i)?.classList.toggle('active', i === step);
+  }
+  document.getElementById('mSubnoteBox').classList.remove('peek-all-mode');
+  document.getElementById('btnDockPeek').classList.remove('active');
+  renderSubnoteWithStep(step);
+}
+
+function renderSubnoteWithStep(step) {
+  const topic = allTopics[currentTopicIdx];
+  const box = document.getElementById('mSubnoteBox');
+  if (!topic || !box) return;
+
+  box.innerHTML = topic.summaryHtml || '<p>원문 데이터가 없습니다.</p>';
+  clozeList = [];
+  currentClozeCursor = 0;
+
+  if (step === 0) {
+    updateBottomMaskStatus();
+    return;
+  }
+
+  let seq = 0;
+  const nextId = () => `m_cloze_${++seq}`;
+
+  if (step === 1) {
+    maskHeadings(box, nextId);
+  } else if (step === 2) {
+    maskHeadings(box, nextId);
+    maskColoredSpans(box, 2, nextId);
+  } else if (step === 3) {
+    maskDiagrams(box, nextId);
+    maskHeadings(box, nextId);
+    maskColoredSpans(box, 3, nextId);
+  } else if (step === 4) {
+    maskDiagrams(box, nextId);
+    maskHeadings(box, nextId);
+    maskColoredSpans(box, 3, nextId);
+    maskRemainingLinesForStep4(box, nextId);
+  }
+
+  highlightCurrentClozeTarget();
+  updateBottomMaskStatus();
+}
+
+function maskHeadings(box, nextId) {
+  const blocks = Array.from(box.querySelectorAll('div, p, td'));
+  blocks.forEach(blk => {
+    if (blk.closest('svg, .cloze-diagram-wrap, .cloze-mask, th')) return;
+    if (blk.querySelector('div, p, table, svg')) return;
+
+    const txt = (blk.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!txt || /^■/.test(txt)) return;
+
+    const m = txt.match(/^([0-9]+\.\s*|\([0-9]+\)\s+)(.+)$/);
+    if (m && txt.length <= 30 && !txt.includes('=') && !txt.includes(':')) {
+      const prefix = m[1];
+      const ans = m[2].trim();
+      blk.innerHTML = `<span style="font-weight:800;">${prefix}</span>`;
+      const sp = document.createElement('span');
+      sp.textContent = ans;
+      blk.appendChild(sp);
+      replaceWithClozeSpan(sp, ans, nextId());
+    }
+  });
+}
+
+function maskColoredSpans(box, step, nextId) {
+  const els = Array.from(box.querySelectorAll('span[style*="color"], td[style*="color"], b[style*="color"]'));
+  els.forEach(el => {
+    if (el.closest('svg, .cloze-diagram-wrap, .cloze-mask')) return;
+    if (el.querySelector('svg, table, .cloze-mask')) return;
+
+    const st = (el.getAttribute('style') || '').toLowerCase();
+    const isBlue = st.includes('#1d4ed8') || st.includes('29, 78, 216') || st.includes('#ea580c');
+    const isRed  = st.includes('#dc2626') || st.includes('220, 38, 38');
+
+    if (step === 2 && !isBlue) return;
+    if (step === 3 && !isBlue && !isRed) return;
+
+    const txt = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!txt || txt === '-' || txt.length > 110) return;
+
+    if (el.tagName === 'TD') {
+      const inner = document.createElement('span');
+      inner.innerHTML = el.innerHTML;
+      el.innerHTML = '';
+      el.appendChild(inner);
+      replaceWithClozeSpan(inner, txt, nextId());
+    } else {
+      replaceWithClozeSpan(el, txt, nextId());
+    }
+  });
+}
+
+function maskDiagrams(box, nextId) {
+  const svgs = Array.from(box.querySelectorAll('svg'));
+  svgs.forEach((svg, idx) => {
+    if (svg.closest('.cloze-diagram-wrap')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'cloze-diagram-wrap';
+    svg.parentNode.insertBefore(wrap, svg);
+    wrap.appendChild(svg);
+
+    const ttsDesc = svg.dataset.tts || `개념도 및 회로도 #${idx + 1}`;
+    const mask = document.createElement('div');
+    mask.className = 'cloze-diagram-mask';
+    mask.innerHTML = `📐 도면 빈칸 #${idx + 1}<br><small style="font-weight:700;">(터치하면 도면 공개 및 설명 낭독)</small>`;
+
+    const itemObj = { id: nextId(), el: mask, wrapEl: wrap, isDiagram: true, answer: ttsDesc };
+    mask.onclick = (e) => {
+      e.stopPropagation();
+      wrap.classList.add('revealed');
+      speakTextNow(ttsDesc);
+      updateBottomMaskStatus();
+    };
+
+    wrap.appendChild(mask);
+    clozeList.push(itemObj);
+  });
+}
+
+function maskRemainingLinesForStep4(box, nextId) {
+  const leaves = Array.from(box.querySelectorAll('div, p, td, li'));
+  leaves.forEach(blk => {
+    if (blk.closest('svg, .cloze-diagram-wrap, .cloze-mask, th')) return;
+    if (blk.querySelector('div, p, table, svg, .cloze-mask')) return;
+    const txt = (blk.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!txt || txt.length < 2 || /^■/.test(txt) || /^[0-9]+$/.test(txt)) return;
+
+    const sp = document.createElement('span');
+    sp.innerHTML = blk.innerHTML;
+    blk.innerHTML = '';
+    blk.appendChild(sp);
+    replaceWithClozeSpan(sp, txt, nextId());
+  });
+}
+
+function getChosungHint(str) {
+  const CHO = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+  let out = '';
+  for (let i = 0; i < str.length; i++) {
+    const code = str.charCodeAt(i) - 44032;
+    if (code >= 0 && code <= 11171) out += CHO[Math.floor(code / 588)];
+    else out += str[i];
+  }
+  return out.length > 18 ? out.slice(0, 18) + '..' : out;
+}
+
+function replaceWithClozeSpan(targetEl, answerText, id) {
+  const span = document.createElement('span');
+  span.className = 'cloze-mask';
+  span.dataset.origHtml = targetEl.innerHTML || answerText;
+  span.dataset.answer = answerText;
+  const hint = getChosungHint(answerText);
+  span.textContent = `🔒 ${hint}`;
+
+  const itemObj = { id, el: span, isDiagram: false, answer: answerText };
+
+  span.onclick = (e) => {
+    e.stopPropagation();
+    const isRev = span.classList.toggle('revealed');
+    if (isRev) {
+      span.innerHTML = span.dataset.origHtml;
+      speakTextNow(answerText);
+    } else {
+      span.textContent = `🔒 ${hint}`;
+    }
+    updateBottomMaskStatus();
+  };
+
+  targetEl.replaceWith(span);
+  clozeList.push(itemObj);
+}
+
+function isClozeRevealed(item) {
+  if (!item) return true;
+  return item.isDiagram
+    ? item.wrapEl.classList.contains('revealed')
+    : item.el.classList.contains('revealed');
+}
+
+function highlightCurrentClozeTarget() {
+  document.querySelectorAll('.current-target').forEach(el => el.classList.remove('current-target'));
+  const unrev = clozeList.find(item => !isClozeRevealed(item));
+  if (unrev && !unrev.isDiagram) {
+    unrev.el.classList.add('current-target');
+  }
+}
+
+function updateBottomMaskStatus() {
+  const remain = clozeList.filter(item => !isClozeRevealed(item)).length;
+  const lbl = document.getElementById('lblMaskCount');
+  if (lbl) lbl.textContent = `남은빈칸 ${remain}/${clozeList.length}`;
+  highlightCurrentClozeTarget();
+}
+
+function handleMainStepButton() {
+  // 1) 빈칸이 남아 있으면 다음 빈칸을 순서대로 열면서 읽어줌
+  const nextItem = clozeList.find(item => !isClozeRevealed(item));
+  if (nextItem) {
+    if (nextItem.isDiagram) {
+      nextItem.wrapEl.classList.add('revealed');
+      nextItem.wrapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      nextItem.el.classList.add('revealed');
+      nextItem.el.innerHTML = nextItem.el.dataset.origHtml;
+      nextItem.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    speakTextNow(nextItem.answer);
+    updateBottomMaskStatus();
+    return;
+  }
+
+  // 2) 빈칸이 모두 열려 있고 궁전이 열려 있으면 궁전 다음 핀 실행
+  if (currentPalace && document.getElementById('mPalaceCard').classList.contains('open')) {
+    stepPalacePinAction();
+    return;
+  }
+
+  // 3) 모든 빈칸을 다 열었으면 다음 Step으로 진급 제안
+  if (currentStep < 4) {
+    setStep(currentStep + 1);
+  } else {
+    setStep(2);
+  }
+}
+
+function togglePeekAll() {
+  const box = document.getElementById('mSubnoteBox');
+  const btn = document.getElementById('btnDockPeek');
+  const isPeek = box.classList.toggle('peek-all-mode');
+  btn.classList.toggle('active', isPeek);
+
+  clozeList.forEach(item => {
+    if (!item.isDiagram) {
+      if (isPeek || item.el.classList.contains('revealed')) {
+        item.el.innerHTML = item.el.dataset.origHtml;
+      } else {
+        item.el.textContent = `🔒 ${getChosungHint(item.answer)}`;
+      }
+    }
+  });
+}
+
+function adjustFontSize(delta) {
+  subnoteFontSize = Math.max(13, Math.min(22, subnoteFontSize + delta));
+  localStorage.setItem('m_font_size', String(subnoteFontSize));
+  document.documentElement.style.setProperty('--subnote-size', subnoteFontSize + 'px');
+}
+
+/* =========================================================================
+   🔊 5. 스마트폰 네이티브 TTS 엔진 (딜레이 제로 동기 발화)
+   ========================================================================= */
+function refineSpeechText(raw) {
+  if (!raw) return '';
+  let text = String(raw)
+    .replace(/🔒\s*[^\s]+/g, ' ')
+    .replace(/[「」『』《》〈〉■※○●◎◇◆□★☆]/g, ' ')
+    .replace(/\(\s*(\d+)\s*\)/g, ' $1, ')
+    .replace(/(\d+)\)\s*/g, ' $1, ');
+
+  const sortedKeys = Object.keys(PRONUN_DICT).sort((a, b) => b.length - a.length);
+  sortedKeys.forEach(k => {
+    const escaped = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (/^[A-Za-z0-9_]+$/.test(k)) {
+      text = text.replace(new RegExp(`(?<![A-Za-z])${escaped}(?![A-Za-z0-9])`, 'g'), PRONUN_DICT[k]);
+    } else {
+      text = text.replace(new RegExp(escaped, 'g'), PRONUN_DICT[k]);
+    }
+  });
+
+  text = text
+    .replace(/\s*\+\s*/g, ' 플러스 ')
+    .replace(/\s*=\s*/g, ' 은, ')
+    .replace(/\s*(?:→|➔|▶|▸|⇒)\s*/g, ', ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  return text;
+}
+
+function getMobileKoreanVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices() || [];
+  const koVoices = voices.filter(v => {
+    const l = (v.lang || '').toLowerCase();
+    const n = (v.name || '').toLowerCase();
+    return l.includes('ko') || n.includes('korean') || n.includes('한국어');
+  });
+  return koVoices.find(v => v.name.includes('Natural')) || koVoices[0] || null;
+}
+
+// 터치 이벤트 안에서 setTimeout 없이 즉시 호출하여 모바일 오디오 차단 100% 돌파
+function speakTextNow(rawText, onEndCallback) {
+  if (!('speechSynthesis' in window)) return;
+  stopSpeech();
+
+  const clean = refineSpeechText(rawText);
+  if (!clean) {
+    if (onEndCallback) onEndCallback();
+    return;
+  }
+
+  const u = new SpeechSynthesisUtterance(clean);
+  window._activeUtterances.push(u);
+  u.lang = 'ko-KR';
+  u.rate = ttsRate;
+
+  const koVoice = getMobileKoreanVoice();
+  if (koVoice) u.voice = koVoice;
+
+  u.onend = () => {
+    if (onEndCallback) onEndCallback();
+  };
+  u.onerror = () => {
+    if (onEndCallback) onEndCallback();
+  };
+
+  try {
+    window.speechSynthesis.resume();
+    window.speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+function stopSpeech() {
+  isSpeakingQueue = false;
+  if (speechTimer) {
+    clearTimeout(speechTimer);
+    speechTimer = null;
+  }
+  window._activeUtterances = [];
+  if ('speechSynthesis' in window) {
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+  }
+  document.querySelectorAll('.tts-reading-row').forEach(el => el.classList.remove('tts-reading-row'));
+  const btn = document.getElementById('btnDockSpeakAll');
+  const lbl = document.getElementById('lblSpeakAllBtn');
+  if (btn) btn.classList.remove('active');
+  if (lbl) lbl.textContent = '🔊 전체듣기';
+}
+
+function collectReadableRows() {
+  const box = document.getElementById('mSubnoteBox');
+  const nodes = Array.from(box.querySelectorAll('div, p, li, tr, svg'));
+  const units = [];
+
+  nodes.forEach(el => {
+    if (el.closest('.cloze-diagram-mask')) return;
+    if (el.tagName !== 'TR' && el.closest('tr')) return;
+    if (el.tagName === 'DIV' && el.querySelector('div:not(.cloze-diagram-mask), table, p, ul, ol')) return;
+
+    let txt = '';
+    if (el.tagName === 'SVG') {
+      txt = el.dataset.tts || '';
+    } else {
+      const clone = el.cloneNode(true);
+      clone.querySelectorAll('.cloze-diagram-mask, svg').forEach(x => x.remove());
+      clone.querySelectorAll('.cloze-mask').forEach(m => {
+        m.textContent = m.dataset.answer || '';
+      });
+      txt = (clone.innerText || clone.textContent || '').replace(/\s+/g, ' ').trim();
+    }
+
+    if (txt && txt.length >= 2) {
+      units.push({ el, text: txt });
+    }
+  });
+  return units;
+}
+
+function speakUnitListSequentially(units) {
+  if (!units.length || !('speechSynthesis' in window)) return;
+  stopSpeech();
+  isSpeakingQueue = true;
+
+  const btn = document.getElementById('btnDockSpeakAll');
+  const lbl = document.getElementById('lblSpeakAllBtn');
+  if (btn) btn.classList.add('active');
+  if (lbl) lbl.textContent = '⏹️ 정지';
+
+  let idx = 0;
+
+  const playNext = () => {
+    if (!isSpeakingQueue || idx >= units.length) {
+      stopSpeech();
+      return;
+    }
+    const item = units[idx++];
+    document.querySelectorAll('.tts-reading-row').forEach(x => x.classList.remove('tts-reading-row'));
+    if (item.el) {
+      item.el.classList.add('tts-reading-row');
+      item.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    if (item.onStart) item.onStart();
+
+    const clean = refineSpeechText(item.text);
+    if (!clean) {
+      playNext();
+      return;
+    }
+
+    const u = new SpeechSynthesisUtterance(clean);
+    window._activeUtterances.push(u);
+    u.lang = 'ko-KR';
+    u.rate = ttsRate;
+    const koVoice = getMobileKoreanVoice();
+    if (koVoice) u.voice = koVoice;
+
+    u.onend = () => {
+      if (!isSpeakingQueue) return;
+      speechTimer = setTimeout(playNext, 140);
+    };
+    u.onerror = () => {
+      if (!isSpeakingQueue) return;
+      speechTimer = setTimeout(playNext, 100);
+    };
+
+    try {
+      window.speechSynthesis.resume();
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  };
+
+  // 첫 문장은 터치 즉시 발화!
+  playNext();
+}
+
+function toggleFullSubnoteSpeech() {
+  if (isSpeakingQueue) {
+    stopSpeech();
+    return;
+  }
+  const units = collectReadableRows();
+  speakUnitListSequentially(units);
+}
+
+function setPickStartLineMode(on) {
+  pickFromHereMode = on;
+  document.getElementById('btnDockFromHere')?.classList.toggle('active', on);
+  document.getElementById('mToast')?.classList.toggle('show', on);
+}
+
+function togglePickStartLineMode() {
+  setPickStartLineMode(!pickFromHereMode);
+}
+
+function startReadingFromClickedElement(targetEl) {
+  const units = collectReadableRows();
+  if (!units.length) return;
+
+  let startIdx = 0;
+  for (let i = 0; i < units.length; i++) {
+    const uEl = units[i].el;
+    if (uEl === targetEl || uEl.contains(targetEl) || targetEl.contains(uEl)) {
+      startIdx = i;
+      break;
+    }
+  }
+  speakUnitListSequentially(units.slice(startIdx));
+}
+
+function cycleTtsRate() {
+  const steps = [1.0, 1.1, 1.25, 1.4, 1.6, 0.9];
+  const curIdx = steps.findIndex(s => Math.abs(s - ttsRate) < 0.04);
+  ttsRate = steps[(curIdx + 1) % steps.length];
+  localStorage.setItem('m_tts_rate', String(ttsRate));
+  updateRateButtonUI();
+}
+
+function updateRateButtonUI() {
+  const lbl = document.getElementById('lblTtsRate');
+  if (lbl) lbl.textContent = `🏃 ${ttsRate.toFixed(2).replace(/\.00$/, '.0').replace(/0$/, '')}x`;
+}
+</script>
 </body>
 </html>
