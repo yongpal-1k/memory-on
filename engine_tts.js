@@ -1,10 +1,9 @@
 /**
  * 🔊 삼국지 × 소방기술사 하이엔드 신경망 TTS 코어 엔진 (engine_tts.js)
- * - [원조 자연스러운 억양 복원] 내가 수동 편집한 사전 항목만 치환하고 나머지는 Edge 자연음성 본연의 호흡으로 낭독
- * - [수식 등호(=) 및 아래첨자(CO₂, O₂) 완벽 보호] 첨자/일반숫자 양방향 매칭 및 화학식·단위 기본 사전 탑재
- * - [테스트 듣기 '개요' 제거] 발음사전 테스트 시 뒤에 '개요'를 붙이지 않고 입력한 단어만 깔끔하게 단독 발음
- * - [중간 끊김 원천 차단] Chromium 가비지 컬렉션 방지(_activeSpeechUtterances) 및 낫표(「 」) 묵음 처리로 궁전 스토리 끝까지 낭독
- * - [여기부터 끝까지 읽기 & 5번 크리스탈 아크릴 리모컨 디자인] 완벽 통합본
+ * - [스마트폰 완벽 호환 패치 통합본]
+ *   1) 모바일 브라우저(iOS/Android) TTS 자동재생 차단(setTimeout) 즉시 해제 및 한국어 음성 완벽 매칭
+ *   2) 스마트폰에서 기억의 궁전 그림이 0px로 찌그러져 안 보이던 레이아웃 버그 완벽 해결 (상하 배치 전환)
+ *   3) 모바일 화면에서 거대 리모컨 자동 축소 및 손가락 터치 드래그 완벽 지원
  */
 
 let availableVoices = [];
@@ -14,6 +13,7 @@ let isContinuousReading = false;
 let activeChunkTimers = [];
 let pronunFilterMode = 'all';
 let pickStartLineOnceMode = false;
+let mobileAudioUnlocked = false;
 
 window._activeSpeechUtterances = [];
 
@@ -376,18 +376,14 @@ function refineForEdgeNaturalSpeech(rawText) {
     .replace(/\[\s*개념도\s*\/?\s*회로도\s*\]/g, ' ')
     .replace(/🔒|🩸|🎯|★|📐/g, ' ');
 
-  // 낫표(「 」, 『 』)를 먼저 공백으로 정리하여 「1. 개요」도 자연스럽게 매칭되도록 처리
   text = text.replace(/[「」『』《》〈〉]/g, ' ');
 
   text = text
     .replace(/\(\s*(\d+)\s*\)/g, ' $1, ')
     .replace(/(^|[\s\|\/—–,\.])(\d+)\)\s*/g, '$1 $2, ');
 
-  // 한 줄 안에 "1. 수식 2. 수식"이 이어질 때 2. 앞에 줄바꿈 딜레이 마커 삽입
   text = text.replace(/([^\s])\s+(?=[2-9]\.\s*[가-힣A-Za-z∑ΣIVR])/g, '$1 @@LINE_BREAK@@ ');
 
-  // ★ 핵심 해결: 발음사전 키에 아래첨자(CO₂)·위첨자(m²)가 있든 일반 숫자(CO2, m2)가 있든
-  // 양쪽 형태를 모두 사전에 확장 등록하여 아래첨자 변환 전·후 모두 100% 매칭되게 처리!
   const effectiveDict = Object.assign({}, userPronunDict);
   Object.keys(userPronunDict).forEach(origKey => {
     const normKey = normalizeSubSupDigits(origKey);
@@ -426,8 +422,7 @@ function refineForEdgeNaturalSpeech(rawText) {
           .join('\\s*');
         out = out.replace(new RegExp(flexPattern, 'g'), repVal);
       } else if (/^[A-Za-z0-9_₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹]+$/.test(k)) {
-        // 순수 영문/숫자/첨자 약어(CO2, CO, Td, Ta 등)는 다른 영단어(Required, Time 등) 내부 글자를 침범하지 않게 경계 보호
-        const reg = new RegExp(`(?<![A-Za-z])${escaped}(?![A-Za-z0-9₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸₉])`, 'g');
+        const reg = new RegExp(`(?<![A-Za-z])${escaped}(?![A-Za-z0-9₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹])`, 'g');
         out = out.replace(reg, repVal);
       } else {
         out = out.replace(new RegExp(escaped, 'g'), repVal);
@@ -436,9 +431,7 @@ function refineForEdgeNaturalSpeech(rawText) {
     return out;
   };
 
-  // 1차 패스: 원문 상태(CO₂, m² 등 첨자 유지 상태)에서 발음사전 최우선 치환
   text = applyDictPass(text);
-  // 남은 첨자들을 일반 숫자로 정규화한 뒤 2차 패스 수행
   text = normalizeSubSupDigits(text);
   text = applyDictPass(text);
 
@@ -503,7 +496,12 @@ function initEdgeTtsVoices() {
     const all = window.speechSynthesis.getVoices() || [];
     if (!all.length) return;
 
-    const koVoices = all.filter(v => (v.lang || '').toLowerCase().includes('ko'));
+    const koVoices = all.filter(v => {
+      const lang = (v.lang || '').toLowerCase();
+      const name = (v.name || '').toLowerCase();
+      return lang.includes('ko') || name.includes('korean') || name.includes('한국어');
+    });
+
     koVoices.sort((a, b) => {
       const aNat = (a.name.includes('Natural') || a.name.includes('Online')) ? 0 : 1;
       const bNat = (b.name.includes('Natural') || b.name.includes('Online')) ? 0 : 1;
@@ -560,17 +558,26 @@ window.initEdgeTtsVoices = initEdgeTtsVoices;
 function findMatchingSavedVoice(voicesList) {
   const list = voicesList || availableVoices || window.speechSynthesis.getVoices() || [];
   if (!list.length) return null;
+
+  const koOnly = list.filter(v => {
+    const lang = (v.lang || '').toLowerCase();
+    const name = (v.name || '').toLowerCase();
+    return lang.includes('ko') || name.includes('korean') || name.includes('한국어') || name.includes('유나') || name.includes('yuna');
+  });
+
   const sel = document.getElementById('ttsVoiceSelect');
   const targetUri = (sel && sel.value) || (window.state && window.state.selectedVoiceURI) || localStorage.getItem('maple_edge_voice_uri');
   if (targetUri) {
-    const matched = list.find(v => v.voiceURI === targetUri);
+    const matched = koOnly.find(v => v.voiceURI === targetUri);
     if (matched) return matched;
   }
-  return list.find(v => v.name.includes('SunHi') && v.name.includes('Natural'))
-      || list.find(v => v.name.includes('Hyunsu') && v.name.includes('Natural'))
-      || list.find(v => v.name.includes('InJoon') && v.name.includes('Natural'))
-      || list.find(v => (v.lang || '').toLowerCase().includes('ko') && v.name.includes('Natural'))
-      || list[0];
+
+  return koOnly.find(v => v.name.includes('SunHi') && v.name.includes('Natural'))
+      || koOnly.find(v => v.name.includes('Hyunsu') && v.name.includes('Natural'))
+      || koOnly.find(v => v.name.includes('InJoon') && v.name.includes('Natural'))
+      || koOnly.find(v => v.name.includes('Natural'))
+      || koOnly[0]
+      || null; // 한국어 보이스가 없으면 억지로 영어 보이스를 넣지 않고 null 반환(브라우저 기본 ko-KR 엔진 작동)
 }
 window.findMatchingSavedVoice = findMatchingSavedVoice;
 
@@ -590,6 +597,7 @@ function onTtsVoiceChange() {
 }
 window.onTtsVoiceChange = onTtsVoiceChange;
 
+// ★ 스마트폰 TTS 차단 해결 핵심: 첫 번째 문장은 setTimeout 없이 사용자 터치 즉시 동기 발화!
 function speakSentenceQueue(queueItems, onComplete) {
   if (!('speechSynthesis' in window) || !queueItems || !queueItems.length) {
     if (onComplete) onComplete();
@@ -597,7 +605,10 @@ function speakSentenceQueue(queueItems, onComplete) {
   }
   clearAllChunkTimers();
   window._activeSpeechUtterances = [];
-  window.speechSynthesis.cancel();
+  try {
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.resume();
+  } catch (e) {}
   isContinuousReading = true;
 
   const defaultPause = Number(ttsEngineConfig.basePauseMs ?? 120);
@@ -684,11 +695,15 @@ function speakSentenceQueue(queueItems, onComplete) {
       const tid = setTimeout(speakNext, 80);
       activeChunkTimers.push(tid);
     };
-    window.speechSynthesis.speak(u);
+
+    try {
+      window.speechSynthesis.resume();
+      window.speechSynthesis.speak(u);
+    } catch (err) {}
   };
 
-  const startTid = setTimeout(speakNext, 45);
-  activeChunkTimers.push(startTid);
+  // 모바일 오디오 차단을 피하기 위해 첫 문장은 setTimeout 없이 즉시 실행!
+  speakNext();
 }
 window.speakSentenceQueue = speakSentenceQueue;
 
@@ -1095,7 +1110,7 @@ function savePronunDictFromModal() {
 window.savePronunDictFromModal = savePronunDictFromModal;
 
 /* ============================================================================
-   ★ [⏬ 여기부터 끝까지 읽기] & 5번 크리스탈 아크릴 리모컨 디자인 ★
+   ★ [⏬ 여기부터 끝까지 읽기] & 5번 크리스탈 아크릴 리모컨 + 모바일 반응형 완벽 패치 ★
    ============================================================================ */
 function injectPremiumRemoteStyleAndSyncMenus() {
   const oldSt = document.getElementById('sgPremiumRemoteStyle');
@@ -1124,203 +1139,115 @@ function injectPremiumRemoteStyleAndSyncMenus() {
       color: #0f172a !important;
     }
 
-    .sg-floating-remote.trans-mid {
-      background: linear-gradient(155deg, rgba(255,255,255,0.34), rgba(240,253,250,0.25)) !important;
-      backdrop-filter: blur(6px) !important;
-      opacity: 0.72 !important;
-    }
-    .sg-floating-remote.trans-high {
-      background: rgba(255, 255, 255, 0.12) !important;
-      backdrop-filter: blur(2px) !important;
-      opacity: 0.34 !important;
-    }
-    .sg-floating-remote.trans-mid:hover,
-    .sg-floating-remote.trans-high:hover {
-      background: linear-gradient(155deg, rgba(255,255,255,0.72), rgba(240,253,250,0.58)) !important;
-      backdrop-filter: blur(16px) !important;
-      opacity: 0.99 !important;
-    }
-
-    .remote-drag-header {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(241, 245, 249, 0.86) 100%) !important;
-      border: 1.5px solid rgba(255, 255, 255, 0.98) !important;
-      border-radius: 18px !important;
-      padding: 8px 12px !important;
-      margin-bottom: 4px !important;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08), inset 0 1px 2px #ffffff !important;
-    }
-    .remote-drag-title {
-      color: #0f766e !important;
-      font-size: 13px !important;
-      font-weight: 900 !important;
-      letter-spacing: -0.2px !important;
-    }
-    .remote-ico-btn {
-      background: rgba(240, 253, 250, 0.95) !important;
-      color: #0f766e !important;
-      border: 1px solid rgba(45, 212, 191, 0.55) !important;
-      border-radius: 99px !important;
-      padding: 3px 9px !important;
-      font-size: 11px !important;
-      font-weight: 800 !important;
-      box-shadow: 0 2px 5px rgba(13, 148, 136, 0.1) !important;
-      transition: all 0.15s ease !important;
-    }
-    .remote-ico-btn:hover {
-      background: linear-gradient(135deg, #2dd4bf, #0d9488) !important;
-      color: #ffffff !important;
-      border-color: #99f6e4 !important;
-      transform: translateY(-1px);
-    }
-
-    .remote-body {
-      padding: 6px 4px 2px 4px !important;
-      gap: 7px !important;
-    }
-
-    .remote-scroll-display {
-      background: linear-gradient(145deg, rgba(254, 252, 232, 0.95) 0%, rgba(254, 240, 138, 0.88) 100%) !important;
-      border: 2px solid rgba(255, 255, 255, 0.95) !important;
-      border-radius: 18px !important;
-      padding: 10px 14px !important;
-      box-shadow:
-        0 6px 16px rgba(234, 179, 8, 0.22),
-        0 0 0 1px rgba(250, 204, 21, 0.5),
-        inset 0 2px 6px rgba(255, 255, 255, 0.9) !important;
-    }
-    .remote-scroll-top {
-      color: #854d0e !important;
-      font-size: 11.5px !important;
-      font-weight: 900 !important;
-      letter-spacing: 0.2px !important;
-      border-bottom: 1px dashed rgba(202, 138, 4, 0.35);
-      padding-bottom: 4px;
-      margin-bottom: 5px !important;
-    }
-    .remote-scroll-target {
-      color: #1e293b !important;
-      font-size: 15px !important;
-      font-weight: 900 !important;
-    }
-
-    .remote-space-btn {
-      position: relative !important;
-      background: radial-gradient(circle at 50% 35%,
-        rgba(153, 246, 228, 0.96) 0%,
-        rgba(45, 212, 191, 0.92) 45%,
-        rgba(13, 148, 136, 0.95) 100%) !important;
-      border: 2px solid rgba(255, 255, 255, 0.95) !important;
-      border-radius: 18px !important;
-      padding: 11px 14px !important;
-      color: #042f2e !important;
-      font-size: 14px !important;
-      font-weight: 900 !important;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
-      box-shadow:
-        0 8px 22px rgba(20, 184, 166, 0.45),
-        0 0 18px rgba(94, 234, 212, 0.7),
-        inset 0 2px 6px rgba(255, 255, 255, 0.95),
-        inset 0 -3px 8px rgba(15, 118, 110, 0.45) !important;
-      transition: all 0.18s ease !important;
-    }
-    .remote-space-btn::before {
-      content: '';
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      border: 3px solid #ffffff;
-      box-shadow: 0 0 10px #ffffff, inset 0 0 6px #ffffff;
-      margin-right: 4px;
-      flex-shrink: 0;
-    }
-    .remote-space-btn .sg-ico {
-      display: none !important;
-    }
-    .remote-space-btn:hover {
-      transform: translateY(-2px) scale(1.01) !important;
-      box-shadow:
-        0 10px 26px rgba(20, 184, 166, 0.6),
-        0 0 24px rgba(153, 246, 228, 0.95),
-        inset 0 2px 8px #ffffff !important;
-    }
-
-    .remote-btn {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(241, 245, 249, 0.76) 100%) !important;
-      color: #1e293b !important;
-      border: 1.5px solid rgba(255, 255, 255, 0.96) !important;
-      border-radius: 999px !important;
-      padding: 6px 6px !important;
-      font-size: 11.8px !important;
-      font-weight: 800 !important;
-      box-shadow:
-        0 4px 10px rgba(15, 23, 42, 0.08),
-        0 0 8px rgba(255, 255, 255, 0.6),
-        inset 0 1px 2px #ffffff !important;
-      transition: all 0.15s ease !important;
-    }
-    .remote-btn:hover {
-      background: #ffffff !important;
-      color: #0f766e !important;
-      border-color: #5eead4 !important;
-      box-shadow: 0 5px 14px rgba(20, 184, 166, 0.25), 0 0 12px rgba(255, 255, 255, 0.95) !important;
-      transform: translateY(-1px);
-    }
-    .remote-btn.active {
-      background: linear-gradient(135deg, #fef08a 0%, #facc15 100%) !important;
-      color: #713f12 !important;
-      border: 1.5px solid #ffffff !important;
-      box-shadow: 0 4px 14px rgba(234, 179, 8, 0.4), inset 0 1px 3px #ffffff !important;
-    }
-    .remote-btn.teal-on {
-      background: linear-gradient(135deg, #99f6e4 0%, #2dd4bf 100%) !important;
-      color: #042f2e !important;
-      border: 1.5px solid #ffffff !important;
-      box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45), inset 0 1px 3px #ffffff !important;
-    }
-
-    .remote-g-btn {
-      border-radius: 999px !important;
-      border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
-      padding: 6px 4px !important;
-      font-size: 11.5px !important;
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.14), inset 0 1px 2px rgba(255,255,255,0.6) !important;
-    }
-
-    .sg-floating-remote.minimized {
-      width: 66px !important;
-      height: 66px !important;
-      border-radius: 20px !important;
-      padding: 0 !important;
-      background: radial-gradient(circle at 50% 35%,
-        rgba(153, 246, 228, 0.96) 0%,
-        rgba(45, 212, 191, 0.92) 50%,
-        rgba(13, 148, 136, 0.96) 100%) !important;
-      border: 2.5px solid #ffffff !important;
-      box-shadow:
-        0 0 0 2px rgba(251, 191, 36, 0.6),
-        0 10px 28px rgba(13, 148, 136, 0.55),
-        0 0 20px rgba(94, 234, 212, 0.85),
-        inset 0 2px 6px #ffffff !important;
-    }
-    .remote-mini-orb {
-      background-image: none !important;
-      width: 34px !important;
-      height: 34px !important;
-      border-radius: 999px !important;
-      border: 4px solid #ffffff !important;
-      box-shadow: 0 0 14px #ffffff, inset 0 0 8px #ffffff !important;
-    }
-    .remote-mini-orb-label {
-      bottom: -14px !important;
-      background: rgba(255, 255, 255, 0.95) !important;
-      color: #0f766e !important;
-      border: 1.5px solid #2dd4bf !important;
-      font-size: 10px !important;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.18) !important;
+    /* 📱 스마트폰(모바일) 화면 최적화 및 궁전 그림 0px 실종 버그 완벽 해결 */
+    @media (max-width: 820px) {
+      .top-master-header {
+        position: relative !important;
+        padding: 8px 10px !important;
+      }
+      .header-row-1, .header-row-2 {
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+      }
+      .topic-nav-group {
+        max-width: 100% !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+      }
+      .stage-ctrl-group {
+        border-left: none !important;
+        padding-left: 0 !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        padding-bottom: 2px !important;
+      }
+      .step-tabs {
+        width: 100% !important;
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+        padding-bottom: 4px !important;
+      }
+      .master-study-toolbar {
+        position: relative !important;
+        top: 0 !important;
+        width: calc(100% - 16px) !important;
+        padding: 8px 10px !important;
+      }
+      /* 기억의 궁전: 좌우 분할을 상하 분할로 바꾸어 그림이 100% 선명하게 나오도록 보장 */
+      .memory-palace-stage, .anki-battle-stage {
+        width: calc(100% - 16px) !important;
+        height: auto !important;
+        max-height: none !important;
+        min-height: 540px !important;
+      }
+      .palace-body-split {
+        flex-direction: column !important;
+        padding: 8px !important;
+        gap: 10px !important;
+      }
+      .palace-viewport {
+        width: 100% !important;
+        min-height: 230px !important;
+        aspect-ratio: 16 / 9 !important;
+        flex: none !important;
+      }
+      .palace-canvas-mover {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+      }
+      .palace-side-console {
+        width: 100% !important;
+        max-height: none !important;
+      }
+      .stage-arena-center {
+        flex-direction: column !important;
+        padding: 8px !important;
+      }
+      .hero-stand-wrap {
+        display: none !important;
+      }
+      .anki-center-console {
+        flex-direction: column !important;
+        width: 100% !important;
+      }
+      .subnote-workspace {
+        flex-direction: column !important;
+        padding: 0 8px !important;
+        margin-bottom: 90px !important;
+      }
+      .outline-sidebar {
+        width: 100% !important;
+        position: relative !important;
+        top: 0 !important;
+      }
+      .subnote-paper-container {
+        width: 100% !important;
+        padding: 14px 12px !important;
+        overflow-x: auto !important;
+      }
+      .sg-floating-remote:not(.minimized) {
+        width: calc(100vw - 16px) !important;
+        max-width: 420px !important;
+        right: 8px !important;
+        left: 8px !important;
+        bottom: 8px !important;
+        margin: 0 auto !important;
+        border-radius: 22px !important;
+        padding: 8px !important;
+      }
     }
   `;
   document.head.appendChild(st);
+
+  // 모바일 화면으로 처음 접속했을 때는 화면을 가리지 않게 리모컨을 기본 최소화(구슬) 상태로 시작
+  if (window.innerWidth <= 820) {
+    const rem = document.getElementById('sgFloatingRemote');
+    if (rem && !rem.dataset.mobileAutoMinDone) {
+      rem.dataset.mobileAutoMinDone = '1';
+      rem.classList.add('minimized');
+    }
+  }
 
   const btnSpeakSel = document.getElementById('btnSpeakSelected');
   if (btnSpeakSel && !document.getElementById('btnSpeakFromHere')) {
@@ -1401,6 +1328,55 @@ function injectPremiumRemoteStyleAndSyncMenus() {
       }
     });
   }
+
+  enableMobileTouchAndAudioBridge();
+}
+
+function enableMobileTouchAndAudioBridge() {
+  if (window._mobileBridgeBound) return;
+  window._mobileBridgeBound = true;
+
+  // 1) 스마트폰 첫 터치 시 모바일 브라우저의 TTS 잠금(Autoplay Lock) 해제
+  const unlockAudio = () => {
+    if (mobileAudioUnlocked || !('speechSynthesis' in window)) return;
+    mobileAudioUnlocked = true;
+    try {
+      window.speechSynthesis.getVoices();
+      const silent = new SpeechSynthesisUtterance('');
+      silent.volume = 0;
+      silent.lang = 'ko-KR';
+      window.speechSynthesis.speak(silent);
+    } catch (e) {}
+  };
+  window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
+  window.addEventListener('click', unlockAudio, { once: true, passive: true });
+
+  // 2) 스마트폰 손가락 터치 드래그를 마우스 드래그(리모컨 이동, 궁전 핀 이동)로 자동 변환
+  const mapTouchToMouse = (touchType, mouseType) => {
+    window.addEventListener(touchType, (e) => {
+      const t = e.changedTouches && e.changedTouches[0];
+      if (!t) return;
+      const target = e.target;
+      if (!target || !target.closest) return;
+      if (target.closest('button, select, input, textarea, a')) return;
+
+      const isDraggable = target.closest('#remoteDragHeader') || target.closest('#remoteMiniOrb') || target.closest('.palace-pin');
+      if (!isDraggable) return;
+
+      const simulated = new MouseEvent(mouseType, {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+        clientX: t.clientX,
+        clientY: t.clientY
+      });
+      target.dispatchEvent(simulated);
+    }, { passive: true });
+  };
+
+  mapTouchToMouse('touchstart', 'mousedown');
+  mapTouchToMouse('touchmove', 'mousemove');
+  mapTouchToMouse('touchend', 'mouseup');
 }
 
 function injectSpeakFromHereButtonUI() {
@@ -1486,7 +1462,7 @@ function speakFromSelectedOrPickedToEnd() {
     if (statusEl) {
       statusEl.textContent = '⏬ [여기부터 끝까지] 읽기 시작할 서브노트 줄이나 표 칸을 마우스로 클릭하세요!';
     } else {
-      alert('⏬ 읽기를 시작할 서브노트 문단이나 표 칸을 마우스로 클릭하시면, 그 위치부터 맨 끝까지 읽어 내려갑니다!\n(팁: [영역선택]으로 미리 한 칸을 찍어 두고 누르셔도 바로 시작됩니다.)');
+      alert('⏬ 읽기를 시작할 서브노트 문단이나 표 칸을 터치하시면, 그 위치부터 맨 끝까지 읽어 내려갑니다!');
     }
   }
 }
@@ -1497,24 +1473,3 @@ if (document.readyState === 'loading') {
 } else {
   injectSpeakFromHereButtonUI();
 }
-
-// 📱 스마트폰 손가락 터치를 마우스 클릭/드래그로 자동 연결해주는 패치
-(function enableMobileTouchBridge() {
-  const mapTouchToMouse = (touchType, mouseType) => {
-    window.addEventListener(touchType, (e) => {
-      const t = e.changedTouches[0];
-      if (!t) return;
-      const target = e.target;
-      const isDraggable = target.closest && (target.closest('#remoteDragHeader') || target.closest('#remoteMiniOrb') || target.closest('.palace-pin'));
-      if (!isDraggable) return;
-      const simulated = new MouseEvent(mouseType, {
-        bubbles: true, cancelable: true, view: window,
-        clientX: t.clientX, clientY: t.clientY
-      });
-      target.dispatchEvent(simulated);
-    }, { passive: false });
-  };
-  mapTouchToMouse('touchstart', 'mousedown');
-  mapTouchToMouse('touchmove', 'mousemove');
-  mapTouchToMouse('touchend', 'mouseup');
-})();
